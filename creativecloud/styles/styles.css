@@ -25,6 +25,6 @@
 }
 
 main.divFor404 > .section> .content {
-  width: 100%;
+  width: 100% !important;
   margin: 0;
 }
