@@ -29,6 +29,7 @@ main.divFor404 > .section {
 }
 
 main.divFor404 > .section > .content {
-  width: 100% !important;
+  width: 100%;
+  max-width: 100%;
   margin: 0;
 }
