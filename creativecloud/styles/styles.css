@@ -24,6 +24,6 @@
   margin: 0 auto;
 }
 
-.divFor404 > .content {
+.main.divFor404 > .section> .content {
   width: 100%
 }
