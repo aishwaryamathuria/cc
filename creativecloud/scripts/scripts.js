@@ -110,6 +110,11 @@ const CONFIG = {
   locales,
   geoRouting: 'on',
   prodDomains: ['www.adobe.com'],
+  jarvis: {
+    id: 'milo',
+    version: '1.0',
+    onDemand: false,
+  },
 };
 
 // Load LCP image immediately
