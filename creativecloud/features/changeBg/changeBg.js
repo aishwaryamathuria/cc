@@ -64,19 +64,19 @@ export default async function changeBg(block) {
   const el = block.querySelectorAll(':scope > div');
 
   const defaultBgSrc =  el[0].querySelectorAll('img');
-  customElem.config['mobile']['defaultBgSrc'] = `${window.location.origin}/${defaultBgSrc[0].src.replace('=png', '=webply').replace('=medium', '=large')}`;
-  customElem.config['tablet']['defaultBgSrc'] = `${window.location.origin}/${defaultBgSrc[1].src.replace('=png', '=webply').replace('=medium', '=large')}`;
-  customElem.config['desktop']['defaultBgSrc'] = `${window.location.origin}/${defaultBgSrc[2].src.replace('=png', '=webply').replace('=medium', '=large')}`;
+  customElem.config['mobile']['defaultBgSrc'] = `${defaultBgSrc[0].src.replace('=png', '=webply').replace('=medium', '=large')}`;
+  customElem.config['tablet']['defaultBgSrc'] = `${defaultBgSrc[1].src.replace('=png', '=webply').replace('=medium', '=large')}`;
+  customElem.config['desktop']['defaultBgSrc'] = `${defaultBgSrc[2].src.replace('=png', '=webply').replace('=medium', '=large')}`;
 
   const marqueeTitleImgSrc =  el[1].querySelectorAll('img');
-  customElem.config['mobile']['marqueeTitleImgSrc'] = `${window.location.origin}/${marqueeTitleImgSrc[0].src.replace('=png', '=webply').replace('=medium', '=large')}`;
-  customElem.config['tablet']['marqueeTitleImgSrc'] = `${window.location.origin}/${marqueeTitleImgSrc[1].src.replace('=png', '=webply').replace('=medium', '=large')}`;
-  customElem.config['desktop']['marqueeTitleImgSrc'] = `${window.location.origin}/${marqueeTitleImgSrc[2].src.replace('=png', '=webply').replace('=medium', '=large')}`;
+  customElem.config['mobile']['marqueeTitleImgSrc'] = `${marqueeTitleImgSrc[0].src.replace('=png', '=webply').replace('=medium', '=large')}`;
+  customElem.config['tablet']['marqueeTitleImgSrc'] = `${marqueeTitleImgSrc[1].src.replace('=png', '=webply').replace('=medium', '=large')}`;
+  customElem.config['desktop']['marqueeTitleImgSrc'] = `${marqueeTitleImgSrc[2].src.replace('=png', '=webply').replace('=medium', '=large')}`;
 
   const talentSrc =  el[2].querySelectorAll('img');
-  customElem.config['mobile']['talentSrc'] = `${window.location.origin}/${talentSrc[0].src.replace('=png', '=webply').replace('=medium', '=large')}`;
-  customElem.config['tablet']['talentSrc'] = `${window.location.origin}/${talentSrc[1].src.replace('=png', '=webply').replace('=medium', '=large')}`;
-  customElem.config['desktop']['talentSrc'] = `${window.location.origin}/${talentSrc[2].src.replace('=png', '=webply').replace('=medium', '=large')}`;
+  customElem.config['mobile']['talentSrc'] = `${talentSrc[0].src.replace('=png', '=webply').replace('=medium', '=large')}`;
+  customElem.config['tablet']['talentSrc'] = `${talentSrc[1].src.replace('=png', '=webply').replace('=medium', '=large')}`;
+  customElem.config['desktop']['talentSrc'] = `${talentSrc[2].src.replace('=png', '=webply').replace('=medium', '=large')}`;
 
   const tryitText =  el[3].textContent.trim();
   customElem.config['mobile']['tryitText'] = tryitText
