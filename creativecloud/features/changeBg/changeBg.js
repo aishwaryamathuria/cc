@@ -63,20 +63,20 @@ export default async function changeBg(block) {
   customElem.config = {'mobile': {groups:[]}, 'tablet': {groups:[]}, 'desktop': {groups:[]}};
   const el = block.querySelectorAll(':scope > div');
 
-  const defaultBgSrc =  el[0].querySelectorAll('picture source:first-child');
-  customElem.config['mobile']['defaultBgSrc'] = `${window.location.origin}/${defaultBgSrc[0].srcset.replace('./', '')}`;
-  customElem.config['tablet']['defaultBgSrc'] = `${window.location.origin}/${defaultBgSrc[1].srcset.replace('./', '')}`;
-  customElem.config['desktop']['defaultBgSrc'] = `${window.location.origin}/${defaultBgSrc[2].srcset.replace('./', '')}`;
+  const defaultBgSrc =  el[0].querySelectorAll('img');
+  customElem.config['mobile']['defaultBgSrc'] = `${window.location.origin}/${defaultBgSrc[0].src.replace('=png', '=webply').replace('=medium', '=large')}`;
+  customElem.config['tablet']['defaultBgSrc'] = `${window.location.origin}/${defaultBgSrc[1].src.replace('=png', '=webply').replace('=medium', '=large')}`;
+  customElem.config['desktop']['defaultBgSrc'] = `${window.location.origin}/${defaultBgSrc[2].src.replace('=png', '=webply').replace('=medium', '=large')}`;
 
-  const marqueeTitleImgSrc =  el[1].querySelectorAll('picture source:first-child');
-  customElem.config['mobile']['marqueeTitleImgSrc'] = `${window.location.origin}/${marqueeTitleImgSrc[0].srcset.replace('./', '')}`;
-  customElem.config['tablet']['marqueeTitleImgSrc'] = `${window.location.origin}/${marqueeTitleImgSrc[1].srcset.replace('./', '')}`;
-  customElem.config['desktop']['marqueeTitleImgSrc'] = `${window.location.origin}/${marqueeTitleImgSrc[2].srcset.replace('./', '')}`;
+  const marqueeTitleImgSrc =  el[1].querySelectorAll('img');
+  customElem.config['mobile']['marqueeTitleImgSrc'] = `${window.location.origin}/${marqueeTitleImgSrc[0].src.replace('=png', '=webply').replace('=medium', '=large')}`;
+  customElem.config['tablet']['marqueeTitleImgSrc'] = `${window.location.origin}/${marqueeTitleImgSrc[1].src.replace('=png', '=webply').replace('=medium', '=large')}`;
+  customElem.config['desktop']['marqueeTitleImgSrc'] = `${window.location.origin}/${marqueeTitleImgSrc[2].src.replace('=png', '=webply').replace('=medium', '=large')}`;
 
-  const talentSrc =  el[2].querySelectorAll('picture source:first-child');
-  customElem.config['mobile']['talentSrc'] = `${window.location.origin}/${talentSrc[0].srcset.replace('./', '')}`;
-  customElem.config['tablet']['talentSrc'] = `${window.location.origin}/${talentSrc[1].srcset.replace('./', '')}`;
-  customElem.config['desktop']['talentSrc'] = `${window.location.origin}/${talentSrc[2].srcset.replace('./', '')}`;
+  const talentSrc =  el[2].querySelectorAll('img');
+  customElem.config['mobile']['talentSrc'] = `${window.location.origin}/${talentSrc[0].srcset.src.replace('=png', '=webply').replace('=medium', '=large')}`;
+  customElem.config['tablet']['talentSrc'] = `${window.location.origin}/${talentSrc[1].srcset.src.replace('=png', '=webply').replace('=medium', '=large')}`;
+  customElem.config['desktop']['talentSrc'] = `${window.location.origin}/${talentSrc[2].srcset.src.replace('=png', '=webply').replace('=medium', '=large')}`;
 
   const tryitText =  el[3].textContent.trim();
   customElem.config['mobile']['tryitText'] = tryitText
@@ -99,14 +99,14 @@ export default async function changeBg(block) {
   const mobileChangePhoto = {name: changePhoto, iconUrl: changePhotoIconUrl, options:[]};
   const tabletChangePhoto = {name: changePhoto, iconUrl: changePhotoIconUrl, options:[]};
   const desktopChangePhoto = {name: changePhoto, iconUrl: changePhotoIconUrl, options:[]};
-  const swatchImages = el[6].querySelectorAll('picture source:first-child');
+  const swatchImages = el[6].querySelectorAll('img');
   [...el[7].querySelectorAll('div')].forEach((d, index) => {
-    const imgs = d.querySelectorAll('picture source:first-child');
+    const imgs = d.querySelectorAll('img');
     imgs.forEach((img, i) => {
       const screen = devices[index];
-      if (index === 0) mobileChangePhoto['options'].push({src: img.srcset.replace('./', ''), swatchSrc: swatchImages[i].srcset.replace('./', '')});
-      if (index === 1) tabletChangePhoto['options'].push({src: img.srcset.replace('./', ''), swatchSrc: swatchImages[i].srcset.replace('./', '')});
-      if (index === 2) desktopChangePhoto['options'].push({src: img.srcset.replace('./', ''), swatchSrc: swatchImages[i].srcset.replace('./', '')});
+      if (index === 0) mobileChangePhoto['options'].push({src: img.src.replace('=png', '=webply').replace('=medium', '=large'), swatchSrc: swatchImages[i].src.replace('=png', '=webply').replace('=medium', '=large')});
+      if (index === 1) tabletChangePhoto['options'].push({src: img.src.replace('=png', '=webply').replace('=medium', '=large'), swatchSrc: swatchImages[i].src.replace('=png', '=webply').replace('=medium', '=large')});
+      if (index === 2) desktopChangePhoto['options'].push({src: img.src.replace('=png', '=webply').replace('=medium', '=large'), swatchSrc: swatchImages[i].src.replace('=png', '=webply').replace('=medium', '=large')});
     });
   });
   customElem.config['mobile']['groups'].push(mobileChangePhoto);
@@ -139,14 +139,14 @@ export default async function changeBg(block) {
   const mobileChangePattern = {name: changePattern, iconUrl: changePatternIconUrl, options:[]};
   const tabletChangePattern = {name: changePattern, iconUrl: changePatternIconUrl, options:[]};
   const desktopChangePattern = {name: changePattern, iconUrl: changePatternIconUrl, options:[]};
-  const swatchPatternImages = el[11].querySelectorAll('picture source:first-child');
+  const swatchPatternImages = el[11].querySelectorAll('img');
   [...el[12].querySelectorAll('div')].forEach((d, index) => {
-    const imgs = d.querySelectorAll('picture source:first-child');
+    const imgs = d.querySelectorAll('img');
     imgs.forEach((img, i) => {
       const screen = devices[index];
-      if (index === 0) mobileChangePattern['options'].push({src: img.srcset.replace('./', ''), swatchSrc: swatchPatternImages[i].srcset.replace('./', '')});
-      if (index === 1) tabletChangePattern['options'].push({src: img.srcset.replace('./', ''), swatchSrc: swatchPatternImages[i].srcset.replace('./', '')});
-      if (index === 2) desktopChangePattern['options'].push({src: img.srcset.replace('./', ''), swatchSrc: swatchPatternImages[i].srcset.replace('./', '')});
+      if (index === 0) mobileChangePattern['options'].push({src: img.src.replace('=png', '=webply').replace('=medium', '=large'), swatchSrc: swatchPatternImages[i].src.replace('=png', '=webply').replace('=medium', '=large')});
+      if (index === 1) tabletChangePattern['options'].push({src: img.src.replace('=png', '=webply').replace('=medium', '=large'), swatchSrc: swatchPatternImages[i].src.replace('=png', '=webply').replace('=medium', '=large')});
+      if (index === 2) desktopChangePattern['options'].push({src: img.src.replace('=png', '=webply').replace('=medium', '=large'), swatchSrc: swatchPatternImages[i].src.replace('=png', '=webply').replace('=medium', '=large')});
     });
   });
   customElem.config['mobile']['groups'].push(mobileChangePattern);
@@ -154,4 +154,5 @@ export default async function changeBg(block) {
   customElem.config['desktop']['groups'].push(desktopChangePattern);
   block.innerHTML = '';
   block.append(customElem);
+  console.log(customElem.config);
 }
