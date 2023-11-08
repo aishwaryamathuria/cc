@@ -185,10 +185,29 @@ const gradient = () => {
 //   }
 // }());
 
+// (async function loadLCPImage() {
+//   const lcpImg = document.querySelector('img');
+//   lcpImg?.removeAttribute('loading');
+// }());
+
+const eagerLoad = (img) => {
+  img?.setAttribute('loading', 'eager');
+  img?.setAttribute('fetchpriority', 'high');
+};
+
 (async function loadLCPImage() {
-  const lcpImg = document.querySelector('img');
-  lcpImg?.removeAttribute('loading');
+  const lcpBlock = document.querySelector('div.interactive-marquee').querySelector('div');
+
+  // if (lcpBlock?.classList[0] === 'imarquee-changebg') {
+  //   const lcpImgs = Array.from(lcpBlock.querySelectorAll(':scope > div > div:first-child img')).slice(0, 3);
+  //   lcpImgs.forEach((img) => { eagerLoad(img); });
+  // }
+  const lcpImgs = lcpBlock.querySelectorAll('img');
+  eagerLoad(lcpImgs[0]);
+  eagerLoad(lcpImgs[1]);
+  eagerLoad(lcpImgs[2]);
 }());
+
 
 (function loadStyles() {
   const paths = [`${miloLibs}/styles/styles.css`];
