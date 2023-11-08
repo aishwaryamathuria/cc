@@ -130,9 +130,9 @@ export default async function changeBg(block) {
       if (index === 1) tabletChangePhoto['options'].push({src: d.textContent.trim()});
     }
   });
-  customElem.config['mobile']['groups'].push(mobileChangePhoto);
-  customElem.config['tablet']['groups'].push(tabletChangePhoto);
-  customElem.config['desktop']['groups'].push(desktopChangePhoto);
+  customElem.config['mobile']['groups'].push(mobileChangeColor);
+  customElem.config['tablet']['groups'].push(tabletChangeColor);
+  customElem.config['desktop']['groups'].push(desktopChangeColor);
 
   const changePattern =  el[10].textContent.trim();
   const changePatternIconUrl = `${window.location.origin}/drafts/suhjain/assets-interactive-marquee/change-pattern-icon.svg`;
