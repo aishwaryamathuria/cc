@@ -143,4 +143,11 @@ const miloLibs = setLibs(LIBS);
   loadLana({ clientId: 'cc' });
   await loadArea();
   loadDelayed();
+
+  const { loadIms } = await import( 'https://milo.adobe.com/libs/utils/utils.js');
+  const [{ default: getUserEntitlements }] = await Promise.all([
+    import('https://milo.adobe.com/libs/blocks/global-navigation/utilities/getUserEntitlements.js'),
+    loadIms(),
+  ]);
+  console.log(getUserEntitlements())
 }());
