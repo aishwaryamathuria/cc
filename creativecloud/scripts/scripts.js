@@ -144,9 +144,11 @@ const miloLibs = setLibs(LIBS);
   await loadArea();
   loadDelayed();
 
-  const { loadIms } = await import( 'https://milo.adobe.com/libs/utils/utils.js');
+  const { loadIms } = await import( '
+https://main--milo--adobecom.hlx.live/libs/utils/utils.js');
   const [{ default: getUserEntitlements }] = await Promise.all([
-    import('https://milo.adobe.com/libs/blocks/global-navigation/utilities/getUserEntitlements.js'),
+    import('
+https://main--milo--adobecom.hlx.live/libs/blocks/global-navigation/utilities/getUserEntitlements.js'),
     loadIms(),
   ]);
   console.log(getUserEntitlements())
