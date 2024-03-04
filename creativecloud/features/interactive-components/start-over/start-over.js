@@ -6,7 +6,7 @@ export default async function stepInit(data) {
   const svg = data.config.querySelector('img[src*=svg]');
   const svgClone = svg.cloneNode(true);
   const content = 'Start Over';
-  const btn = createTag('a', { class: `gray-button start-over body-s next-step layer-${data.step}` }, `${content}`);
+  const btn = createTag('a', { class: `gray-button start-over body-s next-step layer show-layer layer-${data.step}` }, `${content}`);
   btn.prepend(svgClone);
   data.target.classList.add('step-start-over');
   data.target.append(btn);

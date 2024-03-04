@@ -1,10 +1,7 @@
-/**/
-
-.interactive-metadata {
-  display: none;
+.layer {
+  visibility: hidden;
 }
 
-/* .marquee .image img {
-  height: 400px;
-  width: auto;
-} */
+.layer.show-layer {
+  visibility: visible;
+}
