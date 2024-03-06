@@ -6,7 +6,7 @@ export default async function init(el) {
     ar.addEventListener('mouseover', (e) => {
       e.target.classList.add('OdOP4SqpRr_z8Mp7Zgl1');
     });
-    ar..addEventListener('mouseleave', (e) => {
+    ar.addEventListener('mouseleave', (e) => {
       e.target.classList.remove('OdOP4SqpRr_z8Mp7Zgl1');
     });
   });
