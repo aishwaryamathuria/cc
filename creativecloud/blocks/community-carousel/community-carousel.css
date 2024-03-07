@@ -4,6 +4,7 @@
 
 .PUGpRkp1VCr5XYhKhEQ1 {
   box-sizing: border-box;
+  border-radius: var(--spectrum-corner-radius-200);
 }
 
 .XCAFo8ZGyoVOD4elumav {
@@ -199,6 +200,7 @@
 }
 .zytb3jxS7InGo39qdpCi {
   z-index: 1;
+  border-radius: var(--spectrum-corner-radius-200);
 }
 .UIXdrsuMNK45AlUnI7rZ > .zytb3jxS7InGo39qdpCi {
   opacity: 0;
