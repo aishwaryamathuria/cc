@@ -344,3 +344,7 @@
   background: var(--spectrum-global-color-static-gray-200);
   color: var(--spectrum-global-color-static-gray-800);
 }
+
+sp-tooltip {
+  display: none;
+}
