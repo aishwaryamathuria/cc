@@ -7,7 +7,7 @@ export default async function init(el) {
       e.target.closest('article').classList.add('OdOP4SqpRr_z8Mp7Zgl1');
     });
     ar.addEventListener('mouseleave', (e) => {
-      e.target.closest('article')x``.classList.remove('OdOP4SqpRr_z8Mp7Zgl1');
+      e.target.closest('article').classList.remove('OdOP4SqpRr_z8Mp7Zgl1');
     });
   });
 }
