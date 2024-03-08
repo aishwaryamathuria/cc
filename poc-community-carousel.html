@@ -1,9 +1,16 @@
 <html>
   <head>
-    <script src="https://poc-comm-carousel--cc--aishwaryamathuria.hlx.page/creativecloud/blocks/community-carousel/community-carousel.js" type="module"></script>
     <link rel="stylesheet" href="https://poc-comm-carousel--cc--aishwaryamathuria.hlx.page/creativecloud/blocks/community-carousel/community-carousel.css">
+    <scripts>
+      async function pageInit() {
+        const {default: init} = await import('https://poc-comm-carousel--cc--aishwaryamathuria.hlx.page/creativecloud/blocks/community-carousel/community-carousel.js');
+        init(document.querySelector('#community-carousel-div'));
+      }
+    </scripts>
   </head>
   <body>
-    <div></div>
+    <div id='community-carousel-div'>
+      
+    </div>
   </body>
 </html>
