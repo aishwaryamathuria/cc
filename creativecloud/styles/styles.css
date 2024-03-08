@@ -1990,4 +1990,5 @@
   --spectrum-drop-shadow-x: 0px;
   --spectrum-drop-shadow-y: 1px;
   --spectrum-drop-shadow-blur: 4px;
+  --spectrum-transparent-black-600: 0,0,0;
 }
