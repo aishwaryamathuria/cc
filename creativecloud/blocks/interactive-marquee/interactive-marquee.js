@@ -70,6 +70,13 @@ export default async function init(el) {
   const miloLibs = getLibs('/libs');
   const { decorateButtons, decorateBlockBg } = await import(`${miloLibs}/utils/decorate.js`);
   const { createTag, loadStyle } = await import(`${miloLibs}/utils/utils.js`);
+  const eagerLoad = (lcpImg) => {
+    lcpImg?.setAttribute('loading', 'eager');
+    lcpImg?.setAttribute('fetchpriority', 'high');
+    if (lcpImg) lcpImgSet = true;
+  };
+  const fgDivs = el.querySelectorAll("img[src*=svg]").forEach(eagerLoad);
+  fgDivs.forEach((d) => eagerLoad(d.querySelector('img')));
   switch (true) {
     case el.classList.contains('changebg'): {
       const { default: changeBg } = await import('../../features/changeBg/changeBg.js');
