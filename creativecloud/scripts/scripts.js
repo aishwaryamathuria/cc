@@ -169,7 +169,7 @@ setConfig({ ...CONFIG, miloLibs });
 decorateArea();
 
 (function loadStyles() {
-  const paths = [`${miloLibs}/styles/styles.css`];
+  const paths = [`${miloLibs}/styles/styles.css`, '/creativecloud/blocks/interactive-marquee/milo-marquee.css'];
   if (STYLES) { paths.push(STYLES); }
   paths.forEach((path) => {
     const link = document.createElement('link');
