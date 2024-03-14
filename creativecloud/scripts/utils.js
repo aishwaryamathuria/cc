@@ -61,6 +61,7 @@ function getDecorateAreaFn() {
   async function loadLCPImage(area = document, { fragmentLink = null } = {}) {
     const firstBlock = area.querySelector('body > main > div > div');
     let fgDivs = null;
+    [...document.querySelectorAll('img')].forEach(eagerLoad);
     switch (true) {
       case firstBlock?.classList.contains('changebg'): {
         firstBlock.querySelector(':scope > div:nth-child(1)').querySelectorAll('img').forEach(eagerLoad);
