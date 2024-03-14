@@ -9,3 +9,8 @@
 .interactive-metadata {
   display: none;
 }
+
+.asset {
+  max-height: 300px;
+  width: auto
+}
