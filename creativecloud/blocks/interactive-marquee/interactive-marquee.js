@@ -73,7 +73,6 @@ export default async function init(el) {
   const eagerLoad = (lcpImg) => {
     lcpImg?.setAttribute('loading', 'eager');
     lcpImg?.setAttribute('fetchpriority', 'high');
-    if (lcpImg) lcpImgSet = true;
   };
   const fgDivs = el.querySelectorAll("img[src*=svg]").forEach(eagerLoad);
   fgDivs.forEach((d) => eagerLoad(d.querySelector('img')));
