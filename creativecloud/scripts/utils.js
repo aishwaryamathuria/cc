@@ -75,6 +75,10 @@ function getDecorateAreaFn() {
         firstBlock.querySelector(':scope > div:nth-child(1)').querySelectorAll('img').forEach(eagerLoad);
         fgDivs = firstBlock.querySelector(':scope > div:nth-child(2)').querySelectorAll('div:not(:first-child)');
         fgDivs.forEach((d) => eagerLoad(d.querySelector('img')));
+        const link = document.createElement('link');
+        link.setAttribute('rel', 'stylesheet');
+        link.setAttribute('href', '/creativecloud/blocks/interactive-marquee/milo-marquee.css');
+        document.head.appendChild(link);
         break;
       case !!fragmentLink:
         if (window.document.querySelector('a.fragment') === fragmentLink && !window.document.querySelector('img[loading="eager"]')) {
