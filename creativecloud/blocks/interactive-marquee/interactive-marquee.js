@@ -74,8 +74,7 @@ export default async function init(el) {
     lcpImg?.setAttribute('loading', 'eager');
     lcpImg?.setAttribute('fetchpriority', 'high');
   };
-  const fgDivs = el.querySelectorAll("img[src*=svg]").forEach(eagerLoad);
-  fgDivs.forEach((d) => eagerLoad(d.querySelector('img')));
+  el.querySelectorAll("img[src*=svg]").forEach(eagerLoad);
   switch (true) {
     case el.classList.contains('changebg'): {
       const { default: changeBg } = await import('../../features/changeBg/changeBg.js');
