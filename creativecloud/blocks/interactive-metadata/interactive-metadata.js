@@ -54,7 +54,7 @@ async function implementWorkflow(el, canvas, steps) {
 
 export default async function init(el) {
   const intWorkFlowConfig = {
-    'workflow-1': ['crop'],
+    'workflow-1': ['crop', 'start-over'],
     'workflow-2': ['crop', 'crop', 'start-over'],
   };
   let wfName = '';
