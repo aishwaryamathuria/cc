@@ -28,8 +28,7 @@ function setImgAttrs(img, src, attrs) {
   if (attrs.h) img.height = attrs.h;
 }
 
-function handleClick(a, v, deviceConfig, hText) 
-  const { loadScript } = await import(`${getLibs()}/utils/utils.js`);
+function handleClick(a, v, deviceConfig, hText, loadScript) 
   loadScript('https://sdk.cc-embed.adobe.com/v3/CCEverywhere.js').then(async () => {
     if (!ccEverywhere) {
       let env = 'preprod';
@@ -71,7 +70,7 @@ function startAutocycle(a, autoCycleConfig, viewport, deviceConfig, interval, hT
   }, interval);
 }
 
-function processMedia(ic, miloUtil, autoCycleConfig, deviceConfig, v, hText) {
+function processMedia(ic, miloUtil, autoCycleConfig, deviceConfig, v, hText, loadScript) {
   const media = miloUtil.createTag('div', { class: `media ${v}-only` });
   const a = miloUtil.createTag('a', { class: 'genfill-link' });
   const img = miloUtil.createTag('img', { class: 'genfill-image' });
@@ -85,7 +84,7 @@ function processMedia(ic, miloUtil, autoCycleConfig, deviceConfig, v, hText) {
   a.addEventListener('click', () => {
     autoCycleConfig.isImageClicked = true;
     if (autoCycleConfig.autocycleInterval) clearInterval(autoCycleConfig.autocycleInterval);
-    handleClick(a, v, deviceConfig, hText);
+    handleClick(a, v, deviceConfig, hText, loadScript);
   });
 }
 
@@ -97,6 +96,7 @@ function getImgSrc(pic, viewport) {
 }
 
 export default async function decorateGenfill(el, miloUtil) {
+  const { loadScript } = await import(`${getLibs()}/utils/utils.js`);
   const autoCycleConfig = {
     autocycleInterval: null,
     isImageClicked: false,
@@ -133,7 +133,7 @@ export default async function decorateGenfill(el, miloUtil) {
       deviceConfig[v].srcList.push(src);
       const img = pic.querySelector('img');
       deviceConfig[v].attrList.push({ alt: img.alt, w: img.width, h: img.height });
-      if (index === 0) processMedia(ic, miloUtil, autoCycleConfig, deviceConfig, v, hText);
+      if (index === 0) processMedia(ic, miloUtil, autoCycleConfig, deviceConfig, v, hText, loadScript);
     });
   });
   const currentVP = defineDeviceByScreenSize().toLocaleLowerCase();
