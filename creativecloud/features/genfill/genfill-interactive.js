@@ -28,7 +28,7 @@ function setImgAttrs(img, src, attrs) {
   if (attrs.h) img.height = attrs.h;
 }
 
-function handleClick(a, v, deviceConfig, hText, loadScript) 
+function handleClick(a, v, deviceConfig, hText, loadScript) {
   loadScript('https://sdk.cc-embed.adobe.com/v3/CCEverywhere.js').then(async () => {
     if (!ccEverywhere) {
       let env = 'preprod';
