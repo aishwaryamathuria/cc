@@ -51,7 +51,7 @@ function handleClick(a, v, deviceConfig, hText, loadScript) {
       },
     ];
       ccEverywhere.openQuickAction({
-        id: 'resize',
+        id: 'remove-background',
         modalParams: {
           backgroundColor: 'rgba(0, 0, 0, 0.25)',
         },       
