@@ -127,7 +127,7 @@ function processMedia(ic, miloUtil, autoCycleConfig, deviceConfig, v, hText) {
   a.addEventListener('click', () => {
     autoCycleConfig.isImageClicked = true;
     if (autoCycleConfig.autocycleInterval) clearInterval(autoCycleConfig.autocycleInterval);
-    handleClick(a, v, deviceConfig, hText, loadScript, isClicked=true);
+    handleClick(a, v, deviceConfig, hText, loadScript, true);
   });
 }
 
