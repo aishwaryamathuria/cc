@@ -62,6 +62,7 @@ export const loadScript = (url, type) => new Promise((resolve, reject) => {
 });
 
 function handleClick(a, v, deviceConfig, hText, isClicked=false) {
+  if (!isClicked) return;
   loadScript('https://sdk.cc-embed.adobe.com/v3/CCEverywhere.js').then(async () => {
     if (!ccEverywhere) {
       let env = 'preprod';
