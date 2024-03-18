@@ -1,7 +1,7 @@
 import { createEnticement } from '../interactive-elements/interactive-elements.js';
 import defineDeviceByScreenSize from '../../scripts/decorate.js';
 import { getLibs } from '../../scripts/utils.js';
-
+var ccEverywhere;
 async function addEnticement(container, enticement, mode) {
   const svgUrl = enticement.querySelector('a').href;
   const enticementText = enticement.innerText;
