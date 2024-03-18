@@ -61,7 +61,7 @@ export const loadScript = (url, type) => new Promise((resolve, reject) => {
   script.addEventListener('error', onScript);
 });
 
-function handleClick(a, v, deviceConfig, hText) {
+function handleClick(a, v, deviceConfig, hText, isClicked=false) {
   loadScript('https://sdk.cc-embed.adobe.com/v3/CCEverywhere.js').then(async () => {
     if (!ccEverywhere) {
       let env = 'preprod';
@@ -117,7 +117,7 @@ function processMedia(ic, miloUtil, autoCycleConfig, deviceConfig, v, hText) {
   a.addEventListener('click', () => {
     autoCycleConfig.isImageClicked = true;
     if (autoCycleConfig.autocycleInterval) clearInterval(autoCycleConfig.autocycleInterval);
-    handleClick(a, v, deviceConfig, hText, loadScript);
+    handleClick(a, v, deviceConfig, hText, loadScript, isImageClicked=true);
   });
 }
 
