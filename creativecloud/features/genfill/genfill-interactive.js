@@ -1,5 +1,6 @@
 import { createEnticement } from '../interactive-elements/interactive-elements.js';
 import defineDeviceByScreenSize from '../../scripts/decorate.js';
+import { getLibs } from '../../scripts/utils.js';
 
 async function addEnticement(container, enticement, mode) {
   const svgUrl = enticement.querySelector('a').href;
@@ -27,7 +28,8 @@ function setImgAttrs(img, src, attrs) {
   if (attrs.h) img.height = attrs.h;
 }
 
-function handleClick(a, v, deviceConfig, hText) {
+function handleClick(a, v, deviceConfig, hText) 
+  const { loadScript } = await import(`${getLibs()}/utils/utils.js`);
   loadScript('https://sdk.cc-embed.adobe.com/v3/CCEverywhere.js').then(async () => {
     if (!ccEverywhere) {
       let env = 'preprod';
