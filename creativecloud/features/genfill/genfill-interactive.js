@@ -28,15 +28,34 @@ function setImgAttrs(img, src, attrs) {
 }
 
 function handleClick(a, v, deviceConfig, hText) {
-  const img = a.querySelector('img');
-  const currIndex = deviceConfig[v].index;
-  const nextIndex = (currIndex + 1) % deviceConfig[v].srcList.length;
-  const src = deviceConfig[v].srcList[nextIndex];
-  const attrs = deviceConfig[v].attrList[nextIndex];
-  setImgAttrs(img, src, attrs);
-  a.setAttribute('daa-ll', generateDaaLL(hText, attrs.alt, v));
-  deviceConfig[v].index = nextIndex;
-  return nextIndex;
+  loadScript('https://sdk.cc-embed.adobe.com/v3/CCEverywhere.js').then(async () => {
+    if (!ccEverywhere) {
+      let env = 'preprod';
+      ccEverywhere = await window.CCEverywhere.initialize({
+        clientId: 'b20f1d10b99b4ad892a856478f87cec3',
+        appName: 'express',
+      }, {
+        loginMode: 'delayed',
+        env,
+      }, {}, 
+      window.authProvider,
+  )};
+
+    const exportOptions = [
+      {
+        target: 'Download',
+        id: 'download-button',
+        optionType: 'button',
+        buttonType: 'native',
+      },
+    ];
+      ccEverywhere.openQuickAction({
+        id: 'resize',
+        modalParams: {
+          backgroundColor: 'rgba(0, 0, 0, 0.25)',
+        },       
+      });
+    });
 }
 
 function startAutocycle(a, autoCycleConfig, viewport, deviceConfig, interval, hText) {
