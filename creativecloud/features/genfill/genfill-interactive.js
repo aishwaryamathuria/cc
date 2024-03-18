@@ -62,7 +62,15 @@ export const loadScript = (url, type) => new Promise((resolve, reject) => {
 });
 
 function handleClick(a, v, deviceConfig, hText, isClicked=false) {
-  if (!isClicked) return;
+  const img = a.querySelector('img');
+  const currIndex = deviceConfig[v].index;
+  const nextIndex = (currIndex + 1) % deviceConfig[v].srcList.length;
+  const src = deviceConfig[v].srcList[nextIndex];
+  const attrs = deviceConfig[v].attrList[nextIndex];
+  setImgAttrs(img, src, attrs);
+  a.setAttribute('daa-ll', generateDaaLL(hText, attrs.alt, v));
+  deviceConfig[v].index = nextIndex;
+  if (!isClicked) return nextIndex;
   loadScript('https://sdk.cc-embed.adobe.com/v3/CCEverywhere.js').then(async () => {
     if (!ccEverywhere) {
       let env = 'preprod';
@@ -91,6 +99,7 @@ function handleClick(a, v, deviceConfig, hText, isClicked=false) {
         },       
       });
     });
+  return nextIndex;
 }
 
 function startAutocycle(a, autoCycleConfig, viewport, deviceConfig, interval, hText) {
