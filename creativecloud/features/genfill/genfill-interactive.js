@@ -73,8 +73,8 @@ function handleClick(a, v, deviceConfig, hText, isClicked=false) {
   if (!isClicked) return nextIndex;
   const imq = a.closest('.interactive-marquee')
   let qaname = '';
-  if ([...imq.classList].contains('crop')) qaname = 'crop-image';
-  if ([...imq.classList].contains('remove-bg')) qaname = 'remove-background';
+  if (imq.classList.contains('crop')) qaname = 'crop-image';
+  if (imq.classList.contains('remove-bg')) qaname = 'remove-background';
   loadScript('https://sdk.cc-embed.adobe.com/v3/CCEverywhere.js').then(async () => {
     if (!ccEverywhere) {
       let env = 'preprod';
