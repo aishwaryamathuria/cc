@@ -109,7 +109,7 @@ function startAutocycle(a, autoCycleConfig, viewport, deviceConfig, interval, hT
     // if (autoCycleConfig.isImageClicked
     //   || deviceConfig[viewport].index === deviceConfig[viewport].srcList.length - 1) {
     //   clearInterval(autoCycleConfig.autocycleInterval);
-    }
+    // }
   }, interval);
 }
 
