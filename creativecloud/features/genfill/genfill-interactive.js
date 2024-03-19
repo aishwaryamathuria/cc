@@ -71,6 +71,10 @@ function handleClick(a, v, deviceConfig, hText, isClicked=false) {
   a.setAttribute('daa-ll', generateDaaLL(hText, attrs.alt, v));
   deviceConfig[v].index = nextIndex;
   if (!isClicked) return nextIndex;
+  const imq = a.closest('.interactive-marquee')
+  let qaname = '';
+  if ([...imq.classList].contains('crop')) qaname = 'crop-image';
+  if ([...imq.classList].contains('remove-bg')) qaname = 'remove-background';
   loadScript('https://sdk.cc-embed.adobe.com/v3/CCEverywhere.js').then(async () => {
     if (!ccEverywhere) {
       let env = 'preprod';
@@ -93,7 +97,7 @@ function handleClick(a, v, deviceConfig, hText, isClicked=false) {
       },
     ];
       ccEverywhere.openQuickAction({
-        id: 'remove-background',
+        id: qaname,
         modalParams: {
           backgroundColor: 'rgba(0, 0, 0, 0.25)',
         },       
