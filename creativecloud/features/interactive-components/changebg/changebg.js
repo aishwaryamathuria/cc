@@ -93,27 +93,7 @@ function selectorTrayWithImgs(layer, data) {
   const selectorTray = createTag('div', { class: 'body-s selector-tray' });
   const trayItems = createTag('div', { class: 'tray-items' });
   const productIcon = createTag('div', { class: 'product-icon' });
-  const productSvg = `<svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" version="1.1" viewBox="0 0 18 18">
-  <defs>
-    <style>
-      .cls-1 {
-        fill: #ff13dc;
-        fill-opacity: 0;
-      }
-
-      .cls-1, .cls-2 {
-        stroke-width: 0px;
-      }
-
-      .cls-2 {
-        fill: #fff;
-      }
-    </style>
-  </defs>
-  <rect id="Canvas" class="cls-1" width="18" height="18"/>
-  <path class="cls-2" d="M16.3,10h-.9c-.3,0-.5.2-.6.5-.8,3-4,4.8-7,4-1-.3-1.8-.8-2.5-1.5l-.3-.3,2-2c0,0,.1-.2.1-.3,0-.2-.2-.4-.4-.4H1.2c-.1,0-.2.1-.2.2v5.4c0,.2.2.4.4.4.1,0,.2,0,.3-.1l1.8-1.8.2.2c1,1,2.3,1.8,3.6,2.2,4.1,1.1,8.3-1.4,9.4-5.5,0-.1,0-.2,0-.4,0-.3-.1-.5-.4-.6,0,0,0,0,0,0Z"/>
-  <path class="cls-2" d="M16.6,2c-.1,0-.2,0-.3.1l-1.8,1.8-.2-.2c-1-1-2.3-1.8-3.6-2.2C6.6.5,2.3,2.9,1.3,7.1c0,.1,0,.2,0,.4,0,.3.1.5.4.6,0,0,0,0,0,0h.9c.3,0,.5-.2.6-.5.8-3,4-4.8,7-4,1,.3,1.8.8,2.5,1.5l.3.3-2,2c0,0-.1.2-.1.3,0,.2.2.4.4.4h5.4c.1,0,.2-.1.2-.2V2.4c0-.2-.2-.4-.4-.4Z"/>
-</svg>`;
+  const productSvg = `<svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 240 234"><defs><style>.cls-1{fill:#fff;}.cls-2{fill:#fa0f00;}</style></defs><title>advertising_cloud_appicon_noshadow_Artboard 1</title><rect class="cls-1" width="240" height="234" rx="42.5"/><path id="_256" data-name="256" class="cls-2" d="M186.617,175.95037H158.11058a6.24325,6.24325,0,0,1-5.84652-3.76911L121.31715,99.82211a1.36371,1.36371,0,0,0-2.61145-.034l-19.286,45.94252A1.63479,1.63479,0,0,0,100.92626,148h21.1992a3.26957,3.26957,0,0,1,3.01052,1.99409l9.2814,20.65452a3.81249,3.81249,0,0,1-3.5078,5.30176H53.734a3.51828,3.51828,0,0,1-3.2129-4.90437L99.61068,54.14376A6.639,6.639,0,0,1,105.843,50h28.31354a6.6281,6.6281,0,0,1,6.23289,4.14376L189.81885,171.046A3.51717,3.51717,0,0,1,186.617,175.95037Z"/></svg>`;
   productIcon.innerHTML = `${productSvg}`;
   // const removeBg = removeBgButton(data);
   const changeBg = changeBgButton(data);
