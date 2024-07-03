@@ -120,7 +120,7 @@ function selectorTrayWithImgs(layer, data) {
   const uploadCTA = uploadButton(data);
   const continuePS = createContinuePSBtn(data);
   const selectorTrayBgimgs = selectorTrayWithBGImgs(layer, data);
-  trayItems.append(productIcon, removeBg, changeBg, uploadCTA, continuePS);
+  trayItems.append(productIcon, changeBg, uploadCTA, continuePS);
   selectorTray.append(selectorTrayBgimgs, trayItems);
   return selectorTray;
 }
