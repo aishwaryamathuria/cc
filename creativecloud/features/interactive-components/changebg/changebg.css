@@ -534,3 +534,7 @@
 .interactive-enabled .interactive-holder .gray-button.start-over-button.continue {
   display: none;
 }
+
+.interactive-enabled .interactive-holder .product-icon svg * {
+  fill: #fa0f00;
+}
