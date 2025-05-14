@@ -152,11 +152,11 @@ body, html {
   min-height: 500px;
 }
 
-.message a.user {
+.message.user a {
   color: #fff;
 }
 
-.message a.bot {
+.message.bot a {
   color: #000;
 }
 
