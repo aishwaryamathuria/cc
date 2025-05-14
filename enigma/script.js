@@ -27,6 +27,7 @@ function sendMessage() {
 function appendMessage(text, sender) {
   const msg = document.createElement('div');
   msg.className = `message ${sender}`;
+  if (text.contains('```')) text.replace('```', '');
   msg.innerHTML = marked.parse(text);
   if (sender == "bot" && isMarkdown(text)) {
     document.querySelector('div[contentEditable="true"]')?.removeAttribute('contentEditable');
