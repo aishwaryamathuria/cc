@@ -95,6 +95,9 @@ async function handleChatInteraction() {
     };
 
     chatWindow.append(loader);
+    loader.scrollIntoView({
+      behavior: 'smooth'
+    });
     // const res = await fetch('http://localhost:8081/api/agents/chat', options);
     const res = await fetch('https://ff69-130-248-126-34.ngrok-free.app/api/agents/chat', options);
     
