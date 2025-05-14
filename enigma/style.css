@@ -58,23 +58,25 @@ body, html {
   display: flex;
   border-top: 1px solid #f8f8f8;
   position: sticky;
-  width: 60%;
+  width: 100%;
   margin: auto;
   bottom: 0;
   margin-bottom: 20px;
+  margin: 10px 0;
+  padding: 0 20px;
 }
 
 #user-input {
   flex: 1;
   font-family: 'Adobe Clean', Helvetica, Arial, sans-serif;
-  padding: 12px;
   font-size: 16px;
   border: none;
-  border-radius: 6px;
+  border-radius: 6px 0 0 6px;
   resize: none;
   background-color: #eaeaea;
   border-color: #eaeaea;
   color: #505050;
+  padding: 20px;
 }
 
 @media screen and (max-width: 600px) {
@@ -82,20 +84,12 @@ body, html {
     min-width: 250px;
     max-width: 250px;
   }
-
-  .input-area  {
-    width: 100%;
-  }
 }
 
 @media screen and (min-width: 600px) and (max-width: 800px) {
   .message {
     min-width: 500px;
     max-width: 500px;
-  }
-
-  .input-area  {
-    width: 100%;
   }
 }
 
@@ -107,19 +101,19 @@ body, html {
 }
 
 #send-btn {
-  background-color: #7155fa;
+  background-color: #eaeaea;
   color: white;
   border: none;
   padding: 0 20px;
   font-size: 20px;
   cursor: pointer;
-  border-radius: 6px;
+  border-radius: 0 6px 6px 0;
   transition: background-color 0.2s;
-  margin-left: 12px;
+  margin: 0;
 }
 
 #send-btn:hover {
-  background-color: #684de8
+  background-color: #eaeaea;
 }
 
 .message .icon {
@@ -158,6 +152,47 @@ body, html {
   min-height: 500px;
 }
 
-.message a {
+.message a.user {
   color: #fff;
+}
+
+.message a.bot {
+  color: #000;
+}
+
+.loader {
+  border: 5px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 5px solid #3498db;
+  width: 20px;
+  height: 20px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+  padding: 20px;
+  margin: 20px;
+}
+
+.loader.hide {
+  display: none;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#send-btn svg {
+  height: 20px;
+  width: 20px;
+  fill: gray;
+}
+
+#send-btn svg path {
+  fill: gray;
 }
