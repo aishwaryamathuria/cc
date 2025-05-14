@@ -6,15 +6,16 @@
 
 body, html {
   height: 100%;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #1b1b1b;
-  color: #fff;
+  font-family: 'Adobe Clean', Helvetica, Arial, sans-serif;
+  background-color: #fff;
+  color: #000;
 }
 
 .chat-wrapper {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: auto;
+  min-height: 100%;
 }
 
 .chat-window {
@@ -28,31 +29,67 @@ body, html {
 
 .message {
   max-width: 80%;
-  padding: 12px 16px;
+  padding: 20px;
   border-radius: 8px;
   white-space: pre-wrap;
   line-height: 1.5;
 }
 
+.message.user {
+  color: #fff
+}
+
+.message.bot {
+  max-height: 800px;
+  overflow: scroll;
+}
+
+@media screen and (max-width: 600px) {
+  .message {
+    min-width: 250px;
+    max-width: 250px;
+  }
+}
+
+@media screen and (min-width: 600px) and (max-width: 1200px) {
+  .message {
+    min-width: 500px;
+    max-width: 500px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .message {
+    min-width: 800px;
+    max-width: 800px;
+  }
+}
+
 .user {
   align-self: flex-end;
-  background-color: #3b82f6;
+  background-color: #7155fa;
 }
 
 .bot {
   align-self: flex-start;
-  background-color: #444654;
+  background-color: #F8F8F8;
 }
 
 .input-area {
   display: flex;
   padding: 16px;
-  border-top: 1px solid #555;
-  background-color: #323232;
+  border-top: 1px solid #f8f8f8;
+  background-color: #f8f8f8;
+  position: sticky;
+  width: 60%;
+  margin: auto;
+  bottom: 0;
+  margin-bottom: 20px;
 }
 
 #user-input {
   flex: 1;
+  font-family: 'Adobe Clean', Helvetica, Arial, sans-serif;
   padding: 12px;
   font-size: 16px;
   border: none;
@@ -64,7 +101,7 @@ body, html {
 }
 
 #send-btn {
-  background-color: #3b63fb;
+  background-color: #7155fa;
   color: white;
   border: none;
   padding: 0 20px;
@@ -77,4 +114,28 @@ body, html {
 
 #send-btn:hover {
   background-color: #224ae3
+}
+
+.message .icon {
+  font-size: 18px;
+  color: #ffff;
+  position: relative;
+  top: -5px;
+  left: 95%;
+  cursor: pointer;
+  display: flex;
+  border-radius: 8px;
+  padding: 6px;
+  width: 35px;
+}
+
+.message .icon svg {
+  height: 24px;
+  width: 24px;
+  fill: #000;
+}
+
+.message ul,
+.message ol {
+  padding-left: 12px;
 }
