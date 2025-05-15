@@ -62,7 +62,7 @@ function appendiFrameMessage(text, sender) {
   const msg = document.createElement('div');
   msg.className = `message ${sender} has-iframe`;
   const ifr = document.createElement('iframe');
-  ifr.src = `${text}&mepButton=off`;
+  ifr.src = `${text}&mepbutton=off`;
   msg.append(ifr);
   chatWindow.appendChild(msg);
   msg.scrollIntoView({

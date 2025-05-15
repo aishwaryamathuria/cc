@@ -100,6 +100,11 @@ body, html {
   }
 }
 
+.message.has-iframe {
+  min-width: 100%;
+  max-width: 100%;
+}
+
 #send-btn {
   background-color: #eaeaea;
   color: white;
@@ -141,7 +146,7 @@ body, html {
 }
 
 .message .has-iframe {
-  width: 80%;
+  width: 90%;
   height: 600px;
   min-height: 500px;
 }
