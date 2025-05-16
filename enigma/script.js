@@ -3,10 +3,13 @@ const userInput = document.getElementById('user-input');
 const chatWindow = document.getElementById('chat-window');
 const loader = document.createElement('div');
 loader.classList.add('loader');
+let previewerIframe = null;
 let chatHistory = [{
     "role": "system",
     "content": "Conversation started"
   }];
+const agentEP = 'http://localhost:8081/api/agents/chat';
+// const agentEP = 'https://ff69-130-248-126-34.ngrok-free.app/api/agents/chat';
 
 sendBtn.addEventListener('click', sendMessage);
 userInput.addEventListener('keypress', (e) => {
@@ -65,17 +68,19 @@ function appendMessage(text, sender, hasMarkdown = false) {
 function appendiFrameMessage(link, sender) {
   const msg = document.createElement('div');
   msg.className = `message ${sender} has-iframe`;
-  const ifr = document.createElement('iframe');
-  ifr.src = `${link}&martech=off`;
-  msg.append(ifr);
+  previewerIframe = document.createElement('iframe');
+  previewerIframe.src = `${link}&martech=off`;
+  msg.append(previewerIframe);
   chatWindow.appendChild(msg);
   msg.scrollIntoView({
     behavior: 'smooth'
   });
-  window.addEventListener('message', (e) => {
-    wondow.open(e.data.daUrl, "_blank");
-  }, { once: true });
   loader.remove();
+  previewerIframe.onload = () => {
+    previewerIframe.contentWindow.postMessage({
+        chatContext: "Setting chat context",
+    }, '*');
+  }
 }
 
 async function handleChatInteraction() {
@@ -102,8 +107,7 @@ async function handleChatInteraction() {
     loader.scrollIntoView({
       behavior: 'smooth'
     });
-    const res = await fetch('http://localhost:8081/api/agents/chat', options);
-    // const res = await fetch('https://ff69-130-248-126-34.ngrok-free.app/api/agents/chat', options);
+    const res = await fetch(agentEP, options);
     const { response } = await res.json();
     
     if (response.hasOwnProperty('message')) {
@@ -119,3 +123,34 @@ async function handleChatInteraction() {
     console.log(chatHistory);
 }
 
+(() => {
+  window.addEventListener("message", async (e) => {
+    const eventData = e.data;
+    let blockNames = "";
+    if (eventData.hasOwnProperty('blockList')) {
+      blockNames = eventData;
+    } else {
+      return;
+    }
+    console.log(blockNames);
+    // const res = await fetch(agentEP, options);
+    // const { response } = await res.json();
+    previewerIframe.contentWindow.postMessage({
+      // generativeContent: response.message,
+      generativeContent: {
+        0: {
+            "Marquee": {
+              "heading": "This is ai generated heading",
+              "body": "This is ai generated body"
+          }
+        },
+        1: {
+          "Text": {
+            "heading": "This is ai generated heading",
+            "body": "This is ai generated body"
+          }
+        }
+      },
+    }, '*');
+  })
+})();
