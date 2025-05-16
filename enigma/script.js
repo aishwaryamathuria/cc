@@ -63,11 +63,10 @@ function appendMessage(text, sender, hasMarkdown = false) {
 }
 
 function appendiFrameMessage(link, sender) {
-  debugger
   const msg = document.createElement('div');
   msg.className = `message ${sender} has-iframe`;
   const ifr = document.createElement('iframe');
-  ifr.src = link;
+  ifr.src = `${link}&martech=off`;
   msg.append(ifr);
   chatWindow.appendChild(msg);
   msg.scrollIntoView({
@@ -103,8 +102,8 @@ async function handleChatInteraction() {
     loader.scrollIntoView({
       behavior: 'smooth'
     });
-    // const res = await fetch('http://localhost:8081/api/agents/chat', options);
-    const res = await fetch('https://ff69-130-248-126-34.ngrok-free.app/api/agents/chat', options);
+    const res = await fetch('http://localhost:8081/api/agents/chat', options);
+    // const res = await fetch('https://ff69-130-248-126-34.ngrok-free.app/api/agents/chat', options);
     const { response } = await res.json();
     
     if (response.hasOwnProperty('message')) {
