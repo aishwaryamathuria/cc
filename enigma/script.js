@@ -19,20 +19,24 @@ userInput.addEventListener('keypress', (e) => {
 function sendMessage() {
   const message = userInput.value.trim();
   if (!message) return;
-
   appendMessage(message, 'user');
   handleChatInteraction();
 }
 
-function appendMessage(text, sender) {
+function appendMessage(text, sender, hasMarkdown = false) {
   const msg = document.createElement('div');
   msg.className = `message ${sender}`;
-  if (text.includes('```')) {
-    text = text.replace('`', '');
-    text = text.replace('markdown', '');
+
+  if (hasMarkdown) {
+    if (text.includes('```')) {
+      text = text.replace('`', '');
+      text = text.replace('markdown', '');
+    }
+    msg.innerHTML = marked.parse(text);
   }
-  msg.innerHTML = marked.parse(text);
-  if (sender == "bot" && isMarkdown(text)) {
+  else msg.innerHTML = text;
+
+  if (sender == "bot" && hasMarkdown) {
     document.querySelector('div[contentEditable="true"]')?.removeAttribute('contentEditable');
     d = document.createElement("div");
     d.classList.add("icon");
@@ -58,11 +62,12 @@ function appendMessage(text, sender) {
   loader.remove();
 }
 
-function appendiFrameMessage(text, sender) {
+function appendiFrameMessage(link, sender) {
+  debugger
   const msg = document.createElement('div');
   msg.className = `message ${sender} has-iframe`;
   const ifr = document.createElement('iframe');
-  ifr.src = `${text}&mepbutton=off`;
+  ifr.src = link;
   msg.append(ifr);
   chatWindow.appendChild(msg);
   msg.scrollIntoView({
@@ -100,30 +105,18 @@ async function handleChatInteraction() {
     });
     // const res = await fetch('http://localhost:8081/api/agents/chat', options);
     const res = await fetch('https://ff69-130-248-126-34.ngrok-free.app/api/agents/chat', options);
+    const { response } = await res.json();
     
-    const { response, format } = await res.json();
-    if (response.startsWith('PREVIEW_URL:')) {
-      const previewerURL = response.split("PREVIEW_URL:")[1];
-      appendiFrameMessage(previewerURL, 'bot');
-    } else {
-      appendMessage(response, 'bot');
+    if (response.hasOwnProperty('message')) {
+        appendMessage(response.message, 'bot', response.hasOwnProperty('hasMarkdown'));
+        chatHistory.push({
+          "role": "system",
+          "content": response.message
+        });
     }
-    chatHistory.push({
-      "role": "system",
-      "content": response
-    });
+    if (response.hasOwnProperty('previewerUrl')) {
+      appendiFrameMessage(response.previewerUrl, 'bot');
+    }
     console.log(chatHistory);
 }
 
-function isMarkdown(text) {
-  const markdownPatterns = [
-    /#\s+/g,
-    /\*\*.*\*\*/g,
-    /__.*__/g,
-    /\*.*\*/g,
-    /_.*_/g,
-    /[-*]\s+/g,
-    /\[.*\]\(.*\)/g 
-  ];
-  return markdownPatterns.some(pattern => pattern.test(text));
-}
