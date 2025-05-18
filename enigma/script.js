@@ -8,8 +8,8 @@ let chatHistory = [{
     "role": "system",
     "content": "Conversation started"
   }];
-const agentEP = 'http://localhost:8081/api/agents/chat';
-// const agentEP = 'https://ff69-130-248-126-34.ngrok-free.app/api/agents/chat';
+// const agentEP = 'http://localhost:8081/api/agents/chat';
+const agentEP = 'https://ff69-130-248-126-34.ngrok-free.app/api/agents/chat';
 
 sendBtn.addEventListener('click', sendMessage);
 userInput.addEventListener('keypress', (e) => {
