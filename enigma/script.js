@@ -173,7 +173,7 @@ async function handleChatInteraction() {
       body: JSON.stringify(chatPayload)
     };
 
-  fetch('http://2133-49-207-235-196.ngrok-free.app/api/agents/generate-content', options)
+  fetch('https://2133-49-207-235-196.ngrok-free.app/api/agents/generate-content', options)
     .then(response => response.json())
     .then(response => {
       previewerIframe.contentWindow.postMessage({ generativeContent: response.parsedData }, '*');
