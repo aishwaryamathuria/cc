@@ -233,11 +233,8 @@ body, html {
   margin: 10% auto;
   display: block;
   max-width: 90%;
-}
-
-.modal-content img {
   width: auto;
-  height: 90%;
+  height: 200%;
 }
 
 .close {
