@@ -11,8 +11,8 @@ let chatHistory = [{
     "role": "system",
     "content": "Conversation started"
   }];
-// const agentEP = 'http://localhost:8081/api/agents/chat';
-const agentEP = 'https://2133-49-207-235-196.ngrok-free.app/api/agents/chat';
+// const agentEP = 'http://localhost:8081/api/agents';
+const agentEP = 'https://2133-49-207-235-196.ngrok-free.app/api/agents';
 
 sendBtn.addEventListener('click', sendMessage);
 userInput.addEventListener('keypress', (e) => {
@@ -124,7 +124,7 @@ async function handleChatInteraction() {
     loader.scrollIntoView({
       behavior: 'smooth'
     });
-    const res = await fetch(agentEP, options);
+    const res = await fetch(`${agentEP}/chat`, options);
     const { response } = await res.json();
     
     if (response.hasOwnProperty('message')) {
@@ -135,7 +135,8 @@ async function handleChatInteraction() {
         });
     }
     if (response.hasOwnProperty('previewerUrl')) {
-      appendiFrameMessage(response.previewerUrl.replace("https://develop--da-helpx-gem--adobecom.hlx.page", 'http://localhost:8080'), 'bot', response.generateContent);
+      // appendiFrameMessage(response.previewerUrl.replace("https://develop--da-helpx-gem--adobecom.hlx.page", 'http://localhost:8080'), 'bot', response.generateContent);
+      appendiFrameMessage(response.previewerUrl, 'bot', response.generateContent);
     }
     if (response.hasOwnProperty('thumbnail')) {
        appendImageThumbnail(`${response.thumbnail}`, 'bot');
@@ -173,7 +174,7 @@ async function handleChatInteraction() {
       body: JSON.stringify(chatPayload)
     };
 
-  fetch('https://2133-49-207-235-196.ngrok-free.app/api/agents/generate-content', options)
+  fetch(`${agentEP}/generate-content`, options)
     .then(response => response.json())
     .then(response => {
       previewerIframe.contentWindow.postMessage({ generativeContent: response.parsedData }, '*');
