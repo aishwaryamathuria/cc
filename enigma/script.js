@@ -9,7 +9,7 @@ let chatHistory = [{
     "content": "Conversation started"
   }];
 // const agentEP = 'http://localhost:8081/api/agents/chat';
-const agentEP = 'https://ff69-130-248-126-34.ngrok-free.app/api/agents/chat';
+const agentEP = 'https://2133-49-207-235-196.ngrok-free.app/api/agents/chat';
 
 sendBtn.addEventListener('click', sendMessage);
 userInput.addEventListener('keypress', (e) => {
@@ -65,7 +65,7 @@ function appendMessage(text, sender, hasMarkdown = false) {
   loader.remove();
 }
 
-function appendiFrameMessage(link, sender) {
+function appendiFrameMessage(link, sender, generateContent = false) {
   const msg = document.createElement('div');
   msg.className = `message ${sender} has-iframe`;
   previewerIframe = document.createElement('iframe');
@@ -76,10 +76,12 @@ function appendiFrameMessage(link, sender) {
     behavior: 'smooth'
   });
   loader.remove();
-  previewerIframe.onload = () => {
-    previewerIframe.contentWindow.postMessage({
-        chatContext: "Setting chat context",
-    }, '*');
+  if (generateContent) {
+    previewerIframe.onload = () => {
+      previewerIframe.contentWindow.postMessage({
+          chatContext: "Setting chat context",
+      }, '*');
+    }
   }
 }
 
@@ -118,12 +120,13 @@ async function handleChatInteraction() {
         });
     }
     if (response.hasOwnProperty('previewerUrl')) {
-      appendiFrameMessage(response.previewerUrl, 'bot');
+      appendiFrameMessage(response.previewerUrl, 'bot', response.generateContent);
     }
     console.log(chatHistory);
 }
 
 (() => {
+ 
   window.addEventListener("message", async (e) => {
     const eventData = e.data;
     let blockNames = "";
@@ -133,6 +136,21 @@ async function handleChatInteraction() {
       return;
     }
     console.log(blockNames);
+    chatHistory.push({
+      "role": "user",
+      "content": 'Generate content for da page for the following block list'
+    });
+    chatHistory.push({
+      "role": "user",
+      "content": blockNames
+    });
+
+
+    const chatPayload = {
+      "message": JSON.stringify(chatHistory)
+    };
+    console.log(chatHistory)
+    console.log(JSON.stringify(chatPayload))
     // const res = await fetch(agentEP, options);
     // const { response } = await res.json();
     previewerIframe.contentWindow.postMessage({
