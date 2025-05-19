@@ -265,3 +265,11 @@ body, html {
   opacity: 0.7;
   cursor: pointer;
 }
+
+.message .disclaimer {
+  display: flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 12px;
+  color: rgba(102, 100, 100, 0.914)
+}
