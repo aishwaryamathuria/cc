@@ -135,7 +135,6 @@ async function handleChatInteraction() {
         });
     }
     if (response.hasOwnProperty('previewerUrl')) {
-      // appendiFrameMessage(response.previewerUrl.replace("https://develop--da-helpx-gem--adobecom.hlx.page", 'http://localhost:8080'), 'bot', response.generateContent);
       appendiFrameMessage(response.previewerUrl, 'bot', response.generateContent);
     }
     if (response.hasOwnProperty('thumbnail')) {
@@ -145,7 +144,7 @@ async function handleChatInteraction() {
 }
 
 (() => {
-    window.addEventListener("message", async (e) => {
+  window.addEventListener("message", async (e) => {
       const eventData = e.data;
       let blockNames = "";
       if (eventData.hasOwnProperty('blockList')) {
@@ -168,84 +167,43 @@ async function handleChatInteraction() {
       };
       console.log(chatHistory)
 
+    try {
       const options = {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(chatPayload)
-    };
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(chatPayload)
+      };
 
-  fetch(`${agentEP}/generate-content`, options)
-    .then(response => response.json())
-    .then(response => {
-      previewerIframe.contentWindow.postMessage({ generativeContent: response.parsedData }, '*');
-    })
-    .catch(err => {
-      // previewerIframe.contentWindow.postMessage({ generativeContent: {} }, '*');
+      let iterCount = 0;
+      const idRes = await fetch(`${agentEP}/create-content`, options);
+      let { id } = await idRes.json();
 
-      previewerIframe.contentWindow.postMessage({ generativeContent: {
-          "0": {
-            "Marquee": {
-              "heading": "Your Creativity, Amplified",
-              "body": "Unleash your potential with tools that bring your ideas to life. Craft, design, and innovate like never before with Adobe's cutting-edge solutions.",
-              "cta": "Get Started Today"
-            }
-          },
-          "1": {
-            "Text": {
-              "heading": "Everything You Need to Create",
-              "body": "From photo editing to graphic design, video production to digital marketing—our powerful suite of tools empowers creators of all kinds to turn their visions into reality."
-            }
-          },
-          "2": {
-            "Media": {
-              "heading": "Edit Like a Pro",
-              "body": "Transform photos and videos with professional-grade editing tools. Fine-tune details, experiment with effects, and create stunning visuals effortlessly."
-            }
-          },
-          "3": {
-            "Media": {
-              "heading": "Design Without Limits",
-              "body": "Bring your ideas to life with intuitive design tools. From logos to layouts, create anything you can imagine with precision and ease."
-            }
-          },
-          "4": {
-            "Media": {
-              "heading": "Collaborate Seamlessly",
-              "body": "Work smarter, not harder. Share projects, gather feedback, and collaborate with your team in real-time—all from one place."
-            }
-          },
-          "5": {
-            "Media": {
-              "heading": "Master Social Media",
-              "body": "Create scroll-stopping content for every platform. With templates, presets, and automation, crafting engaging posts has never been simpler."
-            }
-          },
-          "6": {
-            "Media": {
-              "heading": "Elevate Your Storytelling",
-              "body": "Captivate your audience with immersive storytelling tools. Whether it’s a presentation, a video, or a digital experience, make it unforgettable."
-            }
-          },
-          "7": {
-            "HowTo": {
-              "heading": "How to Get Started",
-              "body": "1. Choose the tools that fit your needs. 2. Explore tutorials and templates to jumpstart your projects. 3. Start creating and let your imagination run wild."
-            }
-          },
-          "8": {
-            "Aside": {
-              "heading": "Your Vision, Our Tools",
-              "body": "Join millions of creators worldwide who trust Adobe to bring their ideas to life. Start your journey today and see what you can achieve."
-            }
-          },
-          "9": {
-            "Accordion": {
-              "heading": "Frequently Asked Questions",
-              "body": "Find answers to common questions about tools, subscriptions, and getting started. We're here to help you make the most of your creative journey."
-            }
-          }
-        } }, '*');
+      async function tryToLoadContent(id) {
+        try {
+
+          const contentOptions = {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'}
+          };
+
+          const contentRes = await fetch(`${agentEP}/fetch-content/${id}`, contentOptions);
+          const { content } = await contentRes.json();
+          iterCount += 1
+          if(iterCount > 30) throw new Error('Something went wrong while generating content!');
+          if(Object.keys(content).length === 0) setTimeout( () => { tryToLoadContent(id); }, 15000);
+          else previewerIframe.contentWindow.postMessage({ generativeContent: content}, '*');
+
+        } catch (err) {
+          console.log(err);
+          previewerIframe.contentWindow.postMessage({ generativeContent: {}}, '*');
+          appendMessage(`⚠️ Our content muse took a coffee break. Give it another go?.`, 'bot');
+        }
+      }
+      tryToLoadContent(id);
+    } catch (err) {
+      console.log(err);
+      previewerIframe.contentWindow.postMessage({ generativeContent: {}}, '*');
       appendMessage(`⚠️ Our content muse took a coffee break. Give it another go?.`, 'bot');
-    });
+    }
   });
 })();
