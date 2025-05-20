@@ -12,8 +12,8 @@ let chatHistory = [{
     "role": "system",
     "content": "Conversation started"
   }];
-// const agentEP = 'http://localhost:8081/api/agents';
-const agentEP = 'https://2133-49-207-235-196.ngrok-free.app/api/agents';
+const agentEP = 'http://localhost:8081/api/agents';
+// const agentEP = 'https://2133-49-207-235-196.ngrok-free.app/api/agents';
 
 sendBtn.addEventListener('click', () => {
   sendMessage();
