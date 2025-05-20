@@ -1,4 +1,5 @@
 const sendBtn = document.getElementById('send-btn');
+const inputArea = document.getElementById('input-area');
 const userInput = document.getElementById('user-input');
 const chatWindow = document.getElementById('chat-window');
 const loader = document.createElement('div');
@@ -14,7 +15,10 @@ let chatHistory = [{
 // const agentEP = 'http://localhost:8081/api/agents';
 const agentEP = 'https://2133-49-207-235-196.ngrok-free.app/api/agents';
 
-sendBtn.addEventListener('click', sendMessage);
+sendBtn.addEventListener('click', () => {
+  sendMessage();
+});
+
 userInput.addEventListener('keypress', (e) => {
   if (e.key === 'Enter' && !e.shiftKey) {
     e.preventDefault();
@@ -23,6 +27,7 @@ userInput.addEventListener('keypress', (e) => {
 });
 
 function sendMessage() {
+  if (!inputArea.classList.contains('to-bottom')) inputArea.classList.add('to-bottom');
   const message = userInput.value.trim();
   if (!message) return;
   appendMessage(message, 'user');

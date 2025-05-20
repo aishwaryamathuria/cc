@@ -35,12 +35,28 @@ body, html {
 }
 
 .message.user {
-  color: #fff
+  color: #fff;
+  animation: slideLeftFade 0.5s ease-out forwards;
+}
+
+@keyframes slideLeftFade {
+  to {
+    transform: translate(-10%, 0);
+    opacity: 1;
+  }
 }
 
 .message.bot {
   max-height: 600px;
   overflow: scroll;
+  animation: slideRightFade 0.5s ease-out forwards;
+}
+
+@keyframes slideRightFade {
+  to {
+    transform: translate(10%, 0);
+    opacity: 1;
+  }
 }
 
 .user {
@@ -60,10 +76,15 @@ body, html {
   position: sticky;
   width: 100%;
   margin: auto;
-  bottom: 0;
   margin-bottom: 20px;
   margin: 10px 0;
   padding: 0 20px;
+  bottom: 50%;
+}
+
+.input-area.to-bottom {
+  bottom: 0;
+  transition: bottom 0.8s ease;
 }
 
 #user-input {
