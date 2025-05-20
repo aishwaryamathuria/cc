@@ -41,7 +41,7 @@ body, html {
 
 @keyframes slideLeftFade {
   to {
-    transform: translate(-10%, 0);
+    transform: translate(-3%, 0);
     opacity: 1;
   }
 }
@@ -54,7 +54,7 @@ body, html {
 
 @keyframes slideRightFade {
   to {
-    transform: translate(10%, 0);
+    transform: translate(3%, 0);
     opacity: 1;
   }
 }
