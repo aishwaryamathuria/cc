@@ -29,6 +29,13 @@ function sendMessage() {
   handleChatInteraction();
 }
 
+function linkify(text) {
+  const urlRegex = /https?:\/\/[^\s]+/g;
+  return text.replace(urlRegex, function(url) {
+    return `<a href="${url}" target="_blank"">${url}</a>`;
+  });
+}
+
 function appendMessage(text, sender, hasMarkdown = false) {
   const msg = document.createElement('div');
   msg.className = `message ${sender}`;
@@ -40,8 +47,10 @@ function appendMessage(text, sender, hasMarkdown = false) {
     }
     msg.innerHTML = marked.parse(text);
   }
-  else msg.innerHTML = text;
-
+  else {
+    msg.innerHTML = linkify(text);
+  }
+  
   if (sender == "bot" && hasMarkdown) {
     document.querySelector('div[contentEditable="true"]')?.removeAttribute('contentEditable');
     d = document.createElement("div");
