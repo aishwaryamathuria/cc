@@ -36,25 +36,17 @@ body, html {
 
 .message.user {
   color: #fff;
-  animation: slideLeftFade 0.5s ease-out forwards;
-}
-
-@keyframes slideLeftFade {
-  to {
-    transform: translate(-3%, 0);
-    opacity: 1;
-  }
+  animation: slideFade 0.5s ease-out forwards;
 }
 
 .message.bot {
   max-height: 600px;
   overflow: scroll;
-  animation: slideRightFade 0.5s ease-out forwards;
+  animation: slideFade 0.5s ease-out forwards;
 }
 
-@keyframes slideRightFade {
+@keyframes slideFade {
   to {
-    transform: translate(3%, 0);
     opacity: 1;
   }
 }
