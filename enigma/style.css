@@ -64,7 +64,6 @@ body, html {
 
 .input-area {
   display: flex;
-  border-top: 1px solid #f8f8f8;
   position: sticky;
   width: 100%;
   margin: auto;
