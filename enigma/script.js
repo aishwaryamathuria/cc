@@ -29,7 +29,7 @@ userInput.addEventListener('keypress', (e) => {
 function sendMessage() {
   document.querySelector(".chat-window").style.display = "flex";
   document.querySelector(".input-area").classList.add('to-bottom');
-  document.querySelector('.card-section').remove();
+  document.querySelector('.card-section')?.remove();
   if (!inputArea.classList.contains('to-bottom')) inputArea.classList.add('to-bottom');
   const message = userInput.value.trim();
   if (!message) return;
