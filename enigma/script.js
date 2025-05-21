@@ -27,6 +27,9 @@ userInput.addEventListener('keypress', (e) => {
 });
 
 function sendMessage() {
+  document.querySelector(".chat-window").style.display = "flex";
+  document.querySelector(".input-area").classList.add('to-bottom');
+  document.querySelector('.card-section').remove();
   if (!inputArea.classList.contains('to-bottom')) inputArea.classList.add('to-bottom');
   const message = userInput.value.trim();
   if (!message) return;
@@ -224,5 +227,25 @@ async function handleChatInteraction() {
       previewerIframe.contentWindow.postMessage({ generativeContent: {}}, '*');
       appendMessage(`⚠️ Our content muse took a coffee break. Give it another go?.`, 'bot');
     }
+  });
+
+  document.querySelectorAll('.card').forEach(c => {
+    if (c.querySelector(".card-overlay")) return;
+    const staticSrc = c.querySelector('img').src;
+    const gifSrc = c.querySelector('img').getAttribute('data-gif');
+
+    c.addEventListener('mouseenter', () => {
+      c.querySelector('img').src = gifSrc;
+    });
+
+    c.addEventListener('mouseleave', () => {
+      c.querySelector('img').src = staticSrc;
+    });
+
+    c.addEventListener('click', () => {
+      c.closest(".chat-wrapper").querySelector(".chat-window").style.display = "flex";
+      c.closest(".chat-wrapper").querySelector(".input-area").classList.add('to-bottom');
+      c.closest(".card-section").remove();
+    });
   });
 })();
