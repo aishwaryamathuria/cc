@@ -146,23 +146,28 @@ async function handleChatInteraction() {
     loader.scrollIntoView({
       behavior: 'smooth'
     });
-    const res = await fetch(`${agentEP}/chat`, options);
-    const { response } = await res.json();
-    
-    if (response.hasOwnProperty('message')) {
-        appendMessage(response.message, 'bot', response.hasOwnProperty('hasMarkdown'));
-        chatHistory.push({
-          "role": "system",
-          "content": response.message
-        });
+
+    try {
+      const res = await fetch(`${agentEP}/chat`, options);
+      const { response } = await res.json();
+      
+      if (response.hasOwnProperty('message')) {
+          appendMessage(response.message, 'bot', response.hasOwnProperty('hasMarkdown'));
+          chatHistory.push({
+            "role": "system",
+            "content": response.message
+          });
+      }
+      if (response.hasOwnProperty('previewerUrl')) {
+        appendiFrameMessage(response.previewerUrl, 'bot', response.generateContent);
+      }
+      if (response.hasOwnProperty('thumbnail')) {
+        appendImageThumbnail(`${response.thumbnail}`, 'bot');
+      }
+      console.log(chatHistory);
+    } catch (err) {
+        appendMessage(`⚠️ Well, that didn’t go as planned. Give it another go?.`, 'bot');
     }
-    if (response.hasOwnProperty('previewerUrl')) {
-      appendiFrameMessage(response.previewerUrl, 'bot', response.generateContent);
-    }
-    if (response.hasOwnProperty('thumbnail')) {
-       appendImageThumbnail(`${response.thumbnail}`, 'bot');
-    }
-    console.log(chatHistory);
 }
 
 (() => {
