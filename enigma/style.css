@@ -305,7 +305,7 @@ body, html {
 }
 
 .chat-wrapper .card-section .section-heading {
-  font-size: 28px;
+  font-size: 32px;
   margin-bottom: 50px;
   color: #2c3e50;
   display: flex;
@@ -349,6 +349,7 @@ body, html {
 .chat-wrapper .card-section .card-icon {
   width: 40px;
   height: 40px;
+  filter: hue-rotate(79deg) saturate(292%);
 }
 
 .chat-wrapper .card-section .card-title {
