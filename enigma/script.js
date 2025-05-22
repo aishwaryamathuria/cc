@@ -47,7 +47,6 @@ function linkify(text) {
 function appendMessage(text, sender, hasMarkdown = false) {
   const msg = document.createElement('div');
   msg.className = `message ${sender}`;
-
   if (hasMarkdown) {
     if (text.includes('```')) {
       text = text.replace('`', '');
@@ -247,9 +246,13 @@ async function handleChatInteraction() {
       c.querySelector('img').src = staticSrc;
     });
 
-    c.addEventListener('click', () => {
+    c.addEventListener('click', (e) => {
       c.closest(".chat-wrapper").querySelector(".chat-window").style.display = "flex";
       c.closest(".chat-wrapper").querySelector(".input-area").classList.add('to-bottom');
+      let cardQuestion = null;
+      if (e.target.classList.contains('card')) cardQuestion = e.target?.dataset?.question;
+      else cardQuestion = e.target?.closest('.card')?.dataset?.question;
+      if (cardQuestion) appendMessage(cardQuestion, 'bot');
       c.closest(".card-section").remove();
     });
   });

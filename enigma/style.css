@@ -59,7 +59,7 @@ body, html {
 
 .bot {
   align-self: flex-start;
-  background-color: #F8F8F8;
+  background-color: #eaeaea;
   white-space: pre-wrap;
 }
 
@@ -68,9 +68,10 @@ body, html {
   width: 100%;
   margin: auto;
   margin-bottom: 20px;
-  margin: 10px 0;
+  margin: 10px auto;
   padding: 0 20px;
   bottom: 20%;
+  max-width: 1400px;
 }
 
 .input-area.to-bottom {
@@ -122,6 +123,7 @@ body, html {
 .message.has-iframe {
   min-width: 80%;
   max-width: 80%;
+  max-height: 630px;
 }
 
 #send-btn {
@@ -170,8 +172,8 @@ body, html {
 
 .message.has-iframe {
   width: 80%;
-  height: 600px;
-  min-height: 600px;
+  height: 630px;
+  min-height: 630px;
 }
 
 .message iframe {
@@ -217,13 +219,13 @@ body, html {
 }
 
 #send-btn svg {
-  height: 20px;
-  width: 20px;
-  fill: gray;
+  height: 24px;
+  width: 24px;
+  fill: #505050f0;
 }
 
 #send-btn svg path {
-  fill: gray;
+  fill: #505050f0;
 }
 
 
