@@ -351,7 +351,7 @@ body, html {
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   height: 200px;
-  width: 300px;
+  width: 350px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -372,20 +372,19 @@ body, html {
 }
 
 .chat-wrapper .card-section .card-title {
-  font-size: 18px;
+  font-size: 20px;
   display: flex;
   flex-direction: row;
   color: #34495e;
-  margin-bottom: 10px;
   gap: 10px;
   align-items: center;
 }
 
 .chat-wrapper .card-section .card-text {
-  font-size: 14px;
+  font-size: 16px;
   color: #7f8c8d;
   margin: 0;
-  line-height: 1.15;
+  line-height: 1.5;
 }
 
 .chat-wrapper .card-section .card .card-overlay {
