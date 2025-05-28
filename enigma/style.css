@@ -337,30 +337,21 @@ body, html {
 }
 
 .chat-wrapper .card-section .section-heading .cursive {
-  background: linear-gradient(90deg, #c280ee 0%, #ba56f8 25%, #b22be3 55%, #75049f 80%, #ba56f8 100%);
+  background: linear-gradient(90deg,#ba56f8 15%,#75049f 35%,#ba56f8 75%,#75049f 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-size: 150% 150%;
+  background-size: 300% 100%;
   background-clip: text;
   color: transparent;
-  animation: streambg 2s ease infinite;
+  animation: streambg 5s linear infinite;
 }
 
 @keyframes streambg {
   0% {
-    background-position: 50% 0%;
-  }
-  25% {
-    background-position: 100% 50%;
-  }
-  50% {
-    background-position: 50% 100%;
-  }
-  75% {
-    background-position: 0% 50%;
+    background-position: 0% 0%;
   }
   100% {
-    background-position: 50% 0%;
+    background-position: 100% 0%;
   }
 }
 
