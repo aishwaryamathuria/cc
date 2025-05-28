@@ -484,6 +484,9 @@ body, html {
   border-radius: 50px;
   height: 40px;
   width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .toggle-btn.home {
@@ -491,8 +494,8 @@ body, html {
 }
 
 .toggle-btn svg {
-  height: 30px;
-  width: 30px;
+  height: 20px;
+  width: 20px;
 }
 
 .toggle-btn svg path {
