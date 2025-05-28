@@ -430,6 +430,10 @@ body, html {
 }
 
 @media screen and (max-width: 1000px) {
+  .chat-wrapper .card-section .section-heading {
+    flex-direction: column;
+  }
+  
   .chat-wrapper .card-section .card {
     height: 100px;
     width: 200px;
