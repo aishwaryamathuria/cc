@@ -16,6 +16,7 @@ const agentEP = 'http://localhost:8081/api/agents';
 // const agentEP = 'https://2133-49-207-235-196.ngrok-free.app/api/agents';
 
 sendBtn.addEventListener('click', () => {
+  userInput.placeholder = "Ready when you are...";
   sendMessage();
 });
 
@@ -253,9 +254,14 @@ async function handleChatInteraction() {
       c.closest(".chat-wrapper").querySelector(".chat-window").style.display = "flex";
       c.closest(".chat-wrapper").querySelector(".input-area").classList.add('to-bottom');
       let cardQuestion = null;
-      if (e.target.classList.contains('card')) cardQuestion = e.target?.dataset?.question;
+      let cardPlaceholder = null;
+      if (e.target.classList.contains('card')) {
+        cardQuestion = e.target?.dataset?.question;
+        cardPlaceholder =  e.target?.dataset?.placeholder;
+      }
       else cardQuestion = e.target?.closest('.card')?.dataset?.question;
       if (cardQuestion) appendMessage(cardQuestion, 'bot');
+      if (cardPlaceholder) userInput.placeholder = cardPlaceholder;
       c.closest(".card-section").remove();
     });
   });

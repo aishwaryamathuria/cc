@@ -85,7 +85,7 @@ body, html {
   margin-bottom: 20px;
   margin: 10px auto;
   padding: 0 20px;
-  bottom: 20%;
+  bottom: 12%;
   max-width: 1400px;
   z-index: 1;
 }
@@ -320,6 +320,7 @@ body, html {
   justify-content: center;
   width: 100%;
   margin-top: 100px;
+  margin-bottom: 50px;
   z-index: 1;
 }
 
@@ -331,6 +332,34 @@ body, html {
   width: 100%;
   align-items: center;
   justify-content: center;
+}
+
+.chat-wrapper .card-section .section-heading .cursive {
+  background: linear-gradient(90deg, #b367e2 0%, #9245c1 25%, #b22be3 55%, #75049f 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 150% 150%;
+  background-clip: text;
+  color: transparent;
+  animation: streambg 1s ease infinite;
+}
+
+@keyframes streambg {
+  0% {
+    background-position: 50% 0%;
+  }
+  25% {
+    background-position: 100% 50%;
+  }
+  50% {
+    background-position: 50% 100%;
+  }
+  75% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 50% 0%;
+  }
 }
 
 .chat-wrapper .card-section .card-container {
@@ -378,6 +407,7 @@ body, html {
   color: #34495e;
   gap: 10px;
   align-items: center;
+  color: #3e3e3e;
 }
 
 .chat-wrapper .card-section .card-text {
