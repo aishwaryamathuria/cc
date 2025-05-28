@@ -9,47 +9,53 @@
   <script src="https://cdn.jsdelivr.net/npm/turndown/dist/turndown.min.js"></script>
 </head>
 <body>
-  <div class="chat-wrapper">
+  <button id="toggleSidebar" class="toggle-btn">
+    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-layout-sidebar"><path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" /><path d="M9 4l0 16" /></svg>
+  </button>
+  <div id="sidebar" class="sidebar">
+    <h2>Options</h2>
+    <ul>
+      <li><a href="#">Dashboard</a></li>
+      <li><a href="#">Reports</a></li>
+      <li><a href="#">Settings</a></li>
+      <li><a href="#">Logout</a></li>
+    </ul>
+  </div>
 
+  <div class="chat-wrapper">
+  <div class="chat-background"></div>
     <div class="card-section">
-      <h2 class="section-heading">Project Stream</h2>
+      <h2 class="section-heading">Welcome to&nbsp;<span class = "cursive"> STREAM </span>. What can I help with?</h2>
       <div class="card-container">
-        <div class="card" data-question = "Sure, I can help you with that. Could you please provide a brief overview of the requirement and a quick summary of the target audience?">
+        <div class="card" data-question = "Sure, I can help you with that. Could you please provide a brief overview of the requirement?" data-placeholder = "Please write your brief requirement...">
           <div class="card-title">
             <img src="./assets/edit.jpg" alt="Feature 1 Icon" class="card-icon" data-gif="./assets/edit.gif">
             <h3>Generate a PRD</h3>
           </div>
           <p class="card-text">Transform a brief product idea into a comprehensive Product Requirement Document (PRD).</p>
         </div>
-        <div class="card" data-question = "Sure, I can start working on the design. Could you share the finalized PRD and highlight any specific design constraints or user experience goals I should keep in mind?">
+        <div class="card" data-question = "Sure, I can start working on the design. Could you share the finalized PRD?" data-placeholder = "Please provide the PRD details...">
           <div class="card-title">
             <img src="./assets/design.jpg" alt="Feature 1 Icon" class="card-icon" data-gif="./assets/design.gif">
             <h3>Design from PRD</h3>
           </div>
           <p class="card-text">Receive a recommended page category and design layout tailored to the specific goals of the initiative.</p>
         </div>
-        <div class="card" data-question = "Sure, I can create a DA page for you. Could you share the Figma file link and the location of the final page in DA?">
+        <div class="card" data-question = "Sure, I can create a DA page for you. Could you share the page location in DA?" data-placeholder = "Please provide the DA page location...">
           <div class="card-title">
             <img src="./assets/web-developer.jpg" alt="Feature 1 Icon" class="card-icon" data-gif="./assets/web-developer.gif">
             <h3>Figma to DA</h3>
           </div>
           <p class="card-text">Transform Figma design files into DA-compatible pages for seamless integration.</p>
         </div>
-        <div class="card" data-question = "Sure, I can help with that. Could you share the Figma layout and DA page and any guidelines I should follow?">
+        <div class="card" data-question = "Sure, I can help with that. Could you share the Figma layout and DA page and any guidelines I should follow?"  data-placeholder = "Please provide the figma and DA page locations...">
           <div class="card-title">
             <img src="./assets/artificial-intelligence.jpg" alt="Feature 1 Icon" class="card-icon" data-gif="./assets/artificial-intelligence.gif">
             <h3>Generate content & assets</h3>
           </div>
           <p class="card-text">Transform Figma designs into DA pages with intelligent content and asset generation that reflects PRD requirements.</p>
         </div>
-        <div class="card" data-question = "Sure, I can help with that. Could you share the DA link and locale information to trigger the process?">
-          <div class="card-title">
-            <img src="./assets/translate.jpg" alt="Feature 1 Icon" class="card-icon" data-gif="./assets/translate.gif">
-            <h3>Transcreation</h3>
-          </div>
-          <p class="card-text">Seamlessly transform your current page into localized versions with cultural and linguistic precision.</p>
-        </div>
-        <div class="card" data-question = "Sure, I can help with that. Could you share the url and the overview of the statistics that you want to monitor?">
+        <div class="card" data-question = "Sure, I can help with that. Could you share the url and the overview of the statistics that you want to monitor?"  data-placeholder = "Please provide the URL and statistics to analyse...">
           <div class="card-title">
             <img src="./assets/data-analysis.jpg" alt="Feature 1 Icon" class="card-icon" data-gif="./assets/data-analysis.gif">
             <h3>Preflight</h3>
@@ -60,7 +66,7 @@
     </div>
     <div id="chat-window" class="chat-window"></div>
     <div class="input-area" id="input-area">
-      <textarea id="user-input" placeholder="Ready when you are. What’s next on your list?" rows="2"></textarea>
+      <textarea id="user-input" placeholder="Ready when you are..." rows="2"></textarea>
       <button id="send-btn">
         <svg id="SP_AIGenerate_Md_N" xmlns="http://www.w3.org/2000/svg" width="31.13" height="32.858" viewBox="0 0 31.13 32.858">
           <path id="Path_1071708" data-name="Path 1071708" d="M27.21,14.079,25.357,16.1V24.41a1.946,1.946,0,0,1-1.946,1.946H7.839A1.946,1.946,0,0,1,5.893,24.41V8.839A1.946,1.946,0,0,1,7.839,6.893h8.734L12.858,3H7.839A5.839,5.839,0,0,0,2,8.839V24.41a5.839,5.839,0,0,0,5.839,5.839H23.41a5.839,5.839,0,0,0,5.839-5.839V13.846l-1.259-.081a.973.973,0,0,0-.78.314Z" transform="translate(-2 2.609)" fill="#fff" fill-rule="evenodd"/>
