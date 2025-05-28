@@ -3,7 +3,12 @@ const inputArea = document.getElementById('input-area');
 const userInput = document.getElementById('user-input');
 const chatWindow = document.getElementById('chat-window');
 const loader = document.createElement('div');
+const toggleBtn = document.getElementById('toggleSidebar');
+const sidebar = document.getElementById('sidebar');
+const closeBtn = document.getElementById('closeSidebar');
+
 loader.classList.add('loader');
+
 document.querySelector('#closeModal').addEventListener('click', () => {
   document.querySelector('#imgModal').style.display = "none";
 })
@@ -24,6 +29,20 @@ userInput.addEventListener('keypress', (e) => {
   if (e.key === 'Enter' && !e.shiftKey) {
     e.preventDefault();
     sendMessage();
+  }
+});
+
+toggleBtn.addEventListener('click', () => {
+  const isOpen = sidebar.classList.contains('open');
+
+  if (isOpen) {
+    sidebar.classList.remove('open');
+    toggleBtn.innerHTML = '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-layout-sidebar"><path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" /><path d="M9 4l0 16" /></svg>';
+    toggleBtn.style.left = '10px';
+  } else {
+    sidebar.classList.add('open');
+    toggleBtn.textContent = '✕';
+    toggleBtn.style.left = '200px';
   }
 });
 
