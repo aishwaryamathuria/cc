@@ -67,8 +67,12 @@ let chatHistory = [{
     "role": "system",
     "content": "Conversation started"
   }];
-const agentEP = 'http://localhost:8081/api/agents';
-// const agentEP = 'https://2133-49-207-235-196.ngrok-free.app/api/agents';
+
+
+let agentEP = 'https://wcms-milostudio-bulkops-deploy-ethos501-prod-or2-6cb495.cloud.adobe.io/api/agents';
+const agentEPLocal = 'http://localhost:8081/api/agents';
+const params = new URLSearchParams(window.location.search);
+if (params.has('ref') && params.get('ref') == "local") agentEP = agentEPLocal;
 
 sendBtn.addEventListener('click', () => {
   userInput.placeholder = "Ready when you are...";
@@ -107,6 +111,7 @@ function sendMessage() {
   document.querySelector(".chat-window").style.display = "flex";
   document.querySelector(".input-area").classList.add('to-bottom');
   document.querySelector('.card-section').style.display = 'none';
+  document.querySelector('.section-heading').style.display = 'none';
   if (!inputArea.classList.contains('to-bottom')) inputArea.classList.add('to-bottom');
   const message = userInput.value.trim();
   if (!message) return;
@@ -470,18 +475,10 @@ async function loadAllConversations() {
 
     c.addEventListener('click', (e) => {
       restartObserver();
-      c.closest(".chat-wrapper").querySelector(".chat-window").style.display = "flex";
-      c.closest(".chat-wrapper").querySelector(".input-area").classList.add('to-bottom');
-      let cardQuestion = null;
       let cardPlaceholder = null;
-      if (e.target.classList.contains('card')) {
-        cardQuestion = e.target?.dataset?.question;
-        cardPlaceholder =  e.target?.dataset?.placeholder;
-      }
-      else cardQuestion = e.target?.closest('.card')?.dataset?.question;
-      if (cardQuestion) appendMessage(cardQuestion, 'bot');
-      if (cardPlaceholder) userInput.placeholder = cardPlaceholder;
-      c.closest(".card-section").style.display = 'none';
+      if (e.target.classList.contains('card')) cardPlaceholder =  e.target?.dataset?.placeholder;
+      else cardPlaceholder = e.target?.closest('.card')?.dataset?.placeholder;
+      userInput.value = cardPlaceholder;
     });
   });
 

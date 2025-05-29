@@ -94,7 +94,7 @@ body, html {
 }
 
 .input-area.to-bottom {
-  bottom: 50px;
+  bottom: 10%;
   transition: bottom 0.5s ease;
   position: sticky;
 }
@@ -322,12 +322,12 @@ body, html {
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin-top: 80px;
+  margin-top: 20px;
   margin-bottom: 20px;
   z-index: 1;
 }
 
-.chat-wrapper .card-section .section-heading {
+.chat-wrapper .section-heading {
   font-size: 40px;
   margin-bottom: 50px;
   color: #2c3e50;
@@ -335,9 +335,11 @@ body, html {
   width: 100%;
   align-items: center;
   justify-content: center;
+  margin-top: 10%;
+  z-index: 1000;
 }
 
-.chat-wrapper .card-section .section-heading .cursive {
+.chat-wrapper .section-heading .cursive {
   background: linear-gradient(90deg,#ba56f8 15%,#75049f 35%,#ba56f8 75%,#75049f 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -359,7 +361,7 @@ body, html {
 .chat-wrapper .card-section .card-container {
   display: flex;
   width: 95%;
-  gap: 30px;
+  gap: 18px;
   max-width: 1200px;
   margin: 0 auto;
   flex-wrap: wrap;
@@ -369,17 +371,17 @@ body, html {
 
 .chat-wrapper .card-section .card {
   background: #ffffff;
-  padding: 20px 20px;
+  padding: 15px;
   border-radius: 12px;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   height: 200px;
-  width: 350px;
+  width: 220px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   cursor: pointer;
-  gap: 20px;
+  gap: 10px;
   position: relative;
 }
 
@@ -395,7 +397,7 @@ body, html {
 }
 
 .chat-wrapper .card-section .card-title {
-  font-size: 20px;
+  font-size: 16px;
   display: flex;
   flex-direction: row;
   color: #34495e;
@@ -405,7 +407,7 @@ body, html {
 }
 
 .chat-wrapper .card-section .card-text {
-  font-size: 16px;
+  font-size: 14px;
   color: #7f8c8d;
   margin: 0;
   line-height: 1.5;
@@ -423,7 +425,7 @@ body, html {
 }
 
 @media screen and (max-width: 1000px) {
-  .chat-wrapper .card-section .section-heading {
+  .chat-wrapper .section-heading {
     flex-direction: column;
   }
   
@@ -443,7 +445,7 @@ body, html {
 
 @media screen and (max-width: 600px) {
 
-  .chat-wrapper .card-section .section-heading {
+  .chat-wrapper .section-heading {
     flex-direction: column;
   }
 
