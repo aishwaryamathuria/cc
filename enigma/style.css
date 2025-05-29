@@ -552,6 +552,11 @@ body, html {
   left: 0;
 }
 
+.sidebar h2 {
+  font-size: 26px;
+  margin-top: 20px;
+}
+
 .sidebar.open + .toggle-btn {
   left: 260px;
   top: 22px;
@@ -563,7 +568,7 @@ body, html {
   list-style: none;
   padding: 0;
   display: flex;
-  gap: 16px;
+  gap: 10px;
   flex-direction: column;
   margin: 30px 0;
   max-height: 90%;
@@ -580,13 +585,17 @@ body, html {
 .sidebar ul li {
   color: white;
   text-decoration: none;
-  background: #dadada;
+  background: #f0efef;
   padding: 10px;
   padding-right: 0;
   border-radius: 5px;
   color: #000;
   display: flex;
   gap: 8px;
+}
+
+.sidebar ul li:hover {
+  background-color: rgba(197, 197, 197, 0.8);
 }
 
 .sidebar ul li a {
@@ -612,11 +621,11 @@ body, html {
   cursor: pointer;
 }
 
-.sidebar ul li .edit svg {
-  fill: #2e2c2cba;
+.sidebar ul li .edit svg path {
+  fill: #434343ba;
 }
 
-.sidebar ul li .edit.active svg {
+.sidebar ul li .edit-done svg path {
   fill: #1473E6;
 }
 

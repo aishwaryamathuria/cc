@@ -111,7 +111,9 @@ toggleBtn.addEventListener('click', () => {
     toggleBtn.style.left = '10px';
   } else {
     sidebar.classList.add('open');
-    toggleBtn.textContent = '✕';
+    toggleBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.06301 6.5H9.00001V3.4C9.00001 3.29391 8.95787 3.19217 8.88285 3.11716C8.80784 3.04214 8.70609 3 8.60001 3C8.49799 2.99987 8.39999 3.03972 8.32701 3.111L2.53201 9.829C2.48834 9.87523 2.464 9.93641 2.464 10C2.464 10.0636 2.48834 10.1248 2.53201 10.171L8.32401 16.889C8.39773 16.961 8.49696 17.0009 8.60001 17C8.70609 17 8.80784 16.9579 8.88285 16.8828C8.95787 16.8078 9.00001 16.7061 9.00001 16.6V12.92C13.583 12.005 17.25 14.756 19.3 17.345C19.3478 17.4119 19.4158 17.4618 19.4939 17.4874C19.5721 17.513 19.6564 17.5129 19.7345 17.4873C19.8127 17.4616 19.8806 17.4116 19.9283 17.3447C19.9761 17.2777 20.0012 17.1972 20 17.115C20 15.409 18.116 6.5 9.06301 6.5Z" fill="#222222"/>
+                          </svg>`;
     toggleBtn.style.left = '260px';
     document.getElementById('homeIcon').style.display = 'none';
   }
@@ -415,7 +417,7 @@ async function loadAllConversations() {
       li.remove();
     });
 
-    thread.addEventListener('click', async () => {
+    thread.addEventListener('click', async (e) => {
       const li = e.target.closest('li')
       const convId = li.querySelector('a').id;
       document.querySelector('.card-section').style.display = 'none';
