@@ -26,6 +26,29 @@ const deleteSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22
 const editDoneSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
                       <path fill-rule="evenodd" clip-rule="evenodd" d="M17.5 9.49999H7.5V6.12699C7.48765 5.25608 7.7927 4.41045 8.35819 3.74798C8.92368 3.08552 9.71095 2.65151 10.573 2.52699C11.288 2.44012 12.0124 2.57597 12.6474 2.91601C13.2824 3.25604 13.797 3.7837 14.121 4.42699C14.1762 4.53407 14.2682 4.61761 14.3801 4.66226C14.492 4.7069 14.6162 4.70965 14.73 4.66999L15.677 4.33199C15.7433 4.30779 15.8038 4.27 15.8547 4.22106C15.9056 4.17211 15.9456 4.11309 15.9724 4.04776C15.9991 3.98243 16.0119 3.91224 16.0099 3.84168C16.008 3.77111 15.9913 3.70174 15.961 3.63799C15.4971 2.66346 14.7567 1.84695 13.832 1.29021C12.9074 0.733461 11.8393 0.461079 10.761 0.506995C9.32532 0.597117 7.97904 1.235 7.00006 2.28898C6.02107 3.34296 5.4841 4.73258 5.5 6.17099V9.49999H4.5C4.36739 9.49999 4.24021 9.55267 4.14645 9.64644C4.05268 9.74021 4 9.86739 4 9.99999V19C4 19.1326 4.05268 19.2598 4.14645 19.3535C4.24021 19.4473 4.36739 19.5 4.5 19.5H17.5C17.6326 19.5 17.7598 19.4473 17.8536 19.3535C17.9473 19.2598 18 19.1326 18 19V9.99999C18 9.86739 17.9473 9.74021 17.8536 9.64644C17.7598 9.55267 17.6326 9.49999 17.5 9.49999ZM12 14.611V16C12 16.1326 11.9473 16.2598 11.8536 16.3535C11.7598 16.4473 11.6326 16.5 11.5 16.5H10.5C10.3674 16.5 10.2402 16.4473 10.1464 16.3535C10.0527 16.2598 10 16.1326 10 16V14.611C9.80916 14.4416 9.66506 14.226 9.58153 13.9848C9.498 13.7437 9.47785 13.4852 9.523 13.234C9.58849 12.8643 9.79025 12.5326 10.0884 12.3044C10.3866 12.0762 10.7595 11.9682 11.1335 12.0016C11.5075 12.035 11.8553 12.2075 12.1083 12.4849C12.3613 12.7623 12.5011 13.1245 12.5 13.5C12.4996 13.71 12.4549 13.9175 12.3687 14.1089C12.2826 14.3004 12.1569 14.4715 12 14.611Z" fill="#222222"/>
                     </svg>`;
+const likeOutline =  `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M14.922 6L11.647 6.005C11.9248 5.01597 12.0595 3.99224 12.047 2.965C12.0692 2.50005 11.92 2.04312 11.6277 1.6809C11.3353 1.31869 10.9202 1.0764 10.461 1C10.0374 1.0051 9.63179 1.17164 9.32683 1.46564C9.02188 1.75963 8.8406 2.15891 8.82 2.582C8.585 4.859 6.194 6.714 4.936 7.269C4.89434 7.18901 4.83183 7.12177 4.75507 7.07442C4.67831 7.02706 4.59018 7.00135 4.5 7H1.5C1.36739 7 1.24021 7.05268 1.14645 7.14645C1.05268 7.24021 1 7.36739 1 7.5V15.5C1 15.6326 1.05268 15.7598 1.14645 15.8536C1.24021 15.9473 1.36739 16 1.5 16H4.5C4.63261 16 4.75979 15.9473 4.85355 15.8536C4.94732 15.7598 5 15.6326 5 15.5V15H12.222C12.6435 15.0045 13.0583 14.894 13.4218 14.6805C13.7853 14.4669 14.0837 14.1584 14.285 13.788L16.277 8.152C16.3875 7.92302 16.438 7.6697 16.4238 7.41584C16.4095 7.16198 16.3309 6.91592 16.1955 6.70076C16.06 6.4856 15.872 6.30841 15.6493 6.18583C15.4265 6.06325 15.1763 5.9993 14.922 6ZM15.374 7.712L13.366 13.39C13.3026 13.5703 13.1847 13.7264 13.0286 13.8368C12.8726 13.9471 12.6861 14.0063 12.495 14.006L5 14V8.3C6.434 7.723 9.575 5.537 9.82 2.6C9.84003 2.4409 9.91508 2.29382 10.0321 2.18424C10.1492 2.07466 10.3009 2.00948 10.461 2C10.761 2 11.021 2.371 11.047 2.969C11.137 4.36774 10.8347 5.76384 10.174 7H14.923C15.0075 6.99999 15.0907 7.0214 15.1647 7.06224C15.2386 7.10308 15.3011 7.162 15.3461 7.23351C15.3912 7.30503 15.4174 7.38679 15.4222 7.47117C15.4271 7.55554 15.4105 7.63978 15.374 7.716V7.712Z" fill="#2C2C2C"/>
+                      </svg>`;
+const likeFill =  `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path d="M3.5 7H1.5C1.22386 7 1 7.22386 1 7.5V15.5C1 15.7761 1.22386 16 1.5 16H3.5C3.77614 16 4 15.7761 4 15.5V7.5C4 7.22386 3.77614 7 3.5 7Z" fill="#2C2C2C"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M15.483 7.00001H10.5C10.7924 5.50318 10.9597 3.9846 11 2.46001C11 1.63001 10.484 1.00001 10 1.00001C9.8656 0.987715 9.73015 1.00514 9.60323 1.05104C9.47632 1.09695 9.36106 1.17022 9.26563 1.26565C9.1702 1.36108 9.09694 1.47633 9.05103 1.60325C9.00513 1.73016 8.9877 1.86561 9 2.00001C8.90792 3.14651 8.46915 4.23784 7.742 5.12901C6.89223 5.99711 5.97539 6.79691 5 7.52101V15C5 15 6.4 14.984 12 15C12.3921 15.0035 12.7764 14.8901 13.1038 14.6742C13.4311 14.4583 13.6868 14.1498 13.838 13.788L16.4 8.39401C16.4651 8.24207 16.4916 8.07636 16.477 7.91169C16.4624 7.74702 16.4072 7.58855 16.3163 7.45044C16.2255 7.31233 16.1018 7.1989 15.9564 7.12029C15.811 7.04169 15.6483 7.00036 15.483 7.00001Z" fill="#2C2C2C"/>
+                  </svg>`;
+const unlikeOutline =  `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M16.277 9.848L14.285 4.212C14.0837 3.84161 13.7853 3.53307 13.4218 3.31953C13.0583 3.106 12.6435 2.99553 12.222 3H5C5 2.86739 4.94732 2.74021 4.85355 2.64645C4.75979 2.55268 4.63261 2.5 4.5 2.5H1.5C1.36739 2.5 1.24021 2.55268 1.14645 2.64645C1.05268 2.74021 1 2.86739 1 3V11C1 11.1326 1.05268 11.2598 1.14645 11.3536C1.24021 11.4473 1.36739 11.5 1.5 11.5H4.5C4.63261 11.5 4.75979 11.4473 4.85355 11.3536C4.94732 11.2598 5 11.1326 5 11V10.762C6.272 11.349 8.588 13.177 8.82 15.418C8.8406 15.8411 9.02188 16.2404 9.32683 16.5344C9.63179 16.8284 10.0374 16.9949 10.461 17C10.9209 16.9235 11.3366 16.6807 11.629 16.3176C11.9215 15.9545 12.0702 15.4966 12.047 15.031C12.0595 14.0038 11.9248 12.98 11.647 11.991L14.922 12C15.1763 12.0007 15.4265 11.9368 15.6493 11.8142C15.872 11.6916 16.06 11.5144 16.1955 11.2992C16.3309 11.0841 16.4095 10.838 16.4238 10.5842C16.438 10.3303 16.3875 10.077 16.277 9.848ZM14.923 11H10.174C10.8347 12.2362 11.137 13.6323 11.047 15.031C11.021 15.631 10.765 15.998 10.461 16C10.3009 15.9905 10.1492 15.9253 10.0321 15.8158C9.91508 15.7062 9.84003 15.5591 9.82 15.4C9.575 12.462 6.434 10.276 5 9.7V4L12.5 3.99C12.6911 3.98974 12.8776 4.04888 13.0336 4.15923C13.1897 4.26959 13.3076 4.42571 13.371 4.606L15.379 10.284C15.4157 10.3606 15.4323 10.4453 15.4272 10.5301C15.4221 10.6149 15.3954 10.697 15.3498 10.7686C15.3042 10.8403 15.241 10.8991 15.1664 10.9396C15.0917 10.9801 15.0079 11.0009 14.923 11Z" fill="#222222"/>
+                        </svg>`;
+const unlikeFill =  `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <path d="M3.5625 2H1.4375C1.19588 2 1 2.19588 1 2.4375V9.5625C1 9.80412 1.19588 10 1.4375 10H3.5625C3.80412 10 4 9.80412 4 9.5625V2.4375C4 2.19588 3.80412 2 3.5625 2Z" fill="#222222"/>
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M14.1283 10H9.78905C9.78905 10 10.2244 12.1734 10.2244 13.9725C10.2244 14.6991 9.77501 15.25 9.35368 15.25C8.7357 15.25 8.4923 14.8548 8.48295 14.375C8.46626 13.5189 7.95298 12.2587 7.38751 11.6371C6.48871 10.6492 5 9.54428 5 9.54428V3.00001C5 3.00001 6.22288 3.01427 11.0951 3.00001C11.8122 2.99792 12.4215 3.41721 12.6959 4.06065L14.9286 8.78033C15.1749 9.35775 14.7535 10 14.1283 10Z" fill="#222222"/>
+                    </svg>`;
+const copyText = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-md-heavy"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 5C7 3.34315 8.34315 2 10 2H19C20.6569 2 22 3.34315 22 5V14C22 15.6569 20.6569 17 19 17H17V19C17 20.6569 15.6569 22 14 22H5C3.34315 22 2 20.6569 2 19V10C2 8.34315 3.34315 7 5 7H7V5ZM9 7H14C15.6569 7 17 8.34315 17 10V15H19C19.5523 15 20 14.5523 20 14V5C20 4.44772 19.5523 4 19 4H10C9.44772 4 9 4.44772 9 5V7ZM5 9C4.44772 9 4 9.44772 4 10V19C4 19.5523 4.44772 20 5 20H14C14.5523 20 15 19.5523 15 19V10C15 9.44772 14.5523 9 14 9H5Z" fill="currentColor"></path></svg>`;
+const downloadPrd = `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M11.186 11.3C11.1625 11.3258 11.1338 11.3464 11.1019 11.3605C11.07 11.3746 11.0354 11.3819 11.0005 11.3819C10.9656 11.3819 10.9311 11.3746 10.8991 11.3605C10.8672 11.3464 10.8385 11.3258 10.815 11.3L7.77001 7.917C7.73775 7.88106 7.71659 7.83655 7.70909 7.78884C7.70159 7.74113 7.70806 7.69227 7.72774 7.64816C7.74741 7.60405 7.77944 7.56659 7.81995 7.5403C7.86046 7.514 7.90772 7.50001 7.95601 7.5H10V2C10 1.86739 10.0527 1.74021 10.1465 1.64645C10.2402 1.55268 10.3674 1.5 10.5 1.5H11.5C11.6326 1.5 11.7598 1.55268 11.8536 1.64645C11.9473 1.74021 12 1.86739 12 2V7.5H14.136C14.1846 7.50006 14.2322 7.51429 14.2728 7.54096C14.3135 7.56763 14.3455 7.60557 14.3649 7.65014C14.3843 7.69471 14.3903 7.74398 14.3822 7.79191C14.374 7.83984 14.3521 7.88435 14.319 7.92L11.186 11.3Z" fill="#222222"/>
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M6.25 4.5H3C2.86739 4.5 2.74021 4.55268 2.64645 4.64645C2.55268 4.74021 2.5 4.86739 2.5 5V17C2.5 17.1326 2.55268 17.2598 2.64645 17.3536C2.74021 17.4473 2.86739 17.5 3 17.5H19C19.1326 17.5 19.2598 17.4473 19.3536 17.3536C19.4473 17.2598 19.5 17.1326 19.5 17V5C19.5 4.86739 19.4473 4.74021 19.3536 4.64645C19.2598 4.55268 19.1326 4.5 19 4.5H15.75C15.6837 4.5 15.6201 4.52634 15.5732 4.57322C15.5263 4.62011 15.5 4.6837 15.5 4.75V5.75C15.5 5.8163 15.5263 5.87989 15.5732 5.92678C15.6201 5.97366 15.6837 6 15.75 6H18V16H4V6H6.25C6.3163 6 6.37989 5.97366 6.42678 5.92678C6.47366 5.87989 6.5 5.8163 6.5 5.75V4.75C6.5 4.6837 6.47366 4.62011 6.42678 4.57322C6.37989 4.52634 6.3163 4.5 6.25 4.5Z" fill="#222222"/>
+                    </svg>`;
+const editPrd = `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12.127 5.56799L3.73298 14.022C3.66693 14.0882 3.61816 14.1695 3.59098 14.259L2.02798 19.5C1.96398 19.712 2.28698 19.978 2.46898 19.978C2.48062 19.979 2.49233 19.979 2.50398 19.978C2.65898 19.942 6.93098 18.659 7.74398 18.414C7.8321 18.3875 7.9122 18.3394 7.97698 18.274L16.377 9.81899L12.127 5.56799ZM7.28498 17.368C6.06898 17.733 4.54898 18.192 3.49898 18.506L4.62898 14.718L7.28498 17.368Z" fill="#222222"/>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M19.761 5.48201L16.517 2.23801C16.4531 2.17407 16.3772 2.12346 16.2936 2.08912C16.21 2.05479 16.1204 2.03741 16.03 2.03801H16.008C15.8111 2.04455 15.6242 2.12654 15.486 2.26701L13.119 4.63501L17.364 8.88001L19.731 6.51301C19.8654 6.37979 19.9462 6.20186 19.958 6.01301C19.9646 5.9156 19.9505 5.8179 19.9165 5.72637C19.8826 5.63483 19.8296 5.55154 19.761 5.48201Z" fill="#222222"/>
+                </svg>`;
 
 function startNewChat() {
   THREAD_ID = generateId();
@@ -34,6 +57,12 @@ function startNewChat() {
   chatHistory = {};
   document.querySelector('.card-section').style.display = 'flex';
   document.querySelector('.section-heading').style.display = 'flex';
+}
+
+async function copyTextToClipboard(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    await navigator.clipboard.writeText(text);
+  }
 }
 
 function restartObserver() {
@@ -147,21 +176,81 @@ function appendMessage(text, sender, hasMarkdown = false) {
       text = text.replace('`', '');
       text = text.replace('markdown', '');
     }
-    msg.innerHTML = marked.parse(text);
+    msg.innerHTML = `<div class='markdown-content'>${marked.parse(text)}</div>`;
   }
   else {
     msg.innerHTML = linkify(text);
   }
-  
-  if (sender == "bot" && hasMarkdown) {
-    document.querySelector('div[contentEditable="true"]')?.removeAttribute('contentEditable');
-    d = document.createElement("div");
-    d.classList.add("icon");
-    d.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm-2 14-3 1 1-3 7-7 2 2z"/></svg>`;
-    msg.prepend(d);
-    d.addEventListener('click', () => {
-      msg.contentEditable = true;
-      msg.addEventListener('blur', () => {
+  chatWindow.appendChild(msg);
+
+  if (sender == 'bot') {
+    if (hasMarkdown) {
+      msg.innerHTML += `
+        <div class="icons for-markdown">
+          <span class="thumbs-up">${likeOutline}</span>
+          <span class="thumbs-down">${unlikeOutline}</span>
+          <span class="copy-response">${copyText}</span>
+          <span class="edit-prd">${editPrd}</span>
+          <span class="download-prd">${downloadPrd}</span>
+        </div>`;
+    } else {
+      msg.innerHTML += `
+        <div class="icons">
+          <span class="thumbs-up">${likeOutline}</span>
+          <span class="thumbs-down">${unlikeOutline}</span>
+          <span class="copy-response">${copyText}</span>
+        </div>`;
+    }
+
+    msg.querySelector('.icons .thumbs-up').addEventListener('click', (e) => {
+      const icn = e.target.nodeName == 'SPAN' ? e.target : e.target.closest('span');
+      if (icn.classList.contains('active')) {
+        icn.classList.remove('active');
+        icn.innerHTML = likeOutline;
+      } else {
+        icn.classList.add('active');
+        icn.innerHTML = likeFill;
+        const unlike = icn.closest('.icons').querySelector('.thumbs-down.active');
+        if (unlike) {
+          unlike.classList.remove('active');
+          unlike.innerHTML = unlikeOutline;
+        }
+      }
+    });
+
+    msg.querySelector('.icons .thumbs-down').addEventListener('click', (e) => {
+      const icn = e.target.nodeName == 'SPAN' ? e.target : e.target.closest('span');
+      if (icn.classList.contains('active')) {
+        icn.classList.remove('active');
+        icn.innerHTML = unlikeOutline;
+      } else {
+        icn.classList.add('active');
+        icn.innerHTML = unlikeFill;
+        const like = icn.closest('.icons').querySelector('.thumbs-up.active');
+        if (like) {
+          like.classList.remove('active');
+          like.innerHTML = likeOutline;
+        }
+      }
+    });
+
+    msg.querySelector('.icons .copy-response').addEventListener('click', (e) => {
+      if (hasMarkdown) {
+        const m = e.target.closest('.message').querySelector('.markdown-content');
+        const turndownService = new TurndownService();
+        const markdown = turndownService.turndown(m.innerHTML);
+        copyTextToClipboard(markdown.trim());
+      } else {
+        copyTextToClipboard(text);
+      }
+    });
+
+    msg.querySelector('.icons .edit-prd')?.addEventListener('click', (e) => {
+      const icn = e.target.nodeName == 'SPAN' ? e.target : e.target.closest('span');
+      const mkdnEl = msg.querySelector('.markdown-content');
+      if (icn.classList.contains('active')) {
+        mkdnEl.removeAttribute('contentEditable');
+        icn.classList.remove('active');
         const turndownService = new TurndownService();
         const markdown = turndownService.turndown(msg.innerHTML);
         const updatedMessage = markdown.trim();
@@ -169,10 +258,12 @@ function appendMessage(text, sender, hasMarkdown = false) {
           chatHistory[chatHistory.length - 1].content = updatedMessage;
         }
         msg.contentEditable = false;
-      });
+      } else {
+        mkdnEl.setAttribute('contentEditable', 'true');
+        icn.classList.add('active')
+      }
     });
   }
-  chatWindow.appendChild(msg);
   msg.scrollIntoView({
     behavior: 'smooth'
   });
@@ -189,6 +280,9 @@ function appendImageThumbnail(src, sender) {
   img.addEventListener('click', (e) => {
     document.querySelector('#imgModal').querySelector('img').src = src;
     document.querySelector('#imgModal').style.display = 'flex';
+  });
+  msg.scrollIntoView({
+    behavior: 'smooth'
   });
 }
 
@@ -441,6 +535,7 @@ async function loadAllConversations() {
 }
 
 (() => {
+
     window.addEventListener("message", async (e) => {
       const eventData = e.data;
       let blockNames = "";

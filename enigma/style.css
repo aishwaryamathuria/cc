@@ -62,17 +62,18 @@ body, html {
 
 .message {
   max-width: 80%;
-  padding: 20px;
   border-radius: 20px;
   line-height: 1.5;
 }
 
 .message.user {
+  padding: 20px;
   color: #fff;
   animation: slideFade 0.5s ease-out forwards;
 }
 
 .message.bot {
+  padding: 10px 20px;
   max-height: 550px;
   overflow: scroll;
   animation: slideFade 0.5s ease-out forwards;
@@ -307,18 +308,16 @@ body, html {
 }
 
 .message.has-thumbnails {
-  width: auto;
-  min-width: auto;
+  max-height: 400px;
+  height: 400px;
 }
 
 .message.has-thumbnails img {
-  width: 100px;
+  width: 100%;
   height: auto;
-  min-width: auto;
 }
 
 .message.has-thumbnails img:hover {
-  opacity: 0.7;
   cursor: pointer;
 }
 
@@ -645,4 +644,36 @@ span.hide {
 span.show {
   display: inline-flex;
   cursor: pointer;
+}
+
+.message .icons {
+  display: flex;
+  gap: 8px;
+  position: sticky;
+  right: 15px;
+  color: #666;
+  width: 100%;
+  align-items: flex-end;
+  justify-content: flex-end;
+  bottom: 0;
+}
+
+.message .icons.for-markdown {
+  position: sticky;
+  top: 94%;
+}
+
+.message .icons svg {
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+}
+
+.message .icons svg path {
+  fill: #595959
+}
+
+.message .icons .active svg path,
+.message .icons .copy-response:active svg path {
+  fill: #1473E6;
 }
