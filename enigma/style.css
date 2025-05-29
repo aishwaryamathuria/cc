@@ -354,7 +354,7 @@ body, html {
   margin-top: 11%;
   margin-bottom: 70px;
   max-height: 50%;
-  z-index: 1000;
+  z-index: 90;
 }
 
 .chat-wrapper .section-heading .cursive {
@@ -599,7 +599,7 @@ body, html {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  gap: 10px;
+  gap: 5px;
 }
 
 .sidebar ul li div a[contenteditable] {
@@ -607,8 +607,8 @@ body, html {
 }
 
 .sidebar ul li svg {
-  height: 16px;
-  width: 16px;
+  height: 22px;
+  width: 22px;
   cursor: pointer;
 }
 
@@ -620,11 +620,20 @@ body, html {
   fill: #1473E6;
 }
 
-.sidebar ul li .delete svg {
+.sidebar ul li .delete svg path {
   fill: #b30b00ba;
 }
 
 .content {
   margin-left: 20px;
   padding: 60px 20px;
+}
+
+span.hide {
+  display: none;
+}
+
+span.show {
+  display: inline-flex;
+  cursor: pointer;
 }
