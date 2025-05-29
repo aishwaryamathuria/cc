@@ -33,6 +33,7 @@ function startNewChat() {
   chatWindow.innerHTML = "";
   chatHistory = {};
   document.querySelector('.card-section').style.display = 'flex';
+  document.querySelector('.section-heading').style.display = 'flex';
 }
 
 function restartObserver() {
@@ -421,6 +422,7 @@ async function loadAllConversations() {
       const li = e.target.closest('li')
       const convId = li.querySelector('a').id;
       document.querySelector('.card-section').style.display = 'none';
+      document.querySelector('.section-heading').style.display = 'none';
       chatWindow.style.display = 'flex';
       observer?.disconnect();
       observer = null;
