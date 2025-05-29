@@ -11,6 +11,15 @@ body, html {
   color: #000;
 }
 
+.chat-wrapper * {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.chat-wrapper *::-webkit-scrollbar {
+  display: none;
+}
+
 .chat-wrapper {
   display: flex;
   flex-direction: column;
