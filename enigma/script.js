@@ -102,7 +102,7 @@ toggleBtn.addEventListener('click', () => {
   } else {
     sidebar.classList.add('open');
     toggleBtn.textContent = '✕';
-    toggleBtn.style.left = '200px';
+    toggleBtn.style.left = '260px';
     document.getElementById('homeIcon').style.display = 'none';
   }
 });
@@ -365,7 +365,11 @@ async function loadAllConversations() {
     li.innerHTML = `<a href='#' id=${id}>${c.data.name}...</a><div><span class='edit'>${editSVG}</span><span class='delete'>${deleteSVG}</span><div>`;
     conversationList.append(li);
     
-    li.querySelector('.edit').addEventListener('click', (e) => {
+    const edit = li.querySelector('.edit');
+    const del = li.querySelector('.delete');
+    const thread = li.querySelector('a');
+
+    edit.addEventListener('click', (e) => {
       const textTag = e.target.closest('li').querySelector('a');
       textTag.setAttribute('contentEditable', 'true');
       textTag.addEventListener('blur', async (e) => {
@@ -373,13 +377,13 @@ async function loadAllConversations() {
       }, {'once': true});
     });
 
-    li.querySelector('.delete').addEventListener('click', async (e) => {
+    del.addEventListener('click', async (e) => {
       const convId = e.target.closest('li').querySelector('a').id;
       await deleteConversation(convId);
       e.target.closest('li').remove();
     });
 
-    li.querySelector('a').addEventListener('click', async () => {
+    thread.addEventListener('click', async () => {
       document.querySelector('.card-section').style.display = 'none';
       chatWindow.style.display = 'flex';
       observer?.disconnect();

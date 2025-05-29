@@ -380,13 +380,14 @@ body, html {
   display: flex;
   width: 95%;
   gap: 18px;
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   flex-wrap: nowrap;
-  align-items: center;
-  justify-content: center;
   overflow-x: scroll;
   padding: 20px;
+  align-items: center;
+  justify-content: center;
 }
 
 .chat-wrapper .card-section .card {
@@ -461,6 +462,11 @@ body, html {
   .chat-wrapper .card-section .card-text {
     display: none;
   }
+
+  .chat-wrapper .card-section .card-container {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -484,6 +490,11 @@ body, html {
 
   .chat-wrapper .card-section .card-title h3 {
     display: none;
+  }
+
+  .chat-wrapper .card-section .card-container {
+    align-items: flex-start;
+    justify-content: flex-start;
   }
 }
 
@@ -524,8 +535,8 @@ body, html {
 .sidebar {
   position: fixed;
   top: 0;
-  left: -250px;
-  width: 250px;
+  left: -300px;
+  width: 300px;
   height: 100%;
   background-color: #000c;
   color: white;
@@ -542,7 +553,7 @@ body, html {
 }
 
 .sidebar.open + .toggle-btn {
-  left: 210px;
+  left: 260px;
   top: 22px;
   height: 30px;
   width: 30px;
@@ -591,6 +602,10 @@ body, html {
   gap: 10px;
 }
 
+.sidebar ul li div a[contenteditable] {
+  border: 1px solid black;
+}
+
 .sidebar ul li svg {
   height: 16px;
   width: 16px;
@@ -599,6 +614,10 @@ body, html {
 
 .sidebar ul li .edit svg {
   fill: #2e2c2cba;
+}
+
+.sidebar ul li .edit.active svg {
+  fill: #1473E6;
 }
 
 .sidebar ul li .delete svg {
