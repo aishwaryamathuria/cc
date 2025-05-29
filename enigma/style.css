@@ -11,6 +11,11 @@ body, html {
   color: #000;
 }
 
+.sidebar * {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
 .chat-wrapper * {
   scrollbar-width: none;
   -ms-overflow-style: none;
