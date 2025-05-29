@@ -205,15 +205,15 @@ body, html {
 
 .message.has-iframe {
   width: 80%;
-  height: 630px;
-  min-height: 630px;
+  height: 550px;
+  min-height: 550px;
 }
 
 .message iframe {
   border: none;
   width: 100%;
-  height: 550px;
-  min-height: 550px;
+  height: 500px;
+  min-height: 500px;
 }
 
 .message.user a {
