@@ -420,9 +420,10 @@ function openDB() {
 }
 
 async function updateConversationName(id, name) {
-  const data = await getConversationById(id);
-  data.name = name;
-  await saveConversation(id, data);
+  const { data } = await getConversationById(id);
+  const parsedData = JSON.parse(data);
+  parsedData.name = name;
+  await saveConversation(id, parsedData);
 }
 
 async function saveConversation(id, jsonData) {
@@ -483,10 +484,7 @@ async function getConversationById(id) {
     request.onsuccess = () => {
       const result = request.result;
       if (result) {
-        resolve({
-          id: result.id,
-          data: JSON.parse(result.data)
-        });
+        resolve(result);
       } else {
         resolve(null);
       }
@@ -503,7 +501,7 @@ async function loadAllConversations() {
   conversations.forEach((c) => {
     const id = c.id;
     const li = document.createElement('li');
-    li.innerHTML = `<a href='#' id="${id}">${c.data.name}...</a><div><span class='edit'>${editSVG}</span><span class='edit-done hide'>${editDoneSVG}</span><span class='delete'>${deleteSVG}</span><div>`;
+    li.innerHTML = `<a href='#' id="${id}">${c.data.name}</a><div><span class='edit'>${editSVG}</span><span class='edit-done hide'>${editDoneSVG}</span><span class='delete'>${deleteSVG}</span><div>`;
     conversationList.append(li);
   });
 
@@ -558,9 +556,10 @@ async function loadAllConversations() {
       chatWindow.style.display = 'flex';
       observer?.disconnect();
       observer = null;
-      const d = await getConversationById(convId);
-      chatWindow.innerHTML = d.data.domData;
-      chatHistory = JSON.parse(d.data.chatHistory);
+      const { id, data } = await getConversationById(convId);
+      const parsedData = JSON.parse(data);
+      chatWindow.innerHTML = parsedData.domData;
+      chatHistory = JSON.parse(parsedData.chatHistory);
       restartObserver();
       THREAD_ID = d.id;
       chatWindow.scrollTo({
