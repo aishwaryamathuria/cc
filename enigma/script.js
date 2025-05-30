@@ -3,6 +3,10 @@ const inputArea = document.getElementById('input-area');
 const userInput = document.getElementById('user-input');
 const chatWindow = document.getElementById('chat-window');
 const loader = document.createElement('div');
+loader.innerHTML = `
+                      <div class="skeleton-line short"></div>
+                      <div class="skeleton-line long"></div>
+                    `;
 const toggleBtn = document.getElementById('toggleSidebar');
 const homeIconBtn = document.getElementById('homeIcon');
 const sidebar = document.getElementById('sidebar');
