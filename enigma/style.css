@@ -226,7 +226,7 @@ body, html {
   color: #000;
 }
 
-.loader {
+/* .loader {
   border: 5px solid #f3f3f3;
   border-radius: 50%;
   border-top: 5px solid #7155fa;
@@ -236,7 +236,7 @@ body, html {
   animation: spin 2s linear infinite;
   padding: 20px;
   margin: 20px;
-}
+} */
 
 .loader.hide {
   display: none;
@@ -675,4 +675,38 @@ span.show {
 .message .icons .active svg path,
 .message .icons .copy-response:active svg path {
   fill: #1473E6;
+}
+
+.loader {
+  width: 800px;    
+  max-width: 800px;
+  border-radius: 20px;
+  padding: 20px;
+  height: 64px;
+  background: #dcdcdc;
+  position: relative;
+  overflow: hidden;
+}
+
+.loader::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  height: 100%;
+  width: 150%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.5) 50%,
+    transparent 100%
+  );
+  animation: shimmer 1.8s ease-in-out infinite;
+}
+
+/* Shimmer animation */
+@keyframes shimmer {
+  100% {
+    left: 100%;
+  }
 }
