@@ -17,6 +17,7 @@ const STORE_NAME = 'conversations';
 const conversationList = document.getElementById('conversation-list');
 let observer = null;
 let THREAD_ID = generateId();
+let THREAD_NAME = null;
 let CONVERSATION_STARTED = false;
 loader.classList.add('loader');
 
@@ -69,8 +70,9 @@ function restartObserver() {
       if (mutation.type === 'childList') {
         try {
           if (!chatWindow.querySelector('.message.user')) return;
+          if (!THREAD_NAME) THREAD_NAME = chatWindow.querySelector('.message.user').innerText.slice(0, 20);
           await saveConversation(THREAD_ID, {
-            name: chatWindow.querySelector('.message.user').innerText.slice(0, 20),
+            name: THREAD_NAME ? THREAD_NAME : chatWindow.querySelector('.message.user').innerText.slice(0, 20),
             domData: chatWindow.innerHTML,
             chatHistory: JSON.stringify(chatHistory)
           });
@@ -173,7 +175,7 @@ function activateIcons(msgs = chatWindow.querySelectorAll('.message.bot')) {
         }
       }
       await saveConversation(THREAD_ID, {
-        name: chatWindow.querySelector('.message.user').innerText.slice(0, 20),
+        name: THREAD_NAME ? THREAD_NAME : chatWindow.querySelector('.message.user').innerText.slice(0, 20),
         domData: chatWindow.innerHTML,
         chatHistory: JSON.stringify(chatHistory)
       });
@@ -194,7 +196,7 @@ function activateIcons(msgs = chatWindow.querySelectorAll('.message.bot')) {
         }
       }
       await saveConversation(THREAD_ID, {
-        name: chatWindow.querySelector('.message.user').innerText.slice(0, 20),
+        name: THREAD_NAME ? THREAD_NAME : chatWindow.querySelector('.message.user').innerText.slice(0, 20),
         domData: chatWindow.innerHTML,
         chatHistory: JSON.stringify(chatHistory)
       });
@@ -250,7 +252,7 @@ function activateIcons(msgs = chatWindow.querySelectorAll('.message.bot')) {
         chatHistory[chatHistoryMkdnIdx].content = updatedMessage;
         msg.contentEditable = false;
         saveConversation(THREAD_ID, {
-          name: chatWindow.querySelector('.message.user').innerText.slice(0, 20),
+          name: THREAD_NAME ? THREAD_NAME : chatWindow.querySelector('.message.user').innerText.slice(0, 20),
           domData: chatWindow.innerHTML,
           chatHistory: JSON.stringify(chatHistory)
         });
@@ -561,7 +563,8 @@ async function loadAllConversations() {
       chatWindow.innerHTML = parsedData.domData;
       chatHistory = JSON.parse(parsedData.chatHistory);
       restartObserver();
-      THREAD_ID = d.id;
+      THREAD_ID = id;
+      THREAD_NAME = parsedData.name;
       chatWindow.scrollTo({
         top: chatWindow.scrollHeight,
         behavior: 'smooth'
