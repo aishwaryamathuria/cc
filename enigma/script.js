@@ -537,7 +537,7 @@ async function loadAllConversations() {
       edit.classList.remove('hide');
       editDone.classList.add('hide');
       editDone.classList.remove('show');
-      updateConversationName(textTag.id, textTag.innerText);
+      updateConversationName(textTag.id, textTag.innerText.trim());
     });
 
     del.addEventListener('click', async (e) => {
