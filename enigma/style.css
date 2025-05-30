@@ -110,7 +110,7 @@ body, html {
 }
 
 .input-area.to-bottom {
-  bottom: 10%;
+  bottom: 8%;
   transition: bottom 0.5s ease;
   position: sticky;
 }
