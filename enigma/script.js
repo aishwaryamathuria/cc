@@ -56,15 +56,6 @@ const editPrd = `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" 
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M19.761 5.48201L16.517 2.23801C16.4531 2.17407 16.3772 2.12346 16.2936 2.08912C16.21 2.05479 16.1204 2.03741 16.03 2.03801H16.008C15.8111 2.04455 15.6242 2.12654 15.486 2.26701L13.119 4.63501L17.364 8.88001L19.731 6.51301C19.8654 6.37979 19.9462 6.20186 19.958 6.01301C19.9646 5.9156 19.9505 5.8179 19.9165 5.72637C19.8826 5.63483 19.8296 5.55154 19.761 5.48201Z" fill="#222222"/>
                 </svg>`;
 
-function startNewChat() {
-  THREAD_ID = generateId();
-  restartObserver();
-  chatWindow.innerHTML = "";
-  chatHistory = {};
-  document.querySelector('.card-section').style.display = 'flex';
-  document.querySelector('.section-heading').style.display = 'flex';
-}
-
 async function copyTextToClipboard(text) {
   if (navigator.clipboard && window.isSecureContext) {
     await navigator.clipboard.writeText(text);
@@ -255,10 +246,14 @@ function activateIcons(msgs = chatWindow.querySelectorAll('.message.bot')) {
         const turndownService = new TurndownService();
         const markdown = turndownService.turndown(msg.innerHTML);
         const updatedMessage = markdown.trim();
-        if (updatedMessage !== text) {
-          chatHistory[chatHistory.length - 1].content = updatedMessage;
-        }
+        const chatHistoryMkdnIdx = parseInt(msg.dataset.chathistoryidx);
+        chatHistory[chatHistoryMkdnIdx].content = updatedMessage;
         msg.contentEditable = false;
+        saveConversation(THREAD_ID, {
+          name: chatWindow.querySelector('.message.user').innerText.slice(0, 20),
+          domData: chatWindow.innerHTML,
+          chatHistory: JSON.stringify(chatHistory)
+        });
       } else {
         mkdnEl.setAttribute('contentEditable', 'true');
         icn.classList.add('active')
@@ -276,6 +271,7 @@ function appendMessage(text, sender, hasMarkdown = false) {
       text = text.replace('markdown', '');
     }
     msg.innerHTML = `<div class='markdown-content'>${marked.parse(text)}</div>`;
+    msg.setAttribute('data-chathistoryidx', `${chatHistory.length}`);
   }
   else {
     msg.innerHTML = linkify(text);
