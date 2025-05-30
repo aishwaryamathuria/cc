@@ -4,6 +4,7 @@ const userInput = document.getElementById('user-input');
 const chatWindow = document.getElementById('chat-window');
 const loader = document.createElement('div');
 const toggleBtn = document.getElementById('toggleSidebar');
+const homeIconBtn = document.getElementById('homeIcon');
 const sidebar = document.getElementById('sidebar');
 const closeBtn = document.getElementById('closeSidebar');
 const DB_NAME = 'ConversationsDB';
@@ -12,6 +13,7 @@ const STORE_NAME = 'conversations';
 const conversationList = document.getElementById('conversation-list');
 let observer = null;
 let THREAD_ID = generateId();
+let CONVERSATION_STARTED = false;
 loader.classList.add('loader');
 
 const editSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
@@ -129,31 +131,21 @@ userInput.addEventListener('keypress', (e) => {
 toggleBtn.addEventListener('click', () => {
   const isOpen = sidebar.classList.contains('open');
   if (isOpen) {
-    document.getElementById('homeIcon').style.display = 'flex';
+    if (CONVERSATION_STARTED) homeIconBtn.style.display = 'flex';
     sidebar.classList.remove('open');
-    toggleBtn.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <path d="M15.75 18H4.25C3.00928 18 2 16.9902 2 15.75V4.25C2 3.00977 3.00928 2 4.25 2H15.75C16.9907 2 18 3.00977 18 4.25V15.75C18 16.9902 16.9907 18 15.75 18ZM4.25 3.5C3.83643 3.5 3.5 3.83691 3.5 4.25V15.75C3.5 16.1631 3.83643 16.5 4.25 16.5H15.75C16.1636 16.5 16.5 16.1631 16.5 15.75V4.25C16.5 3.83691 16.1636 3.5 15.75 3.5H4.25Z" fill="#292929"/>
-        <path d="M8.75 15H7C5.89697 15 5 14.1025 5 13V7C5 5.89746 5.89697 5 7 5H8.75C9.85303 5 10.75 5.89746 10.75 7V13C10.75 14.1025 9.85303 15 8.75 15ZM7 6.5C6.72412 6.5 6.5 6.72461 6.5 7V13C6.5 13.2754 6.72412 13.5 7 13.5H8.75C9.02588 13.5 9.25 13.2754 9.25 13V7C9.25 6.72461 9.02588 6.5 8.75 6.5H7Z" fill="#292929"/>
-        <path opacity="0.12" d="M8.75 5.75H7C6.30964 5.75 5.75 6.30964 5.75 7V13C5.75 13.6904 6.30964 14.25 7 14.25H8.75C9.44036 14.25 10 13.6904 10 13V7C10 6.30964 9.44036 5.75 8.75 5.75Z" fill="#292929"/>
-      </svg>
-    `;
-    toggleBtn.style.left = '10px';
   } else {
+    if (CONVERSATION_STARTED) homeIconBtn.style.display = 'none';
     sidebar.classList.add('open');
-    toggleBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.06301 6.5H9.00001V3.4C9.00001 3.29391 8.95787 3.19217 8.88285 3.11716C8.80784 3.04214 8.70609 3 8.60001 3C8.49799 2.99987 8.39999 3.03972 8.32701 3.111L2.53201 9.829C2.48834 9.87523 2.464 9.93641 2.464 10C2.464 10.0636 2.48834 10.1248 2.53201 10.171L8.32401 16.889C8.39773 16.961 8.49696 17.0009 8.60001 17C8.70609 17 8.80784 16.9579 8.88285 16.8828C8.95787 16.8078 9.00001 16.7061 9.00001 16.6V12.92C13.583 12.005 17.25 14.756 19.3 17.345C19.3478 17.4119 19.4158 17.4618 19.4939 17.4874C19.5721 17.513 19.6564 17.5129 19.7345 17.4873C19.8127 17.4616 19.8806 17.4116 19.9283 17.3447C19.9761 17.2777 20.0012 17.1972 20 17.115C20 15.409 18.116 6.5 9.06301 6.5Z" fill="#222222"/>
-                          </svg>`;
-    toggleBtn.style.left = '260px';
-    document.getElementById('homeIcon').style.display = 'none';
   }
 });
 
 function sendMessage() {
+  CONVERSATION_STARTED = true;
   document.querySelector(".chat-window").style.display = "flex";
   document.querySelector(".input-area").classList.add('to-bottom');
   document.querySelector('.card-section').style.display = 'none';
   document.querySelector('.section-heading').style.display = 'none';
+  document.getElementById('homeIcon').style.display = 'flex';
   if (!inputArea.classList.contains('to-bottom')) inputArea.classList.add('to-bottom');
   const message = userInput.value.trim();
   if (!message) return;
@@ -514,6 +506,8 @@ async function loadAllConversations() {
 
     thread.addEventListener('click', async (e) => {
       if (e.target.hasAttribute('contentEditable')) return;
+
+      CONVERSATION_STARTED = true;
       const li = e.target.closest('li')
       const convId = li.querySelector('a').id;
       document.querySelector('.card-section').style.display = 'none';
@@ -525,7 +519,7 @@ async function loadAllConversations() {
       chatWindow.innerHTML = d.data.domData;
       chatHistory = JSON.parse(d.data.chatHistory);
       restartObserver();
-      THREAD_ID = id;
+      THREAD_ID = d.id;
       chatWindow.scrollTo({
         top: chatWindow.scrollHeight,
         behavior: 'smooth'
@@ -535,7 +529,6 @@ async function loadAllConversations() {
 }
 
 (() => {
-
     window.addEventListener("message", async (e) => {
       const eventData = e.data;
       let blockNames = "";
@@ -628,5 +621,12 @@ async function loadAllConversations() {
 
   document.getElementById('homeIcon').addEventListener('click', () => {
     window.location.reload();
-  })
+  });
+
+
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.sidebar') && !e.target.closest('.toggle-btn') && !e.target.classList.contains('.toggle-btn')) {
+      sidebar.classList.remove('open');
+    }
+  });
 })();

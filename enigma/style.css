@@ -508,7 +508,7 @@ body, html {
   color: black;
   border: none;
   cursor: pointer;
-  transition: left 0.3s ease;
+  transition: left 0.3s ease, top 0.3s ease;
   border-radius: 50px;
   height: 40px;
   width: 40px;
@@ -518,6 +518,7 @@ body, html {
 }
 
 .toggle-btn.home {
+  display: none;
   top: 60px;
 }
 
@@ -557,10 +558,8 @@ body, html {
 }
 
 .sidebar.open + .toggle-btn {
-  left: 260px;
-  top: 22px;
-  height: 30px;
-  width: 30px;
+  left: 240px;
+  top: 30px;
 }
 
 .sidebar ul {
