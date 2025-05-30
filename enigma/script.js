@@ -241,6 +241,32 @@ function appendMessage(text, sender, hasMarkdown = false) {
       }
     });
 
+    msg.querySelector('.icons .download-prd').addEventListener('click', (e) => {
+      const turndownService = new TurndownService();
+      const markdown = turndownService.turndown(e.target.closest('.message').querySelector('.markdown-content').innerHTML);
+      const markdownMessage = markdown.trim();
+
+      const options = {
+        method: 'POST',
+        headers: {'Content-Type': 'text/markdown'},
+        body: markdownMessage
+      };
+
+      fetch(`${agentEP}/download`, options)
+      .then(response => response.blob())
+      .then(blob => {
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = 'Stream_PRD_Document.docx';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          URL.revokeObjectURL(url);
+      })
+      .catch(err => console.error(err));
+    });
+
     msg.querySelector('.icons .edit-prd')?.addEventListener('click', (e) => {
       const icn = e.target.nodeName == 'SPAN' ? e.target : e.target.closest('span');
       const mkdnEl = msg.querySelector('.markdown-content');

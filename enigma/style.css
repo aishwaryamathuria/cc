@@ -74,6 +74,7 @@ body, html {
 
 .message.bot {
   padding: 10px 20px;
+  padding-bottom: 0;
   max-height: 550px;
   overflow: scroll;
   animation: slideFade 0.5s ease-out forwards;
@@ -711,6 +712,7 @@ span.show {
 @media screen and (max-width: 600px) {
   .loader,
   .message {
+    width: 250px; 
     min-width: 250px;
     max-width: 250px;
   }
@@ -719,6 +721,7 @@ span.show {
 @media screen and (min-width: 600px) and (max-width: 800px) {
   .loader,
   .message {
+    width: 500px; 
     min-width: 500px;
     max-width: 500px;
   }
@@ -727,7 +730,12 @@ span.show {
 @media screen and (min-width: 1200px) {
   .loader,
   .message {
+    width: 800px; 
     min-width: 800px;
     max-width: 800px;
   }
+}
+
+.message.bot .icons {
+  background: #eaeaea;
 }
