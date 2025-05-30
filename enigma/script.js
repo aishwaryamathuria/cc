@@ -425,6 +425,7 @@ async function updateConversationName(id, name) {
   const { data } = await getConversationById(id);
   const parsedData = JSON.parse(data);
   parsedData.name = name;
+  THREAD_NAME = name;
   await saveConversation(id, parsedData);
 }
 
