@@ -134,27 +134,6 @@ body, html {
   border-top: 2px solid #e1e1e1;
 }
 
-@media screen and (max-width: 600px) {
-  .message {
-    min-width: 250px;
-    max-width: 250px;
-  }
-}
-
-@media screen and (min-width: 600px) and (max-width: 800px) {
-  .message {
-    min-width: 500px;
-    max-width: 500px;
-  }
-}
-
-@media screen and (min-width: 1200px) {
-  .message {
-    min-width: 800px;
-    max-width: 800px;
-  }
-}
-
 .message.has-iframe {
   min-width: 80%;
   max-width: 80%;
@@ -726,5 +705,29 @@ span.show {
 @keyframes shimmer {
   100% {
     left: 100%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .loader,
+  .message {
+    min-width: 250px;
+    max-width: 250px;
+  }
+}
+
+@media screen and (min-width: 600px) and (max-width: 800px) {
+  .loader,
+  .message {
+    min-width: 500px;
+    max-width: 500px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .loader,
+  .message {
+    min-width: 800px;
+    max-width: 800px;
   }
 }
