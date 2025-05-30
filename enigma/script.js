@@ -241,7 +241,7 @@ function appendMessage(text, sender, hasMarkdown = false) {
       }
     });
 
-    msg.querySelector('.icons .download-prd').addEventListener('click', (e) => {
+    msg.querySelector('.icons .download-prd')?.addEventListener('click', (e) => {
       const turndownService = new TurndownService();
       const markdown = turndownService.turndown(e.target.closest('.message').querySelector('.markdown-content').innerHTML);
       const markdownMessage = markdown.trim();
