@@ -150,6 +150,7 @@ function sendMessage() {
   document.querySelector('.card-section').style.display = 'none';
   document.querySelector('.section-heading').style.display = 'none';
   document.getElementById('homeIcon').style.display = 'flex';
+  if (!chatWindow.querySelector('.message.user')) restartObserver();
   if (!inputArea.classList.contains('to-bottom')) inputArea.classList.add('to-bottom');
   const message = userInput.value.trim();
   if (!message) return;
@@ -164,41 +165,9 @@ function linkify(text) {
   });
 }
 
-function appendMessage(text, sender, hasMarkdown = false) {
-  const msg = document.createElement('div');
-  msg.className = `message ${sender}`;
-  if (hasMarkdown) {
-    if (text.includes('```')) {
-      text = text.replace('`', '');
-      text = text.replace('markdown', '');
-    }
-    msg.innerHTML = `<div class='markdown-content'>${marked.parse(text)}</div>`;
-  }
-  else {
-    msg.innerHTML = linkify(text);
-  }
-  chatWindow.appendChild(msg);
-
-  if (sender == 'bot') {
-    if (hasMarkdown) {
-      msg.innerHTML += `
-        <div class="icons for-markdown">
-          <span class="thumbs-up">${likeOutline}</span>
-          <span class="thumbs-down">${unlikeOutline}</span>
-          <span class="copy-response">${copyText}</span>
-          <span class="edit-prd">${editPrd}</span>
-          <span class="download-prd">${downloadPrd}</span>
-        </div>`;
-    } else {
-      msg.innerHTML += `
-        <div class="icons">
-          <span class="thumbs-up">${likeOutline}</span>
-          <span class="thumbs-down">${unlikeOutline}</span>
-          <span class="copy-response">${copyText}</span>
-        </div>`;
-    }
-
-    msg.querySelector('.icons .thumbs-up').addEventListener('click', (e) => {
+function activateIcons(msgs = chatWindow.querySelectorAll('.message.bot')) {
+  msgs.forEach((msg) => {
+    msg.querySelector('.icons .thumbs-up')?.addEventListener('click', async (e) => {
       const icn = e.target.nodeName == 'SPAN' ? e.target : e.target.closest('span');
       if (icn.classList.contains('active')) {
         icn.classList.remove('active');
@@ -212,9 +181,14 @@ function appendMessage(text, sender, hasMarkdown = false) {
           unlike.innerHTML = unlikeOutline;
         }
       }
+      await saveConversation(THREAD_ID, {
+        name: chatWindow.querySelector('.message.user').innerText.slice(0, 20),
+        domData: chatWindow.innerHTML,
+        chatHistory: JSON.stringify(chatHistory)
+      });
     });
 
-    msg.querySelector('.icons .thumbs-down').addEventListener('click', (e) => {
+    msg.querySelector('.icons .thumbs-down')?.addEventListener('click', async (e) => {
       const icn = e.target.nodeName == 'SPAN' ? e.target : e.target.closest('span');
       if (icn.classList.contains('active')) {
         icn.classList.remove('active');
@@ -228,9 +202,14 @@ function appendMessage(text, sender, hasMarkdown = false) {
           like.innerHTML = likeOutline;
         }
       }
+      await saveConversation(THREAD_ID, {
+        name: chatWindow.querySelector('.message.user').innerText.slice(0, 20),
+        domData: chatWindow.innerHTML,
+        chatHistory: JSON.stringify(chatHistory)
+      });
     });
 
-    msg.querySelector('.icons .copy-response').addEventListener('click', (e) => {
+    msg.querySelector('.icons .copy-response')?.addEventListener('click', (e) => {
       if (hasMarkdown) {
         const m = e.target.closest('.message').querySelector('.markdown-content');
         const turndownService = new TurndownService();
@@ -285,6 +264,43 @@ function appendMessage(text, sender, hasMarkdown = false) {
         icn.classList.add('active')
       }
     });
+  });
+}
+
+function appendMessage(text, sender, hasMarkdown = false) {
+  const msg = document.createElement('div');
+  msg.className = `message ${sender}`;
+  if (hasMarkdown) {
+    if (text.includes('```')) {
+      text = text.replace('`', '');
+      text = text.replace('markdown', '');
+    }
+    msg.innerHTML = `<div class='markdown-content'>${marked.parse(text)}</div>`;
+  }
+  else {
+    msg.innerHTML = linkify(text);
+  }
+  chatWindow.appendChild(msg);
+
+  if (sender == 'bot') {
+    if (hasMarkdown) {
+      msg.innerHTML += `
+        <div class="icons for-markdown">
+          <span class="thumbs-up">${likeOutline}</span>
+          <span class="thumbs-down">${unlikeOutline}</span>
+          <span class="copy-response">${copyText}</span>
+          <span class="edit-prd">${editPrd}</span>
+          <span class="download-prd">${downloadPrd}</span>
+        </div>`;
+    } else {
+      msg.innerHTML += `
+        <div class="icons">
+          <span class="thumbs-up">${likeOutline}</span>
+          <span class="thumbs-down">${unlikeOutline}</span>
+          <span class="copy-response">${copyText}</span>
+        </div>`;
+    }
+    activateIcons([msg]);
   }
   msg.scrollIntoView({
     behavior: 'smooth'
@@ -554,6 +570,7 @@ async function loadAllConversations() {
         top: chatWindow.scrollHeight,
         behavior: 'smooth'
       });
+      activateIcons();
     });
   });
 }
@@ -635,7 +652,6 @@ async function loadAllConversations() {
     });
 
     c.addEventListener('click', (e) => {
-      restartObserver();
       let cardPlaceholder = null;
       if (e.target.classList.contains('card')) cardPlaceholder =  e.target?.dataset?.placeholder;
       else cardPlaceholder = e.target?.closest('.card')?.dataset?.placeholder;
