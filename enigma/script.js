@@ -203,13 +203,14 @@ function activateIcons(msgs = chatWindow.querySelectorAll('.message.bot')) {
     });
 
     msg.querySelector('.icons .copy-response')?.addEventListener('click', (e) => {
+      const hasMarkdown = msg.querySelector('.markdown-content');
       if (hasMarkdown) {
         const m = e.target.closest('.message').querySelector('.markdown-content');
         const turndownService = new TurndownService();
         const markdown = turndownService.turndown(m.innerHTML);
         copyTextToClipboard(markdown.trim());
       } else {
-        copyTextToClipboard(text);
+        copyTextToClipboard(msg.innerText.trim());
       }
     });
 
