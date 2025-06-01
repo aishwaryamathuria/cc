@@ -126,7 +126,7 @@ body, html {
   border: none;
   border-radius: 200px 0 0 200px;
   resize: none;
-  background: linear-gradient(90deg, #d6dce2 0%, #9ea5ae 98%);
+  background: linear-gradient(90deg, #e9e4e4 0%, #b2b8c1 98%);
   color: #505050;
   padding-left: 50px;
   padding-top: 20px;
@@ -142,7 +142,7 @@ body, html {
 }
 
 #send-btn {
-  background-color: #9ea5ae;
+  background-color: #b3b8c1;
   color: white;
   border: none;
   padding: 0 20px;
