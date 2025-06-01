@@ -104,14 +104,13 @@ body, html {
 .input-area {
   display: flex;
   width: 90%;
-  margin: auto;
-  margin-bottom: 20px;
-  margin: 10px auto;
-  padding: 0 20px;
+  margin: 20px auto;
+  padding: 0;
   bottom: 12%;
   max-width: 1400px;
   z-index: 1;
-  top: 50%;
+  border-radius: 200px;
+  box-shadow: 0 6px 16px rgb(0 0 0 / 21%);
 }
 
 .input-area.to-bottom {
