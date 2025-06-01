@@ -73,7 +73,7 @@ body, html {
 }
 
 .message.bot {
-  padding: 10px 20px;
+  padding: 20px;
   padding-bottom: 0;
   max-height: 550px;
   overflow: scroll;
@@ -88,13 +88,17 @@ body, html {
 
 .user {
   align-self: flex-end;
-  background-color: #7155fa;
+  /* background-color: #7155fa; */
+  background: #923CB5;
+  background: linear-gradient(170deg, #923CB5, #4f1467)
 }
 
 .bot {
   align-self: flex-start;
   background-color: #eaeaea;
   white-space: pre-wrap;
+  background: #C9CCD3;
+  background: linear-gradient(185deg, #eee7e5 0%, #bababa 100%);
 }
 
 .input-area {
@@ -123,16 +127,13 @@ body, html {
   border: none;
   border-radius: 200px 0 0 200px;
   resize: none;
-  background-color: #eaeaea;
+  background: linear-gradient(90deg, #d6dce2 0%, #9ea5ae 98%);
   color: #505050;
   padding-left: 50px;
   padding-top: 20px;
   padding-bottom: 20px;
   outline: none;
   line-height: 1.5;
-  border-left: 2px solid #e1e1e1;
-  border-bottom: 2px solid #e1e1e1;
-  border-top: 2px solid #e1e1e1;
 }
 
 .message.has-iframe {
@@ -142,7 +143,7 @@ body, html {
 }
 
 #send-btn {
-  background-color: #eaeaea;
+  background-color: #9ea5ae;
   color: white;
   border: none;
   padding: 0 20px;
@@ -152,13 +153,10 @@ body, html {
   transition: background-color 0.2s;
   margin: 0;
   width: 80px;
-  border-right: 2px solid #e1e1e1;
-  border-bottom: 2px solid #e1e1e1;
-  border-top: 2px solid #e1e1e1;
 }
 
-#send-btn:hover {
-  background-color: #eaeaea;
+#send-btn:hover svg path {
+  fill: #2d2d2df0;
 }
 
 .message .icon {
