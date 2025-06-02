@@ -551,12 +551,12 @@ async function loadAllConversations() {
 
     thread.addEventListener('click', async (e) => {
       if (e.target.hasAttribute('contentEditable')) return;
-
       CONVERSATION_STARTED = true;
       const li = e.target.closest('li')
       const convId = li.querySelector('a').id;
       document.querySelector('.card-section').style.display = 'none';
       document.querySelector('.section-heading').style.display = 'none';
+      document.getElementById('homeIcon').style.display = 'flex';
       chatWindow.style.display = 'flex';
       observer?.disconnect();
       observer = null;
