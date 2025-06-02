@@ -73,7 +73,7 @@ function restartObserver() {
           if (!THREAD_NAME) THREAD_NAME = chatWindow.querySelector('.message.user').innerText.slice(0, 20);
           await saveConversation(THREAD_ID, {
             name: THREAD_NAME ? THREAD_NAME : chatWindow.querySelector('.message.user').innerText.slice(0, 20),
-            domData: chatWindow.innerHTML,
+            domData: processDomForSave(),
             chatHistory: JSON.stringify(chatHistory)
           });
           await loadAllConversations();
@@ -136,6 +136,20 @@ toggleBtn.addEventListener('click', () => {
   }
 });
 
+function processDomForSave() {
+  if (!chatWindow.querySelector('iframe')) return chatWindow.innerHTML;
+  const domClone = chatWindow.cloneNode(true);
+  const iframes = domClone.querySelectorAll('iframe');
+  iframes.forEach((ifr) => {
+    if (!ifr.src.includes('/preview.html')) return;
+    const url = new URL(ifr.src);
+    url.searchParams.set('source', 'da');
+    url.searchParams.set('contentUrl', url.searchParams.get('targetUrl'));
+    ifr.src = url.toString();
+  });
+  return domClone.innerHTML;
+}
+
 function sendMessage() {
   CONVERSATION_STARTED = true;
   document.querySelector(".chat-window").style.display = "flex";
@@ -176,7 +190,7 @@ function activateIcons(msgs = chatWindow.querySelectorAll('.message.bot')) {
       }
       await saveConversation(THREAD_ID, {
         name: THREAD_NAME ? THREAD_NAME : chatWindow.querySelector('.message.user').innerText.slice(0, 20),
-        domData: chatWindow.innerHTML,
+        domData: processDomForSave(),
         chatHistory: JSON.stringify(chatHistory)
       });
     });
@@ -197,7 +211,7 @@ function activateIcons(msgs = chatWindow.querySelectorAll('.message.bot')) {
       }
       await saveConversation(THREAD_ID, {
         name: THREAD_NAME ? THREAD_NAME : chatWindow.querySelector('.message.user').innerText.slice(0, 20),
-        domData: chatWindow.innerHTML,
+        domData: processDomForSave(),
         chatHistory: JSON.stringify(chatHistory)
       });
     });
@@ -254,7 +268,7 @@ function activateIcons(msgs = chatWindow.querySelectorAll('.message.bot')) {
         msg.contentEditable = false;
         saveConversation(THREAD_ID, {
           name: THREAD_NAME ? THREAD_NAME : chatWindow.querySelector('.message.user').innerText.slice(0, 20),
-          domData: chatWindow.innerHTML,
+          domData: processDomForSave(),
           chatHistory: JSON.stringify(chatHistory)
         });
       } else {
