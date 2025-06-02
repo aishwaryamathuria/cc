@@ -126,7 +126,7 @@ body, html {
   border: none;
   border-radius: 200px 0 0 200px;
   resize: none;
-  background: linear-gradient(90deg, #f6f3f3 0%, #cfcaca 98%);
+  background: linear-gradient(90deg, #f6f3f3 44%, #cfcaca 98%);
   color: #505050;
   padding-left: 50px;
   padding-top: 20px;
