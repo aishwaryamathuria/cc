@@ -88,16 +88,13 @@ body, html {
 
 .user {
   align-self: flex-end;
-  /* background-color: #7155fa; */
-  background: #923CB5;
-  background: linear-gradient(170deg, #923CB5, #4f1467)
+  background: linear-gradient(170deg, #a190f5, #7155FA);
 }
 
 .bot {
   align-self: flex-start;
   background-color: #eaeaea;
   white-space: pre-wrap;
-  background: #C9CCD3;
   background: linear-gradient(185deg, #eee7e5 0%, #bababa 100%);
 }
 
