@@ -126,7 +126,7 @@ body, html {
   border: none;
   border-radius: 200px 0 0 200px;
   resize: none;
-  background: linear-gradient(90deg, #e9e4e4 0%, #b2b8c1 98%);
+  background: linear-gradient(90deg, #f6f3f3 0%, #cfcaca 98%);
   color: #505050;
   padding-left: 50px;
   padding-top: 20px;
@@ -142,7 +142,7 @@ body, html {
 }
 
 #send-btn {
-  background-color: #b3b8c1;
+  background-color: #cfcaca;
   color: white;
   border: none;
   padding: 0 20px;
@@ -203,17 +203,6 @@ body, html {
   color: #000;
 }
 
-/* .loader {
-  border: 5px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 5px solid #7155fa;
-  width: 20px;
-  height: 20px;
-  -webkit-animation: spin 2s linear infinite;
-  animation: spin 2s linear infinite;
-  padding: 20px;
-  margin: 20px;
-} */
 
 .loader.hide {
   display: none;
@@ -660,7 +649,9 @@ span.show {
   border-radius: 20px;
   padding: 20px;
   height: 64px;
-  background: #edebeb;
+  /* background: #edebeb; */
+
+  background: linear-gradient(185deg, #eee7e5 0%, #bababa 100%);
   position: relative;
   overflow: hidden;
   display: flex;
@@ -671,7 +662,7 @@ span.show {
 .skeleton-line {
   height: 16px;
   border-radius: 8px;
-  background-color: #bfbebe;
+  background-color: #a7a5a5;
   position: relative;
   overflow: hidden;
 }
