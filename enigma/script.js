@@ -556,7 +556,6 @@ async function loadAllConversations() {
       const convId = li.querySelector('a').id;
       document.querySelector('.card-section').style.display = 'none';
       document.querySelector('.section-heading').style.display = 'none';
-      document.getElementById('homeIcon').style.display = 'flex';
       chatWindow.style.display = 'flex';
       observer?.disconnect();
       observer = null;
@@ -674,6 +673,7 @@ async function loadAllConversations() {
   document.addEventListener('click', (e) => {
     if (!e.target.closest('.sidebar') && !e.target.closest('.toggle-btn') && !e.target.classList.contains('.toggle-btn')) {
       sidebar.classList.remove('open');
+      if (CONVERSATION_STARTED) document.getElementById('homeIcon').style.display = 'flex';
     }
   });
 })();
