@@ -358,6 +358,7 @@ body, html {
 .chat-wrapper .card-section .card {
   background: #ffffff;
   padding: 15px;
+  padding-top: 30px;
   border-radius: 12px;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
@@ -365,10 +366,10 @@ body, html {
   width: 200px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   cursor: pointer;
   gap: 10px;
   position: relative;
+  justify-content: start;
 }
 
 .chat-wrapper .card-section .card:hover {
