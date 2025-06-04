@@ -380,6 +380,9 @@ function appendPreflightMessage(message) {
   msg.className = `message bot has-table`;
   msg.innerHTML = preflightDetails;
   chatWindow.append(msg);
+  msg.scrollIntoView({
+    behavior: 'smooth'
+  });
   loader.remove();
 }
 
@@ -546,7 +549,7 @@ async function loadAllConversations() {
   conversations.forEach((c) => {
     const id = c.id;
     const li = document.createElement('li');
-    li.innerHTML = `<a href='#' id="${id}">${c.data.name}</a><div><span class='edit'>${editSVG}</span><span class='edit-done hide'>${editDoneSVG}</span><span class='delete'>${deleteSVG}</span><div>`;
+    li.innerHTML = `<a href='#' id="${id}">${c.data.name}</a><div><span class='edit show'>${editSVG}</span><span class='edit-done hide'>${editDoneSVG}</span><span class='delete show'>${deleteSVG}</span><div>`;
     conversationList.append(li);
   });
 

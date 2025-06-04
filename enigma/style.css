@@ -502,7 +502,7 @@ body, html {
   left: -300px;
   width: 300px;
   height: 100%;
-  background-color: #000c;
+  background-color: rgba(21, 21, 21, 0.972);
   color: white;
   padding: 10px;
   padding-top: 15px;
@@ -530,7 +530,7 @@ body, html {
   list-style: none;
   padding: 0;
   display: flex;
-  gap: 10px;
+  gap: 0;
   flex-direction: column;
   margin: 30px 0;
   max-height: 90%;
@@ -542,12 +542,12 @@ body, html {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
+  color: white;
 }
 
 .sidebar ul li {
   color: white;
   text-decoration: none;
-  background: #f0efef;
   padding: 10px;
   padding-right: 0;
   border-radius: 5px;
@@ -557,13 +557,13 @@ body, html {
 }
 
 .sidebar ul li:hover {
-  background-color: rgba(223, 222, 222, 0.8);
+  background: rgba(79, 79, 79, 0.8);
 }
 
 .sidebar ul li a {
   cursor: pointer;
   text-decoration: none;
-  color: #000;
+  color: white;
 }
 
 .sidebar ul li div {
@@ -578,13 +578,22 @@ body, html {
 }
 
 .sidebar ul li svg {
-  height: 22px;
-  width: 22px;
+  height: 18px;
+  width: 18px;
   cursor: pointer;
 }
 
+.sidebar ul li span.show {
+  background: #393838;
+  padding: 5px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .sidebar ul li .edit svg path {
-  fill: #434343ba;
+  fill: #c3c1c1ba;
 }
 
 .sidebar ul li .edit-done svg path {
@@ -592,7 +601,7 @@ body, html {
 }
 
 .sidebar ul li .delete svg path {
-  fill: #b30b00ba;
+  fill: #f04337ba;
 }
 
 .content {
