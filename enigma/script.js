@@ -405,9 +405,6 @@ function handleChatResponse(response) {
   if (response.hasOwnProperty('thumbnail')) {
     appendImageThumbnail(`${response.thumbnail}`, 'bot');
   }
-  if (response.hasOwnProperty('thumbnail')) {
-    appendImageThumbnail(`${response.thumbnail}`, 'bot');
-  }
 }
 
 async function handleChatInteraction() {
