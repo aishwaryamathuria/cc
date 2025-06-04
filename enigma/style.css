@@ -44,7 +44,7 @@ body, html {
   display: flex;
   height: 100%;
   width: 100%;
-  opacity: 0.6;
+  opacity: 0.4;
 }
 
 .chat-window {
@@ -89,7 +89,7 @@ body, html {
 
 .user {
   align-self: flex-end;
-  background: linear-gradient(170deg, #a190f5, #7155FA);
+  background: linear-gradient(170deg, #7daae2, #5558fa);
 }
 
 .bot {
