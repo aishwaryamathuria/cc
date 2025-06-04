@@ -725,3 +725,35 @@ span.show {
 .message.bot .icons {
   background: none;
 }
+
+.message.bot.has-table {
+  padding-bottom: 20px
+}
+
+.table {
+  display: table;
+  width: auto;
+  font-family: sans-serif;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  font-size: 14px;
+  width: 100%;
+  min-width: 700px;
+  background-color: white;
+  font-weight: bold;
+}
+
+.table-row {
+  display: table-row;
+}
+
+.table-cell {
+  display: table-cell;
+  padding: 8px 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.table-row:last-child .cell {
+  border-bottom: none;
+}

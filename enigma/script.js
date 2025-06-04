@@ -364,16 +364,43 @@ function appendiFrameMessage(link, sender, generateContent = false) {
   });
 }
 
+function appendPreflightMessage(message) {
+  let preflightDetails = "<div class='preflight-table table'>";
+  Object.keys(message).forEach((k) => {
+    if (message[k].icon == "green") {
+      preflightDetails += `<div class="table-row"><div class="table-cell">${message[k].title}</div><div class="table-cell">✅</div></div>`;
+    } else if (message[k].icon == "red") {
+      preflightDetails += `<div class="table-row"><div class="table-cell">${message[k].title}</div><div class="table-cell">❌</div></div>`;
+    } else {
+      preflightDetails += `<div class="table-row"><div class="table-cell">${message[k].title}</div><div class="table-cell">⚠️</div></div>`;
+    }
+  });
+  preflightDetails += "</div>";
+  const msg = document.createElement('div');
+  msg.className = `message bot has-table`;
+  msg.innerHTML = preflightDetails;
+  chatWindow.append(msg);
+  loader.remove();
+}
+
 function handleChatResponse(response) {
   if (response.hasOwnProperty('message')) {
-      appendMessage(response.message, 'bot', response.hasOwnProperty('hasMarkdown'));
-      chatHistory.push({
-        "role": "system",
-        "content": response.message
-      });
+      if (response.message.hasOwnProperty('canon') || response.message.hasOwnProperty('lorem')) {
+        appendPreflightMessage(response.message, 'bot');
+      }
+      else {
+        appendMessage(response.message, 'bot', response.hasOwnProperty('hasMarkdown'));
+        chatHistory.push({
+          "role": "system",
+          "content": response.message
+        });
+      }
   }
   if (response.hasOwnProperty('previewerUrl')) {
     appendiFrameMessage(response.previewerUrl, 'bot', response.generateContent);
+  }
+  if (response.hasOwnProperty('thumbnail')) {
+    appendImageThumbnail(`${response.thumbnail}`, 'bot');
   }
   if (response.hasOwnProperty('thumbnail')) {
     appendImageThumbnail(`${response.thumbnail}`, 'bot');
