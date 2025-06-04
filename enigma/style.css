@@ -369,7 +369,7 @@ body, html {
   justify-content: start;
 }
 
-.chat-wrapper .card-section .card:hover {
+.chat-wrapper .card-section .card:not(.disabled):hover {
   transform: translateY(-6px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
@@ -400,12 +400,18 @@ body, html {
 .chat-wrapper .card-section .card .card-overlay {
   height: 100%;
   width: 100%;
-  opacity: 0.5;
+  opacity: 0.6;
   position: absolute;
-  margin: -20px;
+  margin: -30px -15px;
   background-color: #d3d3d3;
   border-radius: 12px;
   opacity: 0.5;
+  z-index: 2;
+}
+
+
+.chat-wrapper .card-section .card.disabled img {
+  z-index: 1;
 }
 
 @media screen and (max-width: 1000px) {
