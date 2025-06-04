@@ -35,7 +35,8 @@ body, html {
 .chat-background {
   background-image: url("https://main--milo--adobecom.aem.live/drafts/mathuria/poc/media_1a5aecf312cf14cde075062b1265874b9ceb1bfa2.jpg?format=webply&optimize=medium");
   background-repeat: no-repeat; 
-  background-size: 100% auto;
+  /* background-size: auto 100%; */
+  object-fit: cover;
   background-position: center;
   background-color: #fff7f6;
   /* opacity: 0.5; */
