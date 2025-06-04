@@ -736,9 +736,9 @@ span.show {
 @media screen and (min-width: 1200px) {
   .loader,
   .message {
-    width: 800px; 
-    min-width: 800px;
-    max-width: 800px;
+    width: 80%; 
+    min-width: 80%;
+    max-width: 80%;
   }
 }
 
