@@ -33,9 +33,9 @@ body, html {
 }
 
 .chat-background {
-  background-image: url("https://main--cc--adobecom.aem.live/drafts/mathuria/figma-to-da/stream_bg/media_107c23847c06427fc79def01c9eee67464f8897d2.jpg?format=webply&optimize=medium");
+  background-image: url("https://main--milo--adobecom.aem.live/drafts/mathuria/poc/media_1a5aecf312cf14cde075062b1265874b9ceb1bfa2.jpg?format=webply&optimize=medium");
   background-repeat: no-repeat; 
-  background-size: auto 100%;
+  background-size: 100% auto;
   background-position: center;
   background-color: #fff7f6;
   /* opacity: 0.5; */
@@ -44,6 +44,7 @@ body, html {
   display: flex;
   height: 100%;
   width: 100%;
+  opacity: 0.6;
 }
 
 .chat-window {
@@ -320,13 +321,14 @@ body, html {
 }
 
 .chat-wrapper .section-heading .cursive {
-  background: linear-gradient(90deg,#ba56f8 15%,#75049f 35%,#ba56f8 75%,#75049f 100%);
+  background: linear-gradient(90deg,#5681f8 15%,#04339f 35%,#566cf8 75%,#044a9f 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-size: 300% 100%;
   background-clip: text;
   color: transparent;
   animation: streambg 5s linear infinite;
+  font-size: 38px;
 }
 
 @keyframes streambg {
@@ -377,7 +379,7 @@ body, html {
 .chat-wrapper .card-section .card-icon {
   width: 40px;
   height: 40px;
-  filter: hue-rotate(79deg) saturate(292%);
+  filter: hue-rotate(56deg) saturate(292%);
 }
 
 .chat-wrapper .card-section .card-title {
