@@ -741,7 +741,6 @@ span.show {
   width: 100%;
   min-width: 700px;
   background-color: white;
-  font-weight: bold;
 }
 
 .table-row {
@@ -754,6 +753,10 @@ span.show {
   border-bottom: 1px solid #eee;
 }
 
-.table-row:last-child .cell {
+.table-row .table-cell:nth-child(1) {
+  font-weight: bold;
+}
+
+.table-row:last-child .table-cell {
   border-bottom: none;
 }

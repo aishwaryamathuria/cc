@@ -368,11 +368,11 @@ function appendPreflightMessage(message) {
   let preflightDetails = "<div class='preflight-table table'>";
   Object.keys(message).forEach((k) => {
     if (message[k].icon == "green") {
-      preflightDetails += `<div class="table-row"><div class="table-cell">${message[k].title}</div><div class="table-cell">✅</div></div>`;
+      preflightDetails += `<div class="table-row"><div class="table-cell">${message[k].title}</div><div class="table-cell"><span title="${message[k].description}">✅</span></div><div class="table-cell">${message[k].description}</div></div>`;
     } else if (message[k].icon == "red") {
-      preflightDetails += `<div class="table-row"><div class="table-cell">${message[k].title}</div><div class="table-cell">❌</div></div>`;
+      preflightDetails += `<div class="table-row"><div class="table-cell">${message[k].title}</div><div class="table-cell"><span title="${message[k].description}">❌</span></div><div class="table-cell">${message[k].description}</div></div>`;
     } else {
-      preflightDetails += `<div class="table-row"><div class="table-cell">${message[k].title}</div><div class="table-cell">⚠️</div></div>`;
+      preflightDetails += `<div class="table-row"><div class="table-cell">${message[k].title}</div><div class="table-cell"><span title="${message[k].description}">⚠️</span></div><div class="table-cell">${message[k].description}</div></div>`;
     }
   });
   preflightDetails += "</div>";
