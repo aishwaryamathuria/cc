@@ -469,7 +469,7 @@ function handleChatResponse(response) {
     appendImageThumbnail(`${response.thumbnail}`, 'bot');
   }
   if (response.hasOwnProperty('preflight')) {
-    appendPreflightMessage(`${response.preflight}`, 'bot');
+    appendPreflightMessage(`${response.preflight[0]}`, 'bot');
   }
 }
 
