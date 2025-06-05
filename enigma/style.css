@@ -315,11 +315,20 @@ body, html {
   width: 100%;
   align-items: center;
   justify-content: center;
-  /* height: 300px; */
   margin-top: 11%;
   margin-bottom: 70px;
   max-height: 50%;
   z-index: 90;
+}
+
+
+@media screen and (max-width: 600px) {
+
+  .chat-wrapper .section-heading {
+    font-size: 30px;
+    margin-top: 40%;
+  }
+
 }
 
 .chat-wrapper .section-heading .cursive {
