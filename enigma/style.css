@@ -756,10 +756,11 @@ span.show {
 }
 
 .message.bot.has-table {
-  padding-bottom: 20px
+  height: 500px;
+  padding-bottom: 20px;
 }
 
-.table {
+/* .table {
   display: table;
   width: auto;
   font-family: sans-serif;
@@ -788,4 +789,121 @@ span.show {
 
 .table-row:last-child .table-cell {
   border-bottom: none;
+} */
+
+
+
+.tabs {
+  display: flex;
+  border-bottom: 2px solid #ccc;
+}
+
+.tab-button {
+  padding: 10px 20px;
+  border: none;
+  background: #c8c7c7;
+  cursor: pointer;
+  margin-right: 5px;
+  border-radius: 5px 5px 0 0;
+}
+
+.tab-button.active {
+  background: #fff;
+  border-bottom: 2px solid white;
+  font-weight: bold;
+}
+
+.tab-content {
+  padding: 30px;
+  display: none;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 44%);
+  max-width: 100%;
+  min-width: 600px;
+  width: 100%;
+}
+
+.tab-content.active {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  height: 400px;
+  min-width: 600px;
+  width: 100%;
+  overflow: scroll;
+}
+
+.tab-content.active.is-empty {
+  display: flex;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  text-align: left;
+}
+
+table th {
+  background: #f7f7f7;
+}
+
+.preflight-icon {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preflight-icon svg {
+  height: 30px;
+  width: 30px;
+}
+
+.preflight-item {
+  display: flex;
+  gap: 20px;
+}
+
+.preflight-content {
+  display: flex;
+  flex-direction: column;
+  max-height: 200px;
+  justify-content: center;
+}
+
+.preflight-content .preflight-title {
+  color: #292929;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.preflight-content .preflight-description {
+  color: #3c3c3c;
+  font-size: 16px;
+}
+
+.preflight-launching-soon {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+table.badLinks {
+  background: white;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+table.badLinks a {
+  color: #264da9 !important;
 }

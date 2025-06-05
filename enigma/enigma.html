@@ -37,10 +37,10 @@
   </button>
 
   <div class="chat-wrapper">
-    <div class="chat-background" style = 'background-image: url("/enigma/assets/scene.jpg"); background-size: cover;'></div>
-    <h2 class="section-heading">Welcome to&nbsp;<span class="cursive"> STREAM. </span>&nbsp;What can I help with?</h2>
-    <div id="chat-window" class="chat-window"></div>
-    <div class="input-area" id="input-area">
+    <div class="chat-background"></div>
+    <h2 class="section-heading" style="display: none">Welcome to&nbsp;<span class="cursive"> STREAM. </span>&nbsp;What can I help with?</h2>
+    <div id="chat-window" class="chat-window"  style="display: flex"></div>
+    <div class="input-area to-bottom" id="input-area">
       <textarea id="user-input" placeholder="Ready when you are..." rows="2"></textarea>
       <button id="send-btn">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -48,7 +48,7 @@
         </svg>
       </button>
     </div>
-    <div class="card-section">
+    <div class="card-section" style="display: none">
       <div class="card-container">
         <div class="card"
           data-placeholder="Generate a PRD around a new requirement from the following brief &lt;Type a brief overview here&gt;.">
@@ -59,8 +59,9 @@
           <p class="card-text">Transform a brief product idea into a comprehensive Product Requirement Document (PRD).
           </p>
         </div>
-        <div class="card"
+        <div class="card disabled"
           data-placeholder="Create a figma design from the following requirement &lt;Type a brief overview or PRD details here&gt;">
+          <div class="card-overlay"></div>
           <div class="card-title">
             <img src="./assets/design.jpg" alt="Feature 1 Icon" class="card-icon" data-gif="./assets/design.gif">
             <h3>Design from PRD</h3>
@@ -69,7 +70,7 @@
             the initiative.</p>
         </div>
         <div class="card"
-          data-placeholder="Create a DA page from the Figma URL https://www.figma.com/design/T7TMQdiAOxdZr881tUhQTv/featurepage and push it to the DA location: https://da.live/edit#/adobecom/da-cc-sandbox/drafts/stream/samplepage">
+          data-placeholder="Create a DA page from the Figma URL <https://www.figma.com/design/T7TMQdiAOxdZr881tUhQTv/featurepage> and push it to the DA location: <https://da.live/edit#/adobecom/da-cc-sandbox/drafts/stream/samplepage>. Page type : (Feature page) ">
           <div class="card-title">
             <img src="./assets/web-developer.jpg" alt="Feature 1 Icon" class="card-icon"
               data-gif="./assets/web-developer.gif">
@@ -77,8 +78,9 @@
           </div>
           <p class="card-text">Transform Figma design files into DA-compatible pages for seamless integration.</p>
         </div>
-        <div class="card"
-          data-placeholder="Create a DA page and content (https://da.live/edit#/adobecom/da-cc-sandbox/drafts/stream/samplepage) from the Figma https://www.figma.com/design/T7TMQdiAOxdZr881tUhQTv/featurepage. Requirement input: &lt;Type a PRD or overview here&gt;">
+        <div class="card disabled"
+          data-placeholder="Create a DA page and content <https://da.live/edit#/adobecom/da-cc-sandbox/drafts/stream/samplepage> from the Figma <https://www.figma.com/design/T7TMQdiAOxdZr881tUhQTv/featurepage>. Requirement input: &lt;Type a PRD or overview here&gt;">
+          <div class="card-overlay"></div>
           <div class="card-title">
             <img src="./assets/artificial-intelligence.jpg" alt="Feature 1 Icon" class="card-icon"
               data-gif="./assets/artificial-intelligence.gif">
@@ -88,7 +90,7 @@
             reflects PRD requirements.</p>
         </div>
         <div class="card"
-          data-placeholder="Launching shortly. Stay tuned...">
+          data-placeholder="Generate preflight insights for <https://da.live/edit#/adobecom/da-cc-sandbox/drafts/stream/doc1>.">
           <div class="card-title">
             <img src="./assets/data-analysis.jpg" alt="Feature 1 Icon" class="card-icon"
               data-gif="./assets/data-analysis.gif">

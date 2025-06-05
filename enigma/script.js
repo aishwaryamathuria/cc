@@ -365,45 +365,111 @@ function appendiFrameMessage(link, sender, generateContent = false) {
 }
 
 function appendPreflightMessage(message) {
-  let preflightDetails = "<div class='preflight-table table'>";
-  Object.keys(message).forEach((k) => {
-    if (message[k].icon == "green") {
-      preflightDetails += `<div class="table-row"><div class="table-cell">${message[k].title}</div><div class="table-cell"><span title="${message[k].description}">✅</span></div><div class="table-cell">${message[k].description}</div></div>`;
-    } else if (message[k].icon == "red") {
-      preflightDetails += `<div class="table-row"><div class="table-cell">${message[k].title}</div><div class="table-cell"><span title="${message[k].description}">❌</span></div><div class="table-cell">${message[k].description}</div></div>`;
+  let tabs = '<div class="tabs">';
+  let tabContents = '';
+  Object.keys(message).forEach((i, idx1) => {
+    let badLinks = `<table class='badLinks' id="tab-${idx1}-table"><tr><th>Problematic Urls</th><th>Located In</th><th>Status</th></tr>`;
+    let hasBadLinks = false;
+    let preflightDetails = '';
+    if (i.toLowerCase().trim() == 'seo') {
+      tabs += `<button class="tab-button active" id="tab-${idx1}">${i}</button>`;
+      if (!Object.keys(message[i]).length) {
+        preflightDetails = `<div class="tab-content is-empty active" id="tab-${idx1}-content">`;
+      } else {
+        preflightDetails = `<div class="tab-content active" id="tab-${idx1}-content">`;
+      }
     } else {
-      preflightDetails += `<div class="table-row"><div class="table-cell">${message[k].title}</div><div class="table-cell"><span title="${message[k].description}">⚠️</span></div><div class="table-cell">${message[k].description}</div></div>`;
+      tabs += `<button class="tab-button" id="tab-${idx1}">${i}</button>`;
+      if (!Object.keys(message[i]).length) {
+        preflightDetails = `<div class="tab-content is-empty" id="tab-${idx1}-content">`;
+      } else {
+        preflightDetails = `<div class="tab-content" id="tab-${idx1}-content">`;
+      }
     }
+
+    if (!Object.keys(message[i]).length) {
+      preflightDetails += `<div class="preflight-launching-soon">Launching Soon. Stay tuned.</div>`
+    } else {
+      Object.keys(message[i]).forEach((j) => {
+        if (message[i][j].icon == "green") {
+          preflightDetails += `<div class="preflight-item">
+            <div class="preflight-icon"><svg xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 512"><path fill="#3AAF3C" d="M256 0c141.39 0 256 114.61 256 256S397.39 512 256 512 0 397.39 0 256 114.61 0 256 0z"/><path fill="#0DA10D" fill-rule="nonzero" d="M391.27 143.23h19.23c-81.87 90.92-145.34 165.89-202.18 275.52-29.59-63.26-55.96-106.93-114.96-147.42l22.03-4.98c44.09 36.07 67.31 76.16 92.93 130.95 52.31-100.9 110.24-172.44 182.95-254.07z"/><path fill="#fff" fill-rule="nonzero" d="M158.04 235.26c19.67 11.33 32.46 20.75 47.71 37.55 39.53-63.63 82.44-98.89 138.24-148.93l5.45-2.11h61.06c-81.87 90.93-145.34 165.9-202.18 275.53-29.59-63.26-55.96-106.93-114.96-147.43l64.68-14.61z"/></svg></div>
+            <div class="preflight-content">
+              <div class="preflight-title">${message[i][j].title}</div>
+              <div class="preflight-description">${message[i][j].description}</div>
+            </div>
+          </div>`
+        } else if (message[i][j].icon == "red") {
+          preflightDetails += `<div class="preflight-item">
+            <div class="preflight-icon"><?xml version="1.0" encoding="utf-8"?><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="122.879px" height="122.879px" viewBox="0 0 122.879 122.879" enable-background="new 0 0 122.879 122.879" xml:space="preserve"><g><path fill-rule="evenodd" clip-rule="evenodd" fill="#FF4141" d="M61.44,0c33.933,0,61.439,27.507,61.439,61.439 s-27.506,61.439-61.439,61.439C27.507,122.879,0,95.372,0,61.439S27.507,0,61.44,0L61.44,0z M73.451,39.151 c2.75-2.793,7.221-2.805,9.986-0.027c2.764,2.776,2.775,7.292,0.027,10.083L71.4,61.445l12.076,12.249 c2.729,2.77,2.689,7.257-0.08,10.022c-2.773,2.765-7.23,2.758-9.955-0.013L61.446,71.54L49.428,83.728 c-2.75,2.793-7.22,2.805-9.986,0.027c-2.763-2.776-2.776-7.293-0.027-10.084L51.48,61.434L39.403,49.185 c-2.728-2.769-2.689-7.256,0.082-10.022c2.772-2.765,7.229-2.758,9.953,0.013l11.997,12.165L73.451,39.151L73.451,39.151z"/></g></svg></div>
+            <div class="preflight-content">
+              <div class="preflight-title">${message[i][j].title}</div>
+              <div class="preflight-description">${message[i][j].description}</div>
+            </div>
+          </div>`
+        } else {
+          preflightDetails += `<div class="preflight-item">
+            <div class="preflight-icon"><svg xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 512"><path fill-rule="nonzero" d="M256 0c70.686 0 134.69 28.658 181.016 74.984C483.342 121.31 512 185.314 512 256c0 70.686-28.658 134.69-74.984 181.016C390.69 483.342 326.686 512 256 512c-70.686 0-134.69-28.658-181.016-74.984C28.658 390.69 0 326.686 0 256c0-70.686 28.658-134.69 74.984-181.016C121.31 28.658 185.314 0 256 0z"/><path fill="#FEC901" d="M256 29.464c125.114 0 226.536 101.422 226.536 226.536S381.114 482.536 256 482.536 29.464 381.114 29.464 256 130.886 29.464 256 29.464z"/><path d="M256 341.492c14.453 0 26.168 11.717 26.168 26.171 0 14.453-11.715 26.167-26.168 26.167s-26.171-11.714-26.171-26.167c0-14.454 11.718-26.171 26.171-26.171zm19.55-39.211c-.88 22.063-38.246 22.092-39.1-.007-3.778-37.804-13.443-127.553-13.135-163.074.311-10.946 9.383-17.426 20.989-19.898 3.578-.765 7.513-1.136 11.477-1.132 3.986.007 7.932.4 11.514 1.165 11.988 2.554 21.401 9.301 21.398 20.444l-.045 1.117-13.098 161.385z"/></svg></div>
+            <div class="preflight-content">
+              <div class="preflight-title">${message[i][j].title}</div>
+              <div class="preflight-description">${message[i][j].description}</div>
+            </div>
+          </div>`
+        }
+        if (message[i][j].badLinks) {
+          hasBadLinks = true;
+          message[i][j].badLinks.forEach((bl) => {
+            badLinks += `<tr><td><a href="${bl.href}">${bl.href}</a></td><td>${bl.parent}</td><td>${bl.status}</td></tr>`;
+          });
+        }
+      });
+    }
+    preflightDetails += "</div>";
+    badLinks += '</table>';
+    if (hasBadLinks) preflightDetails += badLinks;
+    tabContents += preflightDetails;
   });
-  preflightDetails += "</div>";
+  tabs += '</div>';
   const msg = document.createElement('div');
   msg.className = `message bot has-table`;
-  msg.innerHTML = preflightDetails;
+  msg.innerHTML = tabs;
+  msg.innerHTML += tabContents;
   chatWindow.append(msg);
   msg.scrollIntoView({
     behavior: 'smooth'
   });
+  msg.querySelectorAll('.tab-button').forEach((tbtn) => {
+    tbtn.addEventListener('click', (e) => {
+      const currTab = e.target.classList.contains('tab-button') ? e.target : e.target.closest('.tab-button');
+      e.target.closest('.message').querySelectorAll('.tab-button.active').forEach((x) => x.classList.remove('active'));
+      currTab.classList.add('active');
+      const currTabContentId = `#${currTab.id}-content`;
+      e.target.closest('.message')?.querySelectorAll('.tab-content.active').forEach((t) => t.classList.remove('active'));
+      if (e.target.closest('.message').querySelector('.badLinks')) e.target.closest('.message').querySelector('.badLinks').style.display = 'none';
+      if(e.target.closest('.message').querySelector(`#${currTab.id}-table`)) e.target.closest('.message').querySelector(`#${currTab.id}-table`).style.display = 'flex';
+      e.target.closest('.message')?.querySelector(currTabContentId)?.classList.add('active');
+    });
+  });
+  if (!msg.querySelector('.tab-button.active')) msg.querySelector('.tab-button').click();
   loader.remove();
 }
 
 function handleChatResponse(response) {
   if (response.hasOwnProperty('message')) {
-      if (response.message.hasOwnProperty('canon') || response.message.hasOwnProperty('lorem')) {
-        appendPreflightMessage(response.message, 'bot');
-      }
-      else {
-        appendMessage(response.message, 'bot', response.hasOwnProperty('hasMarkdown'));
-        chatHistory.push({
-          "role": "system",
-          "content": response.message
-        });
-      }
+    appendMessage(response.message, 'bot', response.hasOwnProperty('hasMarkdown'));
+    chatHistory.push({
+      "role": "system",
+      "content": response.message
+    });
   }
   if (response.hasOwnProperty('previewerUrl')) {
     appendiFrameMessage(response.previewerUrl, 'bot', response.generateContent);
   }
   if (response.hasOwnProperty('thumbnail')) {
     appendImageThumbnail(`${response.thumbnail}`, 'bot');
+  }
+  if (response.hasOwnProperty('preflight')) {
+    appendPreflightMessage(`${response.preflight}`, 'bot');
   }
 }
 
