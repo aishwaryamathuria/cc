@@ -98,12 +98,12 @@ body, html {
   color: #fff;
   animation: slideFade 0.5s ease-out forwards;
   max-height: 75vh;
+  overflow: scroll;
 }
 
 .message.bot {
   padding: 20px;
   padding-bottom: 0;
-  max-height: 80%;
   overflow: scroll;
   animation: slideFade 0.5s ease-out forwards;
   max-width: 100%;
