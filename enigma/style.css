@@ -684,18 +684,19 @@ span.show {
   padding: 20px;
   padding-bottom: 20px;
   height: 64px;
-  background: #fff;
+  background: #fbfafa;
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 44%);;
 }
 
 .skeleton-line {
   height: 10px;
   border-radius: 8px;
-  background-color: #a7a5a5;
+  background-color: #c0bfbf;
   position: relative;
   overflow: hidden;
 }
@@ -738,39 +739,6 @@ span.show {
   height: 500px;
   padding-bottom: 20px;
 }
-
-/* .table {
-  display: table;
-  width: auto;
-  font-family: sans-serif;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  overflow: hidden;
-  font-size: 14px;
-  width: 100%;
-  min-width: 700px;
-  background-color: white;
-}
-
-.table-row {
-  display: table-row;
-}
-
-.table-cell {
-  display: table-cell;
-  padding: 8px 12px;
-  border-bottom: 1px solid #eee;
-}
-
-.table-row .table-cell:nth-child(1) {
-  font-weight: bold;
-}
-
-.table-row:last-child .table-cell {
-  border-bottom: none;
-} */
-
-
 
 .tabs {
   display: flex;
