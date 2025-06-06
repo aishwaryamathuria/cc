@@ -249,16 +249,21 @@ body, html {
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
+  overflow: hidden;
   background-color: rgba(0,0,0,0.8);
 }
 
+.modal .modal-img-parent {
+  width: 100%;
+  overflow: scroll;
+}
+
 .modal-content {
-  margin: 10% auto;
+  margin: 50px auto;
   display: block;
   max-width: 90%;
-  width: auto;
-  height: 200%;
+  width: 90%;
+  height: auto;
 }
 
 .close {
@@ -523,7 +528,7 @@ body, html {
   left: -300px;
   width: 300px;
   height: 100%;
-  background-color: #cdcdcd;
+  background-color: #edecec;
   color: #0f0f0f;
   padding: 10px;
   padding-top: 15px;
@@ -538,8 +543,8 @@ body, html {
 }
 
 .sidebar h2 {
-  font-size: 1.5rem;
-  margin-top: 1rem;
+  font-size: 1.6rem;
+  margin-top: 1.3rem;
   margin-left: 10px;
 }
 
