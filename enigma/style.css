@@ -909,6 +909,7 @@ table.badLinks a {
   padding-left: 15px;
   padding-bottom: 5px;
   list-style-type: disc;
+  margin-inline-start: 1.5em;
 }
 
 .markdown-content p {
