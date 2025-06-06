@@ -655,7 +655,7 @@ span.show {
 
 .message .icons.for-markdown {
   position: sticky;
-  top: 94%;
+  bottom: 0;
 }
 
 .message .icons svg {
