@@ -142,6 +142,7 @@ body, html {
 .message.has-iframe {
   height: 75vh;
   max-height: 75vh;
+  padding-bottom: 20px;
 }
 
 #send-btn {
