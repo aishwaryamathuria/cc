@@ -2,6 +2,7 @@ const sendBtn = document.getElementById('send-btn');
 const inputArea = document.getElementById('input-area');
 const userInput = document.getElementById('user-input');
 const chatWindow = document.getElementById('chat-window');
+const chatWrapper = document.querySelector('.chat-wrapper');
 const loader = document.createElement('div');
 loader.innerHTML = `
                       <div class="skeleton-line short"></div>
@@ -58,6 +59,13 @@ const editPrd = `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" 
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M12.127 5.56799L3.73298 14.022C3.66693 14.0882 3.61816 14.1695 3.59098 14.259L2.02798 19.5C1.96398 19.712 2.28698 19.978 2.46898 19.978C2.48062 19.979 2.49233 19.979 2.50398 19.978C2.65898 19.942 6.93098 18.659 7.74398 18.414C7.8321 18.3875 7.9122 18.3394 7.97698 18.274L16.377 9.81899L12.127 5.56799ZM7.28498 17.368C6.06898 17.733 4.54898 18.192 3.49898 18.506L4.62898 14.718L7.28498 17.368Z" fill="#222222"/>
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M19.761 5.48201L16.517 2.23801C16.4531 2.17407 16.3772 2.12346 16.2936 2.08912C16.21 2.05479 16.1204 2.03741 16.03 2.03801H16.008C15.8111 2.04455 15.6242 2.12654 15.486 2.26701L13.119 4.63501L17.364 8.88001L19.731 6.51301C19.8654 6.37979 19.9462 6.20186 19.958 6.01301C19.9646 5.9156 19.9505 5.8179 19.9165 5.72637C19.8826 5.63483 19.8296 5.55154 19.761 5.48201Z" fill="#222222"/>
                 </svg>`;
+const botIcon = `<span class="bot-icon">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3.75 15.5C3.33594 15.5 3 15.1787 3 14.7826V5.21739C3 4.82133 3.33594 4.5 3.75 4.5C4.16406 4.5 4.5 4.82133 4.5 5.21739V14.7826C4.5 15.1787 4.16406 15.5 3.75 15.5Z" fill="#292929"/>
+                    <path d="M0.75 14.25C0.33594 14.25 0 13.9141 0 13.5V6.5C0 6.08594 0.33594 5.75 0.75 5.75C1.16406 5.75 1.5 6.08594 1.5 6.5V13.5C1.5 13.9141 1.16406 14.25 0.75 14.25Z" fill="#292929"/>
+                    <path d="M17.0181 3H8.98193C7.33789 3 6 4.33789 6 5.98193V14.0181C6 15.6621 7.33789 17 8.98193 17H17.0181C18.6621 17 20 15.6621 20 14.0181V5.98193C20 4.33789 18.6621 3 17.0181 3ZM12.1597 13.3025C12.0135 13.556 11.7179 13.6812 11.435 13.6244L10.8061 13.4876L10.3307 13.9189C10.2034 14.0346 10.0414 14.0935 9.87839 14.0935C9.76269 14.0935 9.647 14.064 9.54182 14.003C9.28834 13.8568 9.15897 13.5644 9.21998 13.2783L9.35566 12.6504L8.92443 12.174C8.72775 11.9563 8.69409 11.6376 8.84029 11.3851C8.98649 11.1317 9.28204 11.0055 9.56497 11.0633L10.1939 11.2L10.6693 10.7678C10.8871 10.5721 11.2036 10.5353 11.4582 10.6836C11.7116 10.8298 11.841 11.1233 11.78 11.4083L11.6433 12.0373L12.0755 12.5137C12.2722 12.7304 12.3059 13.0491 12.1597 13.3025ZM16.9458 9.44324C16.8101 9.67859 16.5356 9.79969 16.2729 9.74109L14.8774 9.43933L13.8198 10.3983C13.7017 10.5057 13.5513 10.5604 13.3999 10.5604C13.2925 10.5604 13.1851 10.5331 13.0874 10.4764C12.852 10.3407 12.7319 10.0682 12.7895 9.80359L13.0913 8.40808L12.1323 7.35046C11.9497 7.14929 11.9184 6.85339 12.0542 6.61804C12.1899 6.38269 12.4634 6.26648 12.7271 6.31921L14.1226 6.62097L15.1802 5.66296C15.3813 5.47839 15.6763 5.44812 15.9126 5.58484C16.1479 5.72058 16.2681 5.99207 16.2114 6.25769L15.9097 7.6532L16.8677 8.71082C17.0503 8.91199 17.0815 9.20789 16.9458 9.44324Z" fill="#292929"/>
+                  </svg>
+                </span>`;
 
 async function copyTextToClipboard(text) {
   if (navigator.clipboard && window.isSecureContext) {
@@ -160,6 +168,7 @@ function sendMessage() {
   document.querySelector(".input-area").classList.add('to-bottom');
   document.querySelector('.card-section').style.display = 'none';
   document.querySelector('.section-heading').style.display = 'none';
+  chatWrapper.classList.add('conversation-mode');
   document.getElementById('homeIcon').style.display = 'flex';
   if (!chatWindow.querySelector('.message.user')) restartObserver();
   if (!inputArea.classList.contains('to-bottom')) inputArea.classList.add('to-bottom');
