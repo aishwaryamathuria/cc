@@ -39,7 +39,12 @@
   <div class="chat-wrapper">
     <div class="chat-background"></div>
     <h2 class="section-heading" style="display: none">Welcome to&nbsp;<span class="cursive"> STREAM. </span>&nbsp;What can I help with?</h2>
-    <div id="chat-window" class="chat-window"  style="display: flex"></div>
+    <div id="chat-window" class="chat-window" style="display: flex;">
+      <div class="loader">
+        <div class="skeleton-line short"></div>
+        <div class="skeleton-line long"></div>
+      </div>
+    </div>
     <div class="input-area to-bottom" id="input-area">
       <textarea id="user-input" placeholder="Ready when you are..." rows="2"></textarea>
       <button id="send-btn">
@@ -70,7 +75,7 @@
             the initiative.</p>
         </div>
         <div class="card"
-          data-placeholder="Create a DA page from the Figma URL < https://www.figma.com/design/T7TMQdiAOxdZr881tUhQTv/featurepage > and push it to the DA location: < https://da.live/edit#/adobecom/da-cc-sandbox/drafts/stream/samplepage >. Page type : (Feature page) ">
+          data-placeholder="Create a DA page from the Figma URL">
           <div class="card-title">
             <img src="./assets/web-developer.jpg" alt="Feature 1 Icon" class="card-icon"
               data-gif="./assets/web-developer.gif">
@@ -79,7 +84,7 @@
           <p class="card-text">Transform Figma design files into DA-compatible pages for seamless integration.</p>
         </div>
         <div class="card disabled"
-          data-placeholder="Create a DA page and content < https://da.live/edit#/adobecom/da-cc-sandbox/drafts/stream/samplepage > from the Figma < https://www.figma.com/design/T7TMQdiAOxdZr881tUhQTv/featurepage >. Requirement input: &lt;Type a PRD or overview here&gt;">
+          data-placeholder="Create a DA page with ai generated content.">
           <div class="card-overlay"></div>
           <div class="card-title">
             <img src="./assets/artificial-intelligence.jpg" alt="Feature 1 Icon" class="card-icon"

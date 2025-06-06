@@ -151,6 +151,8 @@ function processDomForSave() {
 }
 
 function sendMessage() {
+  const message = userInput.value.trim();
+  if (!message) return;
   CONVERSATION_STARTED = true;
   document.querySelector(".chat-window").style.display = "flex";
   document.querySelector(".input-area").classList.add('to-bottom');
@@ -159,8 +161,6 @@ function sendMessage() {
   document.getElementById('homeIcon').style.display = 'flex';
   if (!chatWindow.querySelector('.message.user')) restartObserver();
   if (!inputArea.classList.contains('to-bottom')) inputArea.classList.add('to-bottom');
-  const message = userInput.value.trim();
-  if (!message) return;
   appendMessage(message, 'user');
   handleChatInteraction();
 }
@@ -283,9 +283,9 @@ function appendMessage(text, sender, hasMarkdown = false) {
   const msg = document.createElement('div');
   msg.className = `message ${sender}`;
   if (hasMarkdown) {
-    if (text.includes('```')) {
-      text = text.replace('`', '');
-      text = text.replace('markdown', '');
+    if (text.includes('`')) {
+      text = text.replaceAll('`', '');
+      text = text.replaceAll('markdown', '');
     }
     msg.innerHTML = `<div class='markdown-content'>${marked.parse(text)}</div>`;
     msg.setAttribute('data-chathistoryidx', `${chatHistory.length}`);
@@ -454,6 +454,34 @@ function appendPreflightMessage(message) {
   loader.remove();
 }
 
+function appendFollowUpQuestions(questions) {
+  const msg = document.createElement('div');
+  msg.className = `message bot is-followup`;
+  questions.forEach((q) => { 
+    const msgDiv = `<a href="#" class="followup-question" data-question="${q}">
+      <div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12" fill="none"><path d="M13.7244 5.97676L10.1467 2.41284C10.0288 2.2954 9.95947 2.13827 9.95219 1.9724C9.94491 1.80654 10.0003 1.64397 10.1074 1.51675C10.2144 1.38953 10.3655 1.30687 10.5307 1.28508C10.6959 1.26328 10.8634 1.30393 11 1.399L11.0889 1.47427L15.8444 6.21583L15.9111 6.3088L15.9467 6.38406L15.9778 6.47261L15.9867 6.5036C15.9957 6.54878 16.0002 6.59476 16 6.64084L15.9911 6.54344L15.9956 6.58329V6.69839L15.9778 6.8135L15.9511 6.89319L15.8978 6.99502L15.8222 7.09242L11.0889 11.8074C10.971 11.9248 10.8132 11.9939 10.6467 12.0011C10.4802 12.0084 10.317 11.9532 10.1893 11.8466C10.0616 11.7399 9.97862 11.5894 9.95674 11.4249C9.93486 11.2603 9.97566 11.0935 10.0711 10.9574L10.1467 10.8688L13.7244 7.30492H8C3.30222 7.30492 0.151105 4.67958 0.0044384 0.938572L-5.72205e-06 0.664084C-5.72205e-06 0.487958 0.0702324 0.319046 0.195256 0.194506C0.320281 0.0699657 0.48985 0 0.666661 0C0.843472 0 1.01304 0.0699657 1.13807 0.194506C1.26309 0.319046 1.33333 0.487958 1.33333 0.664084C1.33333 3.68345 3.74222 5.84837 7.65333 5.97233L8 5.97676H13.7244Z" fill="black"></path></svg>
+      </div>
+      <div class='question-text'>
+        ${q}
+      </div>
+    </a>`
+    msg.innerHTML += msgDiv;
+  });
+  chatWindow.append(msg);
+  msg.scrollIntoView({
+    behavior: 'smooth'
+  });
+  msg.querySelectorAll('a').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      const txt = e.target.nodeName == 'A' ? e.target.querySelector('.question-text').innerText.trim() : e.target.closest('a').querySelector('.question-text').innerText.trim();
+      inputArea.querySelector('textarea').value = txt;
+      sendMessage();
+    });
+  });
+}
+
 function handleChatResponse(response) {
   if (response.hasOwnProperty('message')) {
     appendMessage(response.message, 'bot', response.hasOwnProperty('hasMarkdown'));
@@ -470,6 +498,9 @@ function handleChatResponse(response) {
   }
   if (response.hasOwnProperty('preflight')) {
     appendPreflightMessage(response.preflight[0], 'bot');
+  }
+  if (response.hasOwnProperty('questions')) {
+    appendFollowUpQuestions(response.questions, 'bot');
   }
 }
 
