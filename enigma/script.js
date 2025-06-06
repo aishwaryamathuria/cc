@@ -70,7 +70,7 @@ function restartObserver() {
       if (mutation.type === 'childList') {
         try {
           if (!chatWindow.querySelector('.message.user')) return;
-          if (!THREAD_NAME) THREAD_NAME = chatWindow.querySelector('.message.user').innerText.slice(0, 20);
+          if (!THREAD_NAME) THREAD_NAME = `${chatWindow.querySelector('.message.user').innerText.slice(0, 20)}...`;
           await saveConversation(THREAD_ID, {
             name: THREAD_NAME ? THREAD_NAME : chatWindow.querySelector('.message.user').innerText.slice(0, 20),
             domData: processDomForSave(),
