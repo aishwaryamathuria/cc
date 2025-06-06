@@ -725,6 +725,10 @@ async function loadAllConversations() {
 }
 
 (() => {
+    // appendMessage("hello", "user");
+    // appendMessage("how are", "bot");
+    // appendMessage("khana kha k jana hun", "user");
+
     window.addEventListener("message", async (e) => {
       const eventData = e.data;
       let blockNames = "";
