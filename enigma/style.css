@@ -148,7 +148,7 @@ body, html {
   border: none;
   border-radius: 200px 0 0 200px;
   resize: none;
-  background: #efeeee;
+  background: #fff;
   color: #1f1f1f;
   padding-left: 50px;
   padding-top: 20px;
@@ -168,7 +168,7 @@ body, html {
 }
 
 #send-btn {
-  background-color: #efeeee;
+  background-color: #fff;
   color: white;
   border: none;
   padding: 0 20px;
@@ -335,7 +335,7 @@ body, html {
 }
 
 .chat-wrapper .section-heading {
-  font-size: 3.2rem;
+  font-size: 2.2rem;
   display: flex;
   width: 100%;
   align-items: center;
@@ -364,7 +364,7 @@ body, html {
   background-clip: text;
   color: transparent;
   animation: streambg 5s linear infinite;
-  font-size: 3.2rem;
+  font-size: 2.2rem;
 }
 
 @keyframes streambg {
