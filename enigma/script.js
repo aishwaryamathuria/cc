@@ -389,7 +389,7 @@ function appendiFrameMessage(link, sender, generateContent = false) {
 
   const disclaimerText = document.createElement('div');
   disclaimerText.classList.add('disclaimer');
-  disclaimerText.innerHTML = "* Powered by firefly";
+  disclaimerText.innerHTML = "* Powered by Firefly";
   msg.append(disclaimerText);
 
   window.addEventListener('message', (event) => {
