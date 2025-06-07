@@ -728,6 +728,7 @@ async function loadAllConversations() {
     thread.addEventListener('click', async (e) => {
       if (e.target.hasAttribute('contentEditable')) return;
       CONVERSATION_STARTED = true;
+      chatWrapper.classList.add('conversation-mode');
       const li = e.target.closest('li')
       const convId = li.querySelector('a').id;
       document.querySelector('.card-section').style.display = 'none';
