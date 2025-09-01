@@ -313,10 +313,117 @@ function appendToChatWindow(msg, sender) {
   chatWindow.append(d);
 }
 
+function isDABlocksResponse(text) {
+  const lowerText = text.toLowerCase();
+  const hasText = lowerText.includes('text');
+  const hasMedia = lowerText.includes('media');
+  const hasMarquee = lowerText.includes('marquee');
+  const termCount = [hasText, hasMedia, hasMarquee].filter(Boolean).length;
+  
+  if (termCount >= 2) {
+    const hasListPattern = /(?:text|media|marquee)[\s]*[,-][\s]*(?:text|media|marquee)|(?:text|media|marquee)[\s]*and[\s]*(?:text|media|marquee)/.test(lowerText);
+    return hasListPattern;
+  }
+  return false;
+}
+
+function formatDABlocksAsOrderedList(text) {
+  // Look for content between a colon ":" and the first period "." that comes after it
+  const colonIndex = text.indexOf(':');
+  
+  if (colonIndex === -1) {
+    return `<p>${text}</p>`;
+  }
+  
+  const introText = text.substring(0, colonIndex + 1).trim();
+  const afterColon = text.substring(colonIndex + 1);
+  const periodIndex = afterColon.indexOf('.');
+  
+  let listText = '';
+  let remainingText = '';
+  
+  if (periodIndex !== -1) {
+    listText = afterColon.substring(0, periodIndex).trim();
+    remainingText = afterColon.substring(periodIndex + 1).trim();
+  } else {
+    listText = afterColon.trim();
+  }
+  
+  let items = [];
+  
+  if (listText.includes(',')) {
+    items = listText.split(',').map(item => item.trim()).filter(item => item.length > 0);
+  } else if (listText.includes(' and ')) {
+    items = listText.split(' and ').map(item => item.trim()).filter(item => item.length > 0);
+  } else {
+    const matches = listText.match(/\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+)*\b/g);
+    if (matches) {
+      items = matches;
+    }
+  }
+  
+  if (items.length > 1) {
+    items = items.map(item => {
+      const cleaned = item.replace(/^(the\s+|a\s+)/i, '')
+                         .replace(/\s+(block|component)$/i, '')
+                         .replace(/[.,;]$/, '')
+                         .trim();
+      return cleaned.charAt(0).toLowerCase() + cleaned.slice(1);
+    }).filter(item => item.length > 1 && !item.match(/^(and|or|etc|also)$/i));
+    
+    const shouldTruncate = items.length > 5;
+    const visibleItems = shouldTruncate ? items.slice(0, 5) : items;
+    const hiddenItems = shouldTruncate ? items.slice(5) : [];
+    const visibleListHTML = visibleItems.map((item, index) => `<li>${item}</li>`).join('');
+    const hiddenListHTML = hiddenItems.map((item, index) => `<li style="display: none;" class="hidden-item">${item}</li>`).join('');
+    const listId = `da-blocks-list-${Date.now()}`;
+    let result = `<p>${introText}</p><ol id="${listId}">${visibleListHTML}${hiddenListHTML}</ol>`;
+    if (shouldTruncate) {
+      result += `<button class="view-more-btn" data-list-id="${listId}" onclick="toggleDABlocksList('${listId}')">View more (${hiddenItems.length} more items)</button>`;
+    }
+    if (remainingText) {
+      result += `<p class="da-blocks-remaining-text">${remainingText}</p>`;
+    }
+    
+    return result;
+  }
+  
+  return `<p>${text}</p>`;
+}
+
+function toggleDABlocksList(listId) {
+  const list = document.getElementById(listId);
+  const button = document.querySelector(`[data-list-id="${listId}"]`);
+  const hiddenItems = list.querySelectorAll('.hidden-item');
+  
+  if (!list || !button) return;
+  
+  const isExpanded = button.textContent.includes('View less');
+  
+  if (isExpanded) {
+    hiddenItems.forEach(item => {
+      item.style.display = 'none';
+    });
+    const hiddenCount = hiddenItems.length;
+    button.textContent = `View more (${hiddenCount} more items)`;
+  } else {
+    hiddenItems.forEach(item => {
+      item.style.display = 'list-item';
+    });
+    button.textContent = 'View less';
+  }
+}
+
 function appendMessage(text, sender, hasMarkdown = false) {
   const msg = document.createElement('div');
   msg.className = `message ${sender}`;
-  if (hasMarkdown) {
+  
+  if (sender === 'bot' && isDABlocksResponse(text)) {
+    const formattedText = formatDABlocksAsOrderedList(text);
+    msg.innerHTML = `<div class='markdown-content'>${formattedText}</div>`;
+    msg.setAttribute('data-chathistoryidx', `${chatHistory.length}`);
+    hasMarkdown = true;
+  } else if (hasMarkdown) {
     if (text.includes('`')) {
       text = text.replaceAll('`', '');
       text = text.replaceAll('markdown', '');
