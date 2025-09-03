@@ -907,6 +907,76 @@ table.badLinks a {
   margin-inline-start: 1.5em;
 }
 
+/* Specific styling for ordered lists (DA blocks) */
+.markdown-content ol {
+  counter-reset: list-counter;
+  padding-left: 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.markdown-content ol li {
+  counter-increment: list-counter;
+  list-style-type: none;
+  position: relative;
+  padding-left: 40px;
+  padding-bottom: 8px;
+  margin-inline-start: 0;
+  line-height: 1.4;
+}
+
+.markdown-content ol li::before {
+  content: counter(list-counter) ".";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-weight: 600;
+  color: #2c2c2c;
+  width: 30px;
+  text-align: left;
+}
+
+.markdown-content ol li:hover {
+  background-color: #f8f8f8;
+  border-radius: 4px;
+  padding-left: 40px;
+  margin-left: -5px;
+  padding-right: 5px;
+}
+
+/* View more button styling for DA blocks lists */
+.view-more-btn {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  color: #333;
+  cursor: pointer;
+  font-size: 0.9em;
+  margin: 10px 0;
+  padding: 8px 16px;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.view-more-btn:hover {
+  background-color: #e0e0e0;
+  border-color: #999;
+  transform: translateY(-1px);
+}
+
+.view-more-btn:active {
+  background-color: #d0d0d0;
+  transform: translateY(0);
+}
+
+/* Styling for text that comes after DA blocks list */
+.da-blocks-remaining-text {
+  display: block !important;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  clear: both;
+}
+
 .markdown-content p {
   display: inline-block;
 }
