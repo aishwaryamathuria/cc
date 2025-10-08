@@ -128,7 +128,7 @@ let chatHistory = [{
   }];
 
 
-let agentEP = 'https://wcms-milostudio-bulkops-deploy-ethos501-prod-or2-6cb495.cloud.adobe.io/api/agents';
+let agentEP = 'https://adobe-wcms-stream-service-deploy-ethos601-prod-va6-aff19e.cloud.adobe.io/api/agents';
 const agentEPLocal = 'http://localhost:8081/api/agents';
 const params = new URLSearchParams(window.location.search);
 if (params.has('ref') && params.get('ref') == "local") agentEP = agentEPLocal;
