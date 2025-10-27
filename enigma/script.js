@@ -648,7 +648,7 @@ function handleChatResponse(response) {
   if (response.hasOwnProperty('questions')) {
     appendFollowUpQuestions(response.questions, 'bot');
   }
-  lastState = response.hasOwnProperty('state') ? response.hasOwnProperty('state') : {};
+  lastState = response.hasOwnProperty('state') ? response.state : {};
 }
 
 async function handleChatInteraction() {
