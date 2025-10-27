@@ -20,7 +20,7 @@ let observer = null;
 let THREAD_ID = generateId();
 let THREAD_NAME = null;
 let CONVERSATION_STARTED = false;
-const lastState = [];
+const lastState = {};
 loader.classList.add('loader');
 
 const editSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
