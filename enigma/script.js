@@ -420,7 +420,7 @@ function appendMessage(text, sender, hasMarkdown = false) {
   msg.className = `message ${sender}`;
   
   if (sender === 'bot' && isDABlocksResponse(text)) {
-    const formattedText = formatDABlocksAsOrderedList(text);
+    const formattedText = text.replaceAll('\n', '<br>');
     msg.innerHTML = `<div class='markdown-content'>${formattedText}</div>`;
     msg.setAttribute('data-chathistoryidx', `${chatHistory.length}`);
     hasMarkdown = true;
@@ -433,7 +433,8 @@ function appendMessage(text, sender, hasMarkdown = false) {
     msg.setAttribute('data-chathistoryidx', `${chatHistory.length}`);
   }
   else {
-    msg.innerHTML = linkify(text);
+    const formattedText = text.replaceAll('\n', '<br>');
+    msg.innerHTML = linkify(formattedText);
   }
   // chatWindow.appendChild(msg);
   appendToChatWindow(msg, sender);
