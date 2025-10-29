@@ -20,8 +20,11 @@ let observer = null;
 let THREAD_ID = generateId();
 let THREAD_NAME = null;
 let CONVERSATION_STARTED = false;
-let lastState = {};
 loader.classList.add('loader');
+const urlParams = new URLSearchParams(window.location.search);
+const token = urlParams.get("token");
+let conversation_thread_id = null;
+
 
 const editSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M17.5 9.5H16.5V8.5C16.5 7.04131 15.9205 5.64236 14.8891 4.61091C13.8576 3.57946 12.4587 3 11 3C9.54131 3 8.14236 3.57946 7.11091 4.61091C6.07946 5.64236 5.5 7.04131 5.5 8.5V9.5H4.5C4.36739 9.5 4.24021 9.55268 4.14645 9.64645C4.05268 9.74021 4 9.86739 4 10V19C4 19.1326 4.05268 19.2598 4.14645 19.3536C4.24021 19.4473 4.36739 19.5 4.5 19.5H17.5C17.6326 19.5 17.7598 19.4473 17.8536 19.3536C17.9473 19.2598 18 19.1326 18 19V10C18 9.86739 17.9473 9.74021 17.8536 9.64645C17.7598 9.55268 17.6326 9.5 17.5 9.5ZM7.5 8.5C7.5 7.57174 7.86875 6.6815 8.52513 6.02513C9.1815 5.36875 10.0717 5 11 5C11.9283 5 12.8185 5.36875 13.4749 6.02513C14.1313 6.6815 14.5 7.57174 14.5 8.5V9.5H7.5V8.5ZM12 14.611V16C12 16.1326 11.9473 16.2598 11.8536 16.3536C11.7598 16.4473 11.6326 16.5 11.5 16.5H10.5C10.3674 16.5 10.2402 16.4473 10.1464 16.3536C10.0527 16.2598 10 16.1326 10 16V14.611C9.80916 14.4416 9.66506 14.226 9.58153 13.9848C9.498 13.7437 9.47785 13.4852 9.523 13.234C9.58849 12.8643 9.79025 12.5326 10.0884 12.3044C10.3866 12.0762 10.7595 11.9682 11.1335 12.0016C11.5075 12.035 11.8553 12.2075 12.1083 12.4849C12.3613 12.7623 12.5011 13.1245 12.5 13.5C12.4996 13.71 12.4549 13.9175 12.3687 14.1089C12.2826 14.3004 12.1569 14.4715 12 14.611Z" fill="#222222"/>
@@ -630,6 +633,9 @@ function appendFollowUpQuestions(questions) {
 }
 
 function handleChatResponse(response) {
+  if (response.hasOwnProperty('threadId')) {
+    conversation_thread_id = response.threadId;
+  }
   if (response.hasOwnProperty('message')) {
     appendMessage(response.message, 'bot', response.hasOwnProperty('hasMarkdown'));
     chatHistory.push({
@@ -637,8 +643,8 @@ function handleChatResponse(response) {
       "content": response.message
     });
   }
-  if (response.hasOwnProperty('previewerUrl')) {
-    appendiFrameMessage(response.previewerUrl, 'bot', response.generateContent);
+  if (response.hasOwnProperty('pageContext') && response.pageContext.hasOwnProperty('previewUrl') && response.pageContext.previewUrl) {
+    appendiFrameMessage(response.pageContext.previewUrl, 'bot', false);
   }
   if (response.hasOwnProperty('thumbnail')) {
     appendImageThumbnail(`${response.thumbnail}`, 'bot');
@@ -649,7 +655,6 @@ function handleChatResponse(response) {
   if (response.hasOwnProperty('questions')) {
     appendFollowUpQuestions(response.questions, 'bot');
   }
-  lastState = response.hasOwnProperty('state') ? response.state : {};
 }
 
 async function handleChatInteraction() {
@@ -661,14 +666,15 @@ async function handleChatInteraction() {
     });
     inputBox.value = "";
     const chatPayload = {
-      "message": JSON.stringify(chatHistory),
-      "state": JSON.stringify(lastState)
+      "message": JSON.stringify([chatHistory[chatHistory.length - 1]]),
+      "thread_id": conversation_thread_id
     };
 
     const options = {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify(chatPayload)
     };
@@ -684,6 +690,7 @@ async function handleChatInteraction() {
       handleChatResponse(response);
       console.log(chatHistory);
     } catch (err) {
+        console.log(err);
         appendMessage(`⚠️ Well, that didn’t go as planned. Give it another go?.`, 'bot');
     }
 }
