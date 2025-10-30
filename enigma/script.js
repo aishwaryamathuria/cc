@@ -567,7 +567,7 @@ function appendMessage(text, sender, hasMarkdown = false, hasJIRADetail = false)
       const td2 = document.createElement('td');
       td1.innerHTML = `<strong>${key}</strong>`;
       if (key.toLowerCase() === 'description') {
-        td2.innerHTML = `<div class="markdown-content">${marked.parse(jiraToHtml(text[key]))}</div>`;
+        td2.innerHTML = `<div class="markdown-content">${jiraToHtml(text[key])}</div>`;
       } else {
         td2.innerHTML = text[key] ? text[key] : '-';
       }
