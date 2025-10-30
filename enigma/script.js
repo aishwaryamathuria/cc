@@ -778,6 +778,9 @@ function handleChatResponse(response) {
   if (response.hasOwnProperty('threadId')) {
     conversation_thread_id = response.threadId;
   }
+  if (response.hasOwnProperty('clearConversation') && response.clearConversation) {
+    conversation_thread_id = null;
+  }
   if (response.hasOwnProperty('message')) {
     appendMessage(response.message, 'bot', response.hasOwnProperty('hasMarkdown'), response.hasOwnProperty('hasJIRADetail'));
     chatHistory.push({
