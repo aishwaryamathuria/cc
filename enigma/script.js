@@ -418,16 +418,101 @@ function toggleDABlocksList(listId) {
   }
 }
 
-function appendMessage(text, sender, hasMarkdown = false) {
+function isTimestamp(value) {
+  if (
+    typeof value === 'string' &&
+    /^202[0-5]-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}[+-]\d{4}$/.test(value)
+  ) {
+    return true;
+  }
+  return false;
+}
+
+function jiraToHtml(text) {
+  if (!text) return "";
+
+  // --- Code blocks first (so their contents aren’t formatted) ---
+  const codeBlocks = [];
+  text = text.replace(/{code}([\s\S]*?){code}/g, (_, code) => {
+    codeBlocks.push(`<pre><code>${escapeHtml(code)}</code></pre>`);
+    return `@@CODE_BLOCK_${codeBlocks.length - 1}@@`;
+  });
+
+  // --- Quote blocks ---
+  const quoteBlocks = [];
+  text = text.replace(/{quote}([\s\S]*?){quote}/g, (_, quote) => {
+    quoteBlocks.push(`<blockquote>${escapeHtml(quote)}</blockquote>`);
+    return `@@QUOTE_BLOCK_${quoteBlocks.length - 1}@@`;
+  });
+
+  // --- Headings ---
+  let html = text.replace(/^h([1-6])\.\s?(.*)$/gm, "<h$1>$2</h$1>");
+
+  // --- Inline formatting (bold, italics, underline, etc.) ---
+  html = html
+    .replace(/\{\*\}(.*?)\{\*\}/g, "<strong>$1</strong>")     // {*}{*} bold
+    .replace(/\*(?!\s)([^*]+?)(?<!\s)\*/g, "<strong>$1</strong>") // *bold*
+    .replace(/_(?!\s)([^_]+?)(?<!\s)_/g, "<em>$1</em>")           // _italic_
+    .replace(/\+(?!\s)([^+]+?)(?<!\s)\+/g, "<u>$1</u>")           // +underline+
+    // safer strikethrough: only when surrounded by spaces or start/end
+    .replace(/(^|\s)-(?!\s)([^-]+?)(?<!\s)-(?=\s|$)/g, "$1<del>$2</del>")
+    .replace(/{{([^}]+)}}/g, "<code>$1</code>");                  // {{code}}
+
+  // --- Links [text|url] (handle - safely inside URL) ---
+  html = html.replace(/\[([^\|\]]+)\|([^\]]+)\]/g, (_, text, url) => {
+    const safeUrl = url.replace(/&lt;|&gt;|"/g, ""); // cleanup
+    return `<a href="${safeUrl}" target="_blank">${text}</a>`;
+  });
+
+  // --- Images !url! ---
+  html = html.replace(/!([^!]+)!/g, '<img src="$1" alt="$1" />');
+
+  // --- Lists (group consecutive ones properly) ---
+  html = html.replace(/((?:^\* .*(?:\n|$))+)/gm, (match) => {
+    const items = match
+      .trim()
+      .split(/\n/)
+      .map((line) => line.replace(/^\*\s?(.*)/, "<li>$1</li>"))
+      .join("");
+    return `<ul>${items}</ul>`;
+  });
+
+  html = html.replace(/((?:^# .*(?:\n|$))+)/gm, (match) => {
+    const items = match
+      .trim()
+      .split(/\n/)
+      .map((line) => line.replace(/^#\s?(.*)/, "<li>$1</li>"))
+      .join("");
+    return `<ol>${items}</ol>`;
+  });
+
+  // --- Horizontal rules ---
+  html = html.replace(/^----$/gm, "<hr/>");
+
+  // --- Restore escaped code and quote blocks ---
+  html = html.replace(/@@CODE_BLOCK_(\d+)@@/g, (_, i) => codeBlocks[i]);
+  html = html.replace(/@@QUOTE_BLOCK_(\d+)@@/g, (_, i) => quoteBlocks[i]);
+
+  // --- Clean line breaks ---
+  html = html.replace(/\n{2,}/g, "<br><br>");
+  html = html.replace(/\n/g, "<br>");
+
+  return html.trim();
+
+  // Helper
+  function escapeHtml(str) {
+    return str
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+  }
+}
+
+function appendMessage(text, sender, hasMarkdown = false, hasJIRADetail = false) {
   const msg = document.createElement('div');
   msg.className = `message ${sender}`;
   
-  if (sender === 'bot' && isDABlocksResponse(text)) {
-    const formattedText = text.replaceAll('\n', '<br>');
-    msg.innerHTML = `<div class='markdown-content'>${formattedText}</div>`;
-    msg.setAttribute('data-chathistoryidx', `${chatHistory.length}`);
-    hasMarkdown = true;
-  } else if (hasMarkdown) {
+  if (hasMarkdown) {
     if (text.includes('`')) {
       text = text.replaceAll('`', '');
       text = text.replaceAll('markdown', '');
@@ -435,7 +520,64 @@ function appendMessage(text, sender, hasMarkdown = false) {
     msg.innerHTML = `<div class='markdown-content'>${marked.parse(text)}</div>`;
     msg.setAttribute('data-chathistoryidx', `${chatHistory.length}`);
   }
-  else {
+  if (hasJIRADetail && Array.isArray(text)) {
+    const table = document.createElement('table');
+    table.classList.add('jira-detail-table');
+    const keys = []
+    const tr = document.createElement('tr');
+    table.append(tr);
+    Object.keys(text[0]).forEach(key => {
+      const th = document.createElement('th');
+      th.innerHTML = `<strong>${key}</strong>`;
+      tr.append(th);
+      keys.push(key);
+    });
+    text.forEach(item => {
+      const tr = document.createElement('tr');
+      keys.forEach(key => {
+        const td = document.createElement('td');
+        if (isTimestamp(item[key])) {
+          let timestamp = item[key];
+          let dateObj = null;
+          if (typeof timestamp === 'string' && isTimestamp(timestamp)) {
+            dateObj = new Date(timestamp);
+          } else if (!isNaN(timestamp)) {
+            dateObj = new Date(Number(timestamp) * 1000);
+          }
+          if (dateObj && !isNaN(dateObj.getTime())) {
+            const localeString = dateObj.toLocaleString(undefined, { timeZoneName: 'short' });
+            td.innerHTML = localeString;
+          } else {
+            td.innerHTML = timestamp;
+          }
+        } else {
+          td.innerHTML = item[key] ? item[key] : '-';
+        }
+        tr.append(td);
+      });
+      table.append(tr);
+    });
+    msg.append(table);
+  } else if (hasJIRADetail && typeof text === 'object') {
+    const table = document.createElement('table');
+    table.classList.add('jira-detail-table');
+    Object.keys(text).forEach(key => {
+      const tr = document.createElement('tr');
+      const td1 = document.createElement('td');
+      const td2 = document.createElement('td');
+      td1.innerHTML = `<strong>${key}</strong>`;
+      if (key.toLowerCase() === 'description') {
+        td2.innerHTML = `<div class="markdown-content">${marked.parse(jiraToHtml(text[key]))}</div>`;
+      } else {
+        td2.innerHTML = text[key] ? text[key] : '-';
+      }
+      tr.append(td1);
+      tr.append(td2);
+      tr.append(...[td1, td2]);
+      table.append(tr);
+    });
+    msg.append(table);
+  } else {
     const formattedText = text.replaceAll('\n', '<br>');
     msg.innerHTML = linkify(formattedText);
   }
@@ -637,7 +779,7 @@ function handleChatResponse(response) {
     conversation_thread_id = response.threadId;
   }
   if (response.hasOwnProperty('message')) {
-    appendMessage(response.message, 'bot', response.hasOwnProperty('hasMarkdown'));
+    appendMessage(response.message, 'bot', response.hasOwnProperty('hasMarkdown'), response.hasOwnProperty('hasJIRADetail'));
     chatHistory.push({
       "role": "system",
       "content": response.message
