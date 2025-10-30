@@ -1057,3 +1057,18 @@ table.badLinks a {
   height: 30px;
   width: 30px;
 }
+
+.jira-detail-table th {
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
+.jira-detail-table tr > td:first-child {
+  font-weight: bold;
+  text-wrap: nowrap;
+}
+
+.jira-detail-table tr th,
+.jira-detail-table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
