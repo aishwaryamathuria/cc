@@ -619,7 +619,7 @@ function appendMessage(text, sender, hasMarkdown = false, hasJIRADetail = false)
         td2.innerHTML = `<div class="markdown-content">${jiraToHtml(text[key])}</div>`;
       } else {
         if (key.toLowerCase() === 'key') {
-          td.innerHTML = `<a href="https://jira.corp.adobe.com/browse/${item[key]}" target="_blank">${item[key]}</a>`;
+          td2.innerHTML = `<a href="https://jira.corp.adobe.com/browse/${text[key]}" target="_blank">${text[key]}</a>`;
         } else if (isTimestamp(text[key])) {
           let timestamp = text[key];
           let dateObj = null;
