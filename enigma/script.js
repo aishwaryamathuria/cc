@@ -564,45 +564,44 @@ function appendMessage(text, sender, hasMarkdown = false, hasJIRADetail = false)
       });
       table.append(tr);
     });
-    const nextButtons = [
-      {
-        "id": "show-more",
-        "text": "Show more",
-        "class": "show-more-row"
-      },
-      {
-        "id": "show-less",
-        "text": "Show less",
-        "class": "show-less-row"
-      }
-    ];
-    nextButtons.forEach(button => {
-      const tr = document.createElement('tr');
-      tr.classList.add(button.class);
-      const td = document.createElement('td');
-      td.setAttribute('colspan', keys.length);
-      const a = document.createElement('a');
-      a.classList.add('view-more-btn');
-      a.setAttribute('href', `#${button.id}`);
-      a.textContent = button.text;
-      
-      // Attach event listener directly to the anchor element
-      a.addEventListener('click', (e) => {
-        e.preventDefault();
-        if (button.id === 'show-more') {
-          console.log('Show more clicked, removing show-less class');
-          table.classList.remove('show-less');
-        } else {
-          console.log('Show less clicked, adding show-less class');
-          table.classList.add('show-less');
+    if (text.length > 4) {
+      const nextButtons = [
+        {
+          "id": "show-more",
+          "text": "Show more",
+          "class": "show-more-row"
+        },
+        {
+          "id": "show-less",
+          "text": "Show less",
+          "class": "show-less-row"
         }
+      ];
+      nextButtons.forEach(button => {
+        const tr = document.createElement('tr');
+        tr.classList.add(button.class);
+        const td = document.createElement('td');
+        td.setAttribute('colspan', keys.length);
+        const a = document.createElement('a');
+        a.classList.add('view-more-btn');
+        a.setAttribute('href', `#${button.id}`);
+        a.textContent = button.text;
+        
+        // Attach event listener directly to the anchor element
+        a.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (button.id === 'show-more') {
+            table.classList.remove('show-less');
+          } else {
+            table.classList.add('show-less');
+          }
+        });
+        
+        td.append(a);
+        tr.append(td);
+        table.append(tr);
       });
-      
-      td.append(a);
-      tr.append(td);
-      table.append(tr);
-    });
-    
+    }
     msg.append(table);
   } else if (hasJIRADetail && typeof text === 'object') {
     const table = document.createElement('table');
