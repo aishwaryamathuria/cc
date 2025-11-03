@@ -16,6 +16,7 @@ const DB_NAME = 'ConversationsDB';
 const DB_VERSION = 1;
 const STORE_NAME = 'conversations';
 const conversationList = document.getElementById('conversation-list');
+const clearAllConversations = document.getElementById('clear-all-conversations');
 let observer = null;
 let THREAD_ID = generateId();
 let THREAD_NAME = null;
@@ -522,13 +523,17 @@ function appendMessage(text, sender, hasMarkdown = false, hasJIRADetail = false)
   }
   if (hasJIRADetail && Array.isArray(text)) {
     const table = document.createElement('table');
-    table.classList.add('jira-detail-table');
+    table.classList.add(...['jira-detail-table', 'issue-list', 'show-less']);
     const keys = []
     const tr = document.createElement('tr');
     table.append(tr);
     Object.keys(text[0]).forEach(key => {
       const th = document.createElement('th');
-      th.innerHTML = `<strong>${key}</strong>`;
+      if (key.toLowerCase() === 'key') {
+        th.innerHTML = `<strong>JIRA ID</strong>`;
+      } else {
+        th.innerHTML = `<strong>${key}</strong>`;
+      }
       tr.append(th);
       keys.push(key);
     });
@@ -536,7 +541,9 @@ function appendMessage(text, sender, hasMarkdown = false, hasJIRADetail = false)
       const tr = document.createElement('tr');
       keys.forEach(key => {
         const td = document.createElement('td');
-        if (isTimestamp(item[key])) {
+        if (key.toLowerCase() === 'key') {
+          td.innerHTML = `<a href="https://jira.corp.adobe.com/browse/${item[key]}" target="_blank">${item[key]}</a>`;
+        } else if (isTimestamp(item[key])) {
           let timestamp = item[key];
           let dateObj = null;
           if (typeof timestamp === 'string' && isTimestamp(timestamp)) {
@@ -557,6 +564,45 @@ function appendMessage(text, sender, hasMarkdown = false, hasJIRADetail = false)
       });
       table.append(tr);
     });
+    const nextButtons = [
+      {
+        "id": "show-more",
+        "text": "Show more",
+        "class": "show-more-row"
+      },
+      {
+        "id": "show-less",
+        "text": "Show less",
+        "class": "show-less-row"
+      }
+    ];
+    nextButtons.forEach(button => {
+      const tr = document.createElement('tr');
+      tr.classList.add(button.class);
+      const td = document.createElement('td');
+      td.setAttribute('colspan', keys.length);
+      const a = document.createElement('a');
+      a.classList.add('view-more-btn');
+      a.setAttribute('href', `#${button.id}`);
+      a.textContent = button.text;
+      
+      // Attach event listener directly to the anchor element
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (button.id === 'show-more') {
+          console.log('Show more clicked, removing show-less class');
+          table.classList.remove('show-less');
+        } else {
+          console.log('Show less clicked, adding show-less class');
+          table.classList.add('show-less');
+        }
+      });
+      
+      td.append(a);
+      tr.append(td);
+      table.append(tr);
+    });
+    
     msg.append(table);
   } else if (hasJIRADetail && typeof text === 'object') {
     const table = document.createElement('table');
@@ -565,11 +611,33 @@ function appendMessage(text, sender, hasMarkdown = false, hasJIRADetail = false)
       const tr = document.createElement('tr');
       const td1 = document.createElement('td');
       const td2 = document.createElement('td');
-      td1.innerHTML = `<strong>${key}</strong>`;
+      if (key.toLowerCase() === 'key') {
+        td1.innerHTML = `<strong>JIRA ID</strong>`;
+      } else {
+        td1.innerHTML = `<strong>${key}</strong>`;
+      }
       if (key.toLowerCase() === 'description') {
         td2.innerHTML = `<div class="markdown-content">${jiraToHtml(text[key])}</div>`;
       } else {
-        td2.innerHTML = text[key] ? text[key] : '-';
+        if (key.toLowerCase() === 'key') {
+          td.innerHTML = `<a href="https://jira.corp.adobe.com/browse/${item[key]}" target="_blank">${item[key]}</a>`;
+        } else if (isTimestamp(text[key])) {
+          let timestamp = text[key];
+          let dateObj = null;
+          if (typeof timestamp === 'string' && isTimestamp(timestamp)) {
+            dateObj = new Date(timestamp);
+          } else if (!isNaN(timestamp)) {
+            dateObj = new Date(Number(timestamp) * 1000);
+          }
+          if (dateObj && !isNaN(dateObj.getTime())) {
+            const localeString = dateObj.toLocaleString(undefined, { timeZoneName: 'short' });
+            td2.innerHTML = localeString;
+          } else {
+            td2.innerHTML = timestamp;
+          }
+        } else {
+          td2.innerHTML = text[key] ? text[key] : '-';
+        }
       }
       tr.append(td1);
       tr.append(td2);
@@ -585,23 +653,23 @@ function appendMessage(text, sender, hasMarkdown = false, hasJIRADetail = false)
   appendToChatWindow(msg, sender);
 
   if (sender == 'bot') {
+    const iconsDiv = document.createElement('div');
+    iconsDiv.classList.add('icons');
     if (hasMarkdown) {
-      msg.innerHTML += `
-        <div class="icons for-markdown">
+      iconsDiv.classList.add('for-markdown');
+      iconsDiv.innerHTML = `
           <span class="thumbs-up">${likeOutline}</span>
           <span class="thumbs-down">${unlikeOutline}</span>
           <span class="copy-response">${copyText}</span>
           <span class="edit-prd">${editPrd}</span>
-          <span class="download-prd">${downloadPrd}</span>
-        </div>`;
+          <span class="download-prd">${downloadPrd}</span>`;
     } else {
-      msg.innerHTML += `
-        <div class="icons">
+      iconsDiv.innerHTML = `
           <span class="thumbs-up">${likeOutline}</span>
           <span class="thumbs-down">${unlikeOutline}</span>
-          <span class="copy-response">${copyText}</span>
-        </div>`;
+          <span class="copy-response">${copyText}</span>`;
     }
+    msg.append(iconsDiv);
     activateIcons([msg]);
   }
   msg.scrollIntoView({
@@ -764,7 +832,7 @@ function appendFollowUpQuestions(questions) {
   msg.scrollIntoView({
     behavior: 'smooth'
   });
-  msg.querySelectorAll('a').forEach((a) => {
+  msg.querySelectorAll('a:not(.view-more-btn)').forEach((a) => {
     a.addEventListener('click', (e) => {
       e.preventDefault();
       const txt = e.target.nodeName == 'A' ? e.target.querySelector('.question-text').innerText.trim() : e.target.closest('a').querySelector('.question-text').innerText.trim();
@@ -1012,6 +1080,14 @@ async function loadAllConversations() {
       });
       activateIcons();
     });
+
+    clearAllConversations.addEventListener('click', async (e) => {
+      for (c in conversations) {
+        const id = conversations[c].id;
+        await deleteConversation(id);
+        conversationList.innerHTML = '';
+      }
+    });
   });
 }
 
@@ -1080,17 +1156,6 @@ async function loadAllConversations() {
 
   document.querySelectorAll('.card').forEach(c => {
     if (c.querySelector(".card-overlay")) return;
-    const staticSrc = c.querySelector('img').src;
-    const gifSrc = c.querySelector('img').getAttribute('data-gif');
-
-    c.addEventListener('mouseenter', () => {
-      c.querySelector('img').src = gifSrc;
-    });
-
-    c.addEventListener('mouseleave', () => {
-      c.querySelector('img').src = staticSrc;
-    });
-
     c.addEventListener('click', (e) => {
       let cardPlaceholder = null;
       if (e.target.classList.contains('card')) cardPlaceholder =  e.target?.dataset?.placeholder;
