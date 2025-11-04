@@ -191,9 +191,11 @@ function sendMessage() {
   handleChatInteraction();
 }
 
-function linkify(text) {
+function linkify(text, isTable = false) {
   const urlRegex = /https?:\/\/[^\s]+/g;
   return text.replace(urlRegex, function(url) {
+    if (isTable && url.includes('https://www.figma.com/')) return `<a href="${url}" target="_blank"">Link to Figma</a>`;
+    else if (isTable &&url.includes('https://da.live')) return `<a href="${url}" target="_blank"">Link to DA page</a>`;
     return `<a href="${url}" target="_blank"">${url}</a>`;
   });
 }
@@ -422,7 +424,7 @@ function toggleDABlocksList(listId) {
 function isTimestamp(value) {
   if (
     typeof value === 'string' &&
-    /^202[0-5]-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}[+-]\d{4}$/.test(value)
+    /^202[0-5]-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}(Z|[+-]\d{4})$/.test(value)
   ) {
     return true;
   }
@@ -521,7 +523,7 @@ function appendMessage(text, sender, hasMarkdown = false, hasJIRADetail = false)
     msg.innerHTML = `<div class='markdown-content'>${marked.parse(text)}</div>`;
     msg.setAttribute('data-chathistoryidx', `${chatHistory.length}`);
   }
-  if (hasJIRADetail && Array.isArray(text)) {
+  if (hasJIRADetail && Array.isArray(text) && text.length > 0) {
     const table = document.createElement('table');
     table.classList.add(...['jira-detail-table', 'issue-list', 'show-less']);
     const keys = []
@@ -558,7 +560,7 @@ function appendMessage(text, sender, hasMarkdown = false, hasJIRADetail = false)
             td.innerHTML = timestamp;
           }
         } else {
-          td.innerHTML = item[key] ? item[key] : '-';
+          td.innerHTML = item[key] ? linkify(item[key], true) : '-';
         }
         tr.append(td);
       });
@@ -644,7 +646,10 @@ function appendMessage(text, sender, hasMarkdown = false, hasJIRADetail = false)
       table.append(tr);
     });
     msg.append(table);
-  } else {
+  } else if (Array.isArray(text) && text.length === 0) {
+      msg.innerHTML = 'Could not find any matching records.';
+  }
+  else {
     const formattedText = text.replaceAll('\n', '<br>');
     msg.innerHTML = linkify(formattedText);
   }
