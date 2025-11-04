@@ -424,7 +424,7 @@ function toggleDABlocksList(listId) {
 function isTimestamp(value) {
   if (
     typeof value === 'string' &&
-    /^202[0-5]-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}[+-]\d{4}$/.test(value)
+    /^202[0-5]-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}(Z|[+-]\d{4})$/.test(value)
   ) {
     return true;
   }
@@ -523,7 +523,7 @@ function appendMessage(text, sender, hasMarkdown = false, hasJIRADetail = false)
     msg.innerHTML = `<div class='markdown-content'>${marked.parse(text)}</div>`;
     msg.setAttribute('data-chathistoryidx', `${chatHistory.length}`);
   }
-  if (hasJIRADetail && Array.isArray(text)) {
+  if (hasJIRADetail && Array.isArray(text) && text.length > 0) {
     const table = document.createElement('table');
     table.classList.add(...['jira-detail-table', 'issue-list', 'show-less']);
     const keys = []
@@ -646,7 +646,10 @@ function appendMessage(text, sender, hasMarkdown = false, hasJIRADetail = false)
       table.append(tr);
     });
     msg.append(table);
-  } else {
+  } else if (Array.isArray(text) && text.length === 0) {
+      msg.innerHTML = 'Could not find any matching records.';
+  }
+  else {
     const formattedText = text.replaceAll('\n', '<br>');
     msg.innerHTML = linkify(formattedText);
   }
