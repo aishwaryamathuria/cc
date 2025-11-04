@@ -191,9 +191,11 @@ function sendMessage() {
   handleChatInteraction();
 }
 
-function linkify(text) {
+function linkify(text, isTable = false) {
   const urlRegex = /https?:\/\/[^\s]+/g;
   return text.replace(urlRegex, function(url) {
+    if (isTable && url.includes('https://www.figma.com/')) return `<a href="${url}" target="_blank"">Link to Figma</a>`;
+    else if (isTable &&url.includes('https://da.live')) return `<a href="${url}" target="_blank"">Link to DA page</a>`;
     return `<a href="${url}" target="_blank"">${url}</a>`;
   });
 }
@@ -558,7 +560,7 @@ function appendMessage(text, sender, hasMarkdown = false, hasJIRADetail = false)
             td.innerHTML = timestamp;
           }
         } else {
-          td.innerHTML = item[key] ? item[key] : '-';
+          td.innerHTML = item[key] ? linkify(item[key], true) : '-';
         }
         tr.append(td);
       });
