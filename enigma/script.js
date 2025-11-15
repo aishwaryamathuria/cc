@@ -133,7 +133,7 @@ let chatHistory = [{
   }];
 
 
-let agentEP = 'https://adobe-wcms-stream-service-deploy-ethos501-prod-or2-317c9b.cloud.adobe.io/api/agents';
+let agentEP = 'https://adobe-acom-stream-service-deploy-ethos502-prod-or2-1de07c.cloud.adobe.io/api/agents';
 const agentEPLocal = 'http://localhost:8081/api/agents';
 const params = new URLSearchParams(window.location.search);
 if (params.has('ref') && params.get('ref') == "local") agentEP = agentEPLocal;
